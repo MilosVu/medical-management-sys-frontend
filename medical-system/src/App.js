@@ -5,6 +5,7 @@ import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import ListMedicinesComponent from './components/Medicines/ListMedicinesComponent';
 import CreateMedicineComponent from './components/Medicines/CreateMedicineComponent';
+import HomeComponent from './components/HomeComponent';
 import ListPharmaceuticalCompany from './components/PharmaceutalCompany/ListPharmaceuticalCompany';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
 
@@ -18,7 +19,8 @@ function App() {
 
             <div className="container">
               <Routes>
-                <Route path='/' element= {< ListUsers />}></Route>
+                <Route path='/' element= {< HomeComponent />}/>
+
                 <Route path='/users' element= {< ListUsers />}></Route>
 
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>
