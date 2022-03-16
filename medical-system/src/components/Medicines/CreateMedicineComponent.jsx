@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React, { Component } from 'react';
-
-class CreateMedicineComponent extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        );
-    }
-}
-
-export default CreateMedicineComponent;
-=======
 import React, { Component } from 'react'
 import MedicineService from '../../services/MedicineService';
 
@@ -95,4 +80,3 @@ import MedicineService from '../../services/MedicineService';
 }
 
 export default CreateMedicineComponent
->>>>>>> 5e2deaa6aa2fbdfa85cdcdf4e2e360dcbbb8d3a4

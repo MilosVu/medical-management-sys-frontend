@@ -10,11 +10,7 @@ class ListMedicinesComponent extends Component {
         this.state = {
                 medicines: []
         }
-<<<<<<< HEAD
         this.addMedicine = this.addMedicine.bind(this)
-=======
-        
->>>>>>> 5e2deaa6aa2fbdfa85cdcdf4e2e360dcbbb8d3a4
     }
 
     componentDidMount(){
@@ -23,13 +19,9 @@ class ListMedicinesComponent extends Component {
         });
     }
 
-<<<<<<< HEAD
     addMedicine(){
         this.props.history.push('/add-medicine');
     }
-=======
-    
->>>>>>> 5e2deaa6aa2fbdfa85cdcdf4e2e360dcbbb8d3a4
 
     render() {
         return (
