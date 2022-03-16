@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import MedicineService from '../../services/MedicineService';
+import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanyService';
 
-class ListMedicinesComponent extends Component {
+class ListPharmaceuticalCompany extends Component {
 
     constructor(props){
         super(props)
 
         this.state = {
-                medicines: []
+                companies: []
         }
         
     }
 
     componentDidMount(){
-        MedicineService.getMedicines().then((res) => {
-            this.setState({medicines: res.data});
+        PharmaceuticalCompanyService.getCompanies().then((res) => {
+            this.setState({companies: res.data});
         });
     }
 
@@ -24,30 +24,31 @@ class ListMedicinesComponent extends Component {
     render() {
         return (
             <div>
-            <h2 className='test-center'>Medicine list</h2>
-            <div className='row'>
-                <Link to="/add-medicine">
-                <button className='btn btn-primary'>Add medicine</button>
+            <h2 className='test-center'>Pharmaceutical companies list</h2>
+            <Link to="/add-pharmaceutical-company">
+                <button className='btn btn-primary'>Add company</button>
 
                 </Link>
+            <div className='row'>
+                
             </div>
             <div className="row">
                 <table className='table table-striped table-bordered'>
 
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            
                             <th>Pharmaceutical company</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         {
-                            this.state.medicines.map(
-                                medicine =>
-                                <tr key = {medicine.medicineid}>
-                                    <td> {medicine.name} </td>
-                                    <td> {medicine.pharmaceuticalCompany.name} </td>
+                            this.state.companies.map(
+                                company =>
+                                <tr key = {company.companyId}>
+                                    <td> {company.name} </td>
+                                    
                                 </tr>
                             )
                         }
@@ -61,4 +62,4 @@ class ListMedicinesComponent extends Component {
     }
 }
 
-export default ListMedicinesComponent;
+export default ListPharmaceuticalCompany;

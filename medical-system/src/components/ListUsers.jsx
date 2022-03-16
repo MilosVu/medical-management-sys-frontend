@@ -10,7 +10,7 @@ class ListUsers extends Component {
                 users: []
         }
     }
-//proba
+
     componentDidMount(){
         UserService.getUsers().then((res) => {
             this.setState({users: res.data});
