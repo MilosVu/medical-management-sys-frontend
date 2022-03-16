@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import MedicineService from '../../services/MedicineService';
 
 class ListMedicinesComponent extends Component {
@@ -9,7 +10,11 @@ class ListMedicinesComponent extends Component {
         this.state = {
                 medicines: []
         }
+<<<<<<< HEAD
         this.addMedicine = this.addMedicine.bind(this)
+=======
+        
+>>>>>>> 5e2deaa6aa2fbdfa85cdcdf4e2e360dcbbb8d3a4
     }
 
     componentDidMount(){
@@ -18,14 +23,24 @@ class ListMedicinesComponent extends Component {
         });
     }
 
+<<<<<<< HEAD
     addMedicine(){
         this.props.history.push('/add-medicine');
     }
+=======
+    
+>>>>>>> 5e2deaa6aa2fbdfa85cdcdf4e2e360dcbbb8d3a4
 
     render() {
         return (
             <div>
-            <h2 className='test-center'>Users list</h2>
+            <h2 className='test-center'>Medicine list</h2>
+            <div className='row'>
+                <Link to="/add-medicine">
+                <button className='btn btn-primary'>Add medicine</button>
+
+                </Link>
+            </div>
             <div className="row">
                 <button className='btn btn-primary' onClick={this.addMedicine}></button>
             </div>
