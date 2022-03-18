@@ -7,7 +7,9 @@ class PharmaceuticalCompanyService {
     getCompanies() {
         return axios.get(PHARMACEUTAL_COMPANY_API_BASE_URL);
     }
-
+    createCompany(pharmaceuticalCompany) {
+        return axios.post(PHARMACEUTAL_COMPANY_API_BASE_URL, pharmaceuticalCompany);
+    }
 
 }
 
