@@ -1,4 +1,5 @@
 import './App.css';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import ListUsers from './components/ListUsers';
 import HeaderComponent from './components/HeaderComponent';
@@ -8,32 +9,37 @@ import CreateMedicineComponent from './components/Medicines/CreateMedicineCompon
 import HomeComponent from './components/HomeComponent';
 import ListPharmaceuticalCompany from './components/PharmaceutalCompany/ListPharmaceuticalCompany';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
+import NavbarComponent from './components/NavbarComponent';
+import DashboardComponent from './components/DashboardComponent';
+import Login from './components/Login/Login';
 
 function App() {
+
+  const [token, setToken] = useState();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
+
   return (
     <div>
       <Router>
-        <div className='container'>
-
-          <HeaderComponent />
 
             <div className="container">
               <Routes>
-                <Route path='/' element= {< HomeComponent />}/>
 
                 <Route path='/users' element= {< ListUsers />}></Route>
+
+                <Route path='/dashboard' element= {< DashboardComponent />}></Route>
 
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>
                 <Route path='/add-medicine' element= {< CreateMedicineComponent />}></Route>
 
                 <Route path='/pharmaceutical-company' element= {< ListPharmaceuticalCompany />}></Route>
-                <Route path='/add-pharmaceutical-company' element= {<CreatePharmaceuticalCompanyComponent/>}></Route>
+                
               </Routes>
             </div>
 
-          <FooterComponent />
-            
-        </div>
       </Router>
     </div>
   );
