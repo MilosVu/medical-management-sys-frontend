@@ -10,7 +10,7 @@ class ListMedicinesComponent extends Component {
         this.state = {
                 medicines: []
         }
-        
+        this.addMedicine = this.addMedicine.bind(this)
     }
 
     componentDidMount(){
@@ -19,7 +19,9 @@ class ListMedicinesComponent extends Component {
         });
     }
 
-    
+    addMedicine(){
+        this.props.history.push('/add-medicine');
+    }
 
     render() {
         return (
@@ -30,6 +32,9 @@ class ListMedicinesComponent extends Component {
                 <button className='btn btn-primary'>Add medicine</button>
 
                 </Link>
+            </div>
+            <div className="row">
+                <button className='btn btn-primary' onClick={this.addMedicine}></button>
             </div>
             <div className="row">
                 <table className='table table-striped table-bordered'>
