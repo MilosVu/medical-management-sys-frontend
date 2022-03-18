@@ -1,20 +1,32 @@
 import React, { Component } from 'react'
 import MedicineService from '../../services/MedicineService';
+import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanyService';
 
  class CreateMedicineComponent extends Component {
 
+    
+
+    
     constructor(props){
         super(props)
         this.state={
             
             name: '',
-            pharmaceuticalCompany: ''
+            pharmaceuticalCompany: '',
+            companies: []
             
         }
         this.changeNameHandler = this.changeNameHandler.bind(this);
         this.changeCompanyHandler = this.changeCompanyHandler.bind(this);
         this.saveOrUpdateMedicine = this.saveOrUpdateMedicine.bind(this);
     }
+
+    componentDidMount(){
+        PharmaceuticalCompanyService.getCompanies().then((res) => {
+            this.setState({companies: res.data});
+        });
+    }
+
     changeNameHandler= (event) => {
         this.setState({name: event.target.value});
     }
@@ -29,9 +41,7 @@ import MedicineService from '../../services/MedicineService';
         console.log('medicine => ' + JSON.stringify(medicine));
 
         // step 5
-        MedicineService.createMedicine(medicine).then(res =>{
-            this.props.history.push('/medicines');
-        });
+        MedicineService.createMedicine(medicine);
     }
       /*  if(this.state.id === '_add'){
             EmployeeService.createEmployee(medicine).then(res =>{
@@ -61,8 +71,16 @@ import MedicineService from '../../services/MedicineService';
                                 </div>
                                 <div className = "form-group">
                                     <label> Pharmaceutical company:</label>
-                                    <input placeholder="Pharmaceutical company" name="pharmaceuticalCompany" className="form-control" 
-                                     value={this.state.pharmaceuticalCompany} onChange={this.changeCompanyHandler}   />
+                                    <select placeholder="Pharmaceutical company" name="pharmaceuticalCompany" className="form-control" >
+                                     
+                                         {
+                            this.state.companies.map(
+                                company =>
+                                <option name={company.name} id={company.id}></option>
+                               
+                            )
+                        }
+                                     </select>
                                 </div>
                                 
 
