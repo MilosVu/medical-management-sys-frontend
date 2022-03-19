@@ -10,7 +10,9 @@ import DashboardComponent from './components/Login/DashboardComponent';
 import HomeComponent from './components/HomeComponent';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
 import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
+import ListExaminationsComponent from './components/Examinations/ListExaminationsComponent';
 import DoctorDashboard from './components/Doctors/DoctorDashboard';
+import ReceptionistDashboardComponent from './components/Receptionist/ReceptionistDashboardComponent';
 
 function App() {
 
@@ -43,6 +45,11 @@ function App() {
                 
                 
 
+                <Route path='/examinations' element= {< ListExaminationsComponent />}></Route>
+
+
+                <Route path='/receptionist-dashboard' element= {< ReceptionistDashboardComponent />}></Route>
+``
               </Routes>
             </div>
 
