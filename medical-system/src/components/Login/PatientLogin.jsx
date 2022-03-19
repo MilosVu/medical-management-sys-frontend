@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 async function registerPatient(patient) {
     return fetch('http://localhost:8080/api/v1/patients', {
@@ -81,7 +82,12 @@ class PatientLogin extends Component {
                                         <span>Female </span>
                                     </label>
                                 </div>
-                                <a href="index1.php">Already have an account?</a>
+
+                                <Link to="/register">
+                                    <p>Already have an account?</p>
+                                </Link>
+                                
+                                    
                             </div>
                         </div>
 

@@ -54,54 +54,7 @@ class PatientRegister extends Component {
 
     render() {
         return (
-            <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <h3 className="register-heading">Register as Patient</h3>
-                <form method="post" action="func2.php">
-                    <div className="row register-form">
-
-                        <div className="col-md-6">
-                            <div className="form-group">
-                                <input type="text" className="form-control" placeholder="First Name *" name="fname" required="" />
-                            </div>
-                            <div className="form-group">
-                                <input type="email" className="form-control" placeholder="Your Email *" name="email" />
-                            </div>
-                            <div className="form-group">
-                                <input type="password" className="form-control" placeholder="Password *" id="password" name="password" onkeyup="check();" required="" />
-                            </div>
-
-                            <div className="form-group">
-                                <div className="maxl">
-                                    <label className="radio inline">
-                                        <input type="radio" name="gender" value="Male" checked="" />
-                                        <span> Male </span>
-                                    </label>
-                                    <label className="radio inline">
-                                        <input type="radio" name="gender" value="Female" />
-                                        <span>Female </span>
-                                    </label>
-                                </div>
-                                <a href="index1.php">Already have an account?</a>
-                            </div>
-                        </div>
-
-                        <div className="col-md-6">
-                            <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Last Name *" name="lname" onkeydown="return alphaOnly(event);" required="" />
-                            </div>
-
-                            <div className="form-group">
-                                <input type="tel" minLength="10" maxLength="10" name="contact" className="form-control" placeholder="Your Phone *" />
-                            </div>
-                            <div className="form-group">
-                                <input type="password" className="form-control" id="cpassword" placeholder="Confirm Password *" name="cpassword" onkeyup="check();" required="" /><span id="message"></span>
-                            </div>
-                            <input type="submit" className="btnRegister" name="patsub1" onClick="return checklen();" value="Register" />
-                        </div>
-
-                    </div>
-                </form>
-            </div>
+            <h1>REGISTER</h1>
         );
     }
 }

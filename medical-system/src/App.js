@@ -10,6 +10,8 @@ import ListPharmaceuticalCompany from './components/PharmaceutalCompany/ListPhar
 import DashboardComponent from './components/Login/DashboardComponent';
 import Register from './components/Login/Register';
 import HomeComponent from './components/HomeComponent';
+import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
+import PatientRegister from './components/Login/PatientRegister';
 
 function App() {
 
@@ -33,12 +35,15 @@ function App() {
 
                 <Route path='/' element= {< DashboardComponent />}></Route>
                 <Route path='/dashboard' element= {< DashboardComponent />}></Route>
+                <Route path='/register' element= {< PatientRegister />}></Route>
+
                 <Route path='/home' element= {< HomeComponent />}></Route>
 
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>
                 <Route path='/add-medicine' element= {< CreateMedicineComponent />}></Route>
 
                 <Route path='/pharmaceutical-company' element= {< ListPharmaceuticalCompany />}></Route>
+                <Route path='/add-pharmaceutical-company' element= {< CreatePharmaceuticalCompanyComponent />}></Route>
                 
               </Routes>
             </div>
