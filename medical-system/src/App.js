@@ -1,19 +1,19 @@
 import './App.css';
 import React, { useState } from 'react';
-import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
 import ListUsers from './components/ListUsers';
 import ListMedicinesComponent from './components/Medicines/ListMedicinesComponent';
 import CreateMedicineComponent from './components/Medicines/CreateMedicineComponent';
 import ListPharmaceuticalCompanyComponent from './components/PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
 import DashboardComponent from './components/Login/DashboardComponent';
-import HomeComponent from './components/HomeComponent';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
 import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
 import ListExaminationsComponent from './components/Examinations/ListExaminationsComponent';
 import DoctorDashboard from './components/Doctors/DoctorDashboard';
 import ReceptionistDashboardComponent from './components/Receptionist/ReceptionistDashboardComponent';
 import CreateDoctorComponent from './components/Doctors/CreateDoctorComponent';
+import NotFoundComponent from './components/NotFoundComponent';
 
 function App() {
 
@@ -29,6 +29,8 @@ function App() {
 
             <div className="container">
               <Routes>
+
+                <Route path='*' element= {< NotFoundComponent />}></Route>
 
                 <Route path='/' element= {< DashboardComponent />}></Route>
                 <Route path='/dashboard' element= {< DashboardComponent />}></Route>
@@ -51,7 +53,9 @@ function App() {
 
 
                 <Route path='/receptionist-dashboard' element= {< ReceptionistDashboardComponent />}></Route>
-``
+
+                
+
               </Routes>
             </div>
 
