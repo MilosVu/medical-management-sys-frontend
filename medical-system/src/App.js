@@ -13,6 +13,7 @@ import HomeComponent from './components/HomeComponent';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
 import PatientRegister from './components/Login/PatientRegister';
 import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
+import ListExaminationsComponent from './components/Examinations/ListExaminationsComponent';
 
 function App() {
 
@@ -48,6 +49,8 @@ function App() {
                 
                 <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
                 
+
+                <Route path='/examinations' element= {< ListExaminationsComponent />}></Route>
 
               </Routes>
             </div>
