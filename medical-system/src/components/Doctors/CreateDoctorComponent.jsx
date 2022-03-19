@@ -4,25 +4,42 @@ import React, { Component } from 'react'
 
 
 
-import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanyService';
+import DoctorService from '../../services/DoctorService';
 
-class CreatePharmaceuticalCompanyComponent extends Component {
+class CreateDoctorComponent extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
 
-            name: '',
-
+            FirstName: '',
+            LastName: '',
+            Username: '',
+            Email: '',
+            Password: '',
+            Fees: '',
+            SpecializationId: '',
+            specializations: []
 
         }
-        this.changeNameHandler = this.changeNameHandler.bind(this);
+        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
+        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+
         this.saveOrUpdateCompany = this.saveOrUpdateCompany.bind(this);
     }
 
 
-    changeNameHandler = (event) => {
-        this.setState({ name: event.target.value });
+    changeFirstNameHandler = (event) => {
+        this.setState({ FirstName: event.target.value });
+    }
+    changeLastNameHandler = (event) => {
+        this.setState({ LastName: event.target.value });
+    }
+    changeLastNameHandler = (event) => {
+        this.setState({ LastName: event.target.value });
     }
 
     saveOrUpdateCompany = (e) => {
@@ -33,7 +50,7 @@ class CreatePharmaceuticalCompanyComponent extends Component {
 
         // step 5
         PharmaceuticalCompanyService.createCompany(company);
-        
+
     }
     /*  if(this.state.id === '_add'){
           EmployeeService.createEmployee(medicine).then(res =>{
@@ -62,11 +79,11 @@ class CreatePharmaceuticalCompanyComponent extends Component {
                                         <input placeholder="Pharmaceutical company" name="pharmaceuticalCompany" className="form-control"
                                             onChange={this.changeNameHandler} />
                                     </div>
-                                 
 
-                                    
-                                        <button className="btn btn-success" onClick={this.saveOrUpdateCompany}>Save</button>
-                                    
+
+
+                                    <button className="btn btn-success" onClick={this.saveOrUpdateCompany}>Save</button>
+
 
 
                                     <button className="btn btn-danger" >Cancel</button>
@@ -81,4 +98,4 @@ class CreatePharmaceuticalCompanyComponent extends Component {
     }
 }
 
-export default CreatePharmaceuticalCompanyComponent
+export default CreateDoctorComponent

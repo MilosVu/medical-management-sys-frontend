@@ -71,12 +71,13 @@ import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanySe
                                 </div>
                                 <div className = "form-group">
                                     <label> Pharmaceutical company:</label>
-                                    <select placeholder="Pharmaceutical company" name="pharmaceuticalCompany" className="form-control" >
+                                    <select placeholder="Pharmaceutical company" name="pharmaceuticalCompany" className="form-control"
+                                        value={this.state.pharmaceuticalCompany} onChange={this.changeCompanyHandler} >
                                      
                                          {
                             this.state.companies.map(
                                 company =>
-                                <option name={company.name} id={company.id}></option>
+                                    <option name={company.name} id={company.id}>{company.name}</option>
                                
                             )
                         }
@@ -84,7 +85,7 @@ import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanySe
                                 </div>
                                 
 
-                                <button className="btn btn-success" onClick={this.saveOrUpdateEmployee}>Save</button>
+                                <button className="btn btn-success" onClick={this.saveOrUpdateMedicine}>Save</button>
                                 <button className="btn btn-danger" >Cancel</button>
                             </form>
                         </div>

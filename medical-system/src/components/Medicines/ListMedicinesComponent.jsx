@@ -29,13 +29,11 @@ class ListMedicinesComponent extends Component {
             <h2 className='test-center'>Medicine list</h2>
             <div className='row'>
                 <Link to="/add-medicine">
-                <button className='btn btn-primary'>Add medicine</button>
+                        <button className='btn btn-primary' onClick={this.addMedicine}>Add medicine</button>
 
                 </Link>
             </div>
-            <div className="row">
-                <button className='btn btn-primary' onClick={this.addMedicine}></button>
-            </div>
+
             <div className="row">
                 <table className='table table-striped table-bordered'>
 

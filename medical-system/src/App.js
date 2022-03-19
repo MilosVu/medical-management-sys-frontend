@@ -6,12 +6,13 @@ import { useLocation } from 'react-router-dom'
 import ListUsers from './components/ListUsers';
 import ListMedicinesComponent from './components/Medicines/ListMedicinesComponent';
 import CreateMedicineComponent from './components/Medicines/CreateMedicineComponent';
-import ListPharmaceuticalCompany from './components/PharmaceutalCompany/ListPharmaceuticalCompany';
+import ListPharmaceuticalCompanyComponent from './components/PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
 import DashboardComponent from './components/Login/DashboardComponent';
 import Register from './components/Login/Register';
 import HomeComponent from './components/HomeComponent';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
 import PatientRegister from './components/Login/PatientRegister';
+import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
 
 function App() {
 
@@ -42,9 +43,12 @@ function App() {
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>
                 <Route path='/add-medicine' element= {< CreateMedicineComponent />}></Route>
 
-                <Route path='/pharmaceutical-company' element= {< ListPharmaceuticalCompany />}></Route>
+                <Route path='/pharmaceutical-company' element= {< ListPharmaceuticalCompanyComponent />}></Route>
                 <Route path='/add-pharmaceutical-company' element= {< CreatePharmaceuticalCompanyComponent />}></Route>
                 
+                <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
+                
+
               </Routes>
             </div>
 
