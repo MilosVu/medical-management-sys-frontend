@@ -69,7 +69,7 @@ class DashboardComponent extends Component {
                 <div className="col-md-9 register-right" >
 
                     {this.state.isLogginActive
-                        ?<div>
+                        ? <div>
                             <UserMenu
                                 current={current}
                                 currentActive={currentActive}
@@ -96,7 +96,6 @@ class DashboardComponent extends Component {
 
                             </div>
                         </div>
-
                         : <div>
                             <PatientRegister />
                             <a href="#" onClick={this.changeState}>Go to login</a>

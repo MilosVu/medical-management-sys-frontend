@@ -10,6 +10,7 @@ import DashboardComponent from './components/Login/DashboardComponent';
 import HomeComponent from './components/HomeComponent';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
 import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
+import DoctorDashboard from './components/Doctors/DoctorDashboard';
 
 function App() {
 
@@ -26,20 +27,20 @@ function App() {
             <div className="container">
               <Routes>
 
-                <Route path='/users' element= {< ListUsers />}></Route>
-
                 <Route path='/' element= {< DashboardComponent />}></Route>
                 <Route path='/dashboard' element= {< DashboardComponent />}></Route>
+                <Route path='/home' element= {< DashboardComponent />}></Route>
 
-                <Route path='/home' element= {< HomeComponent />}></Route>
+                <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
+                <Route path='/doctors-dashboard' element= {< DoctorDashboard />}></Route>
 
+                <Route path='/users' element= {< ListUsers />}></Route>
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>
                 <Route path='/add-medicine' element= {< CreateMedicineComponent />}></Route>
 
                 <Route path='/pharmaceutical-company' element= {< ListPharmaceuticalCompanyComponent />}></Route>
                 <Route path='/add-pharmaceutical-company' element= {< CreatePharmaceuticalCompanyComponent />}></Route>
                 
-                <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
                 
 
               </Routes>
