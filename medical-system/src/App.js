@@ -1,17 +1,14 @@
 import './App.css';
 import React, { useState } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
 
 import ListUsers from './components/ListUsers';
 import ListMedicinesComponent from './components/Medicines/ListMedicinesComponent';
 import CreateMedicineComponent from './components/Medicines/CreateMedicineComponent';
 import ListPharmaceuticalCompanyComponent from './components/PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
 import DashboardComponent from './components/Login/DashboardComponent';
-import Register from './components/Login/Register';
 import HomeComponent from './components/HomeComponent';
 import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompany/CreatePharmaceuticalCompanyComponent';
-import PatientRegister from './components/Login/PatientRegister';
 import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
 
 function App() {
@@ -29,14 +26,10 @@ function App() {
             <div className="container">
               <Routes>
 
-                <Route path='/register' element= {< Register />}></Route>
-
-
                 <Route path='/users' element= {< ListUsers />}></Route>
 
                 <Route path='/' element= {< DashboardComponent />}></Route>
                 <Route path='/dashboard' element= {< DashboardComponent />}></Route>
-                <Route path='/register' element= {< PatientRegister />}></Route>
 
                 <Route path='/home' element= {< HomeComponent />}></Route>
 

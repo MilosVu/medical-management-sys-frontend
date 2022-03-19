@@ -71,3 +71,7 @@ a.nav-link.active {
 label.radio.inline {
   margin-left: 20px;
 }
+
+a.nav-link {
+  cursor: pointer;
+}
