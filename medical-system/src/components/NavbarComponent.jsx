@@ -5,6 +5,10 @@ class NavbarComponent extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
             <div className="container">
+
+            {/* <Link to="/register">
+                            <p>Already have an account?</p>
+                        </Link> */}
         
               <a className="navbar-brand js-scroll-trigger" href="/"><h4><i className="fa fa-user-plus" aria-hidden="true"></i>&nbsp; GLOBAL HOSPITALS</h4></a>
               <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
