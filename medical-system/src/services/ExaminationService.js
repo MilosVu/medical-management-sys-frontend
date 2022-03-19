@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const EXAMINATION_API_BASE_URL = "http://localhost:8080/api/v1/examinations"
 
-class DoctorService {
+class ExaminationService {
 
     getExaminations() {
         return axios.get(EXAMINATION_API_BASE_URL);
@@ -13,4 +13,4 @@ class DoctorService {
 
 }
 
-export default new DoctorService();
+export default new ExaminationService();

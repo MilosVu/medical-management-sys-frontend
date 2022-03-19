@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-
-
-
-
-
 import DoctorService from '../../services/DoctorService';
+
+
+
+
+
+import SpecializationService from '../../services/SpecializationService';
 
 class CreateDoctorComponent extends Component {
 
@@ -22,34 +23,35 @@ class CreateDoctorComponent extends Component {
             specializations: []
 
         }
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeLastNameHandler = this.changeLastNameHandler.bind(this);
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
-        this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
-        this.saveOrUpdateCompany = this.saveOrUpdateCompany.bind(this);
+        this.saveOrUpdateDoctor = this.saveOrUpdateDoctor.bind(this);
+    }
+    componentDidMount() {
+        SpecializationService.getSpecializations().then((res) => {
+            this.setState({ specializations: res.data });
+        });
     }
 
 
-    changeFirstNameHandler = (event) => {
-        this.setState({ FirstName: event.target.value });
-    }
-    changeLastNameHandler = (event) => {
-        this.setState({ LastName: event.target.value });
-    }
-    changeLastNameHandler = (event) => {
-        this.setState({ LastName: event.target.value });
+    handleChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
-    saveOrUpdateCompany = (e) => {
+    saveOrUpdateDoctor = (e) => {
 
         e.preventDefault();
-        let company = { name: this.state.name };
-        console.log('company => ' + JSON.stringify(company));
+        let doctor = { firstName: this.state.FirstName, lastName: this.state.LastName, userName: this.state.Username, email: this.state.Email, password: this.state.Password, fees: this.state.Fees, specialization: this.state.SpecializationId };
+        console.log('doctor => ' + JSON.stringify(doctor));
 
         // step 5
-        PharmaceuticalCompanyService.createCompany(company);
+        DoctorService.createDoctor(doctor);
 
     }
     /*  if(this.state.id === '_add'){
@@ -75,14 +77,54 @@ class CreateDoctorComponent extends Component {
                                 <form>
 
                                     <div className="form-group">
-                                        <label> Pharmaceutical company:</label>
-                                        <input placeholder="Pharmaceutical company" name="pharmaceuticalCompany" className="form-control"
-                                            onChange={this.changeNameHandler} />
+                                        <label> First name:</label>
+                                        <input placeholder="First name" name="firstName" className="form-control"
+                                            onChange={this.handleChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Last name:</label>
+                                        <input placeholder="Last name" name="lastName" className="form-control"
+                                            onChange={this.handleChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Email:</label>
+                                        <input placeholder="Email" name="email" className="form-control"
+                                            onChange={this.handleChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Fees:</label>
+                                        <input placeholder="Fees" name="fees" className="form-control"
+                                            onChange={this.handleChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Specialization:</label>
+                                        <select placeholder="Specialization" name="specialization" className="form-control"
+                                            value={this.state.SpecializationId} onChange={this.handleChange} >
+
+                                            {
+                                                this.state.specializations.map(
+                                                    specialization =>
+                                                        <option name={specialization.name} id={specialization.specializationId}>{specialization.name}</option>
+
+                                                )
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Username:</label>
+                                        <input placeholder="Username" name="userName" className="form-control"
+                                            onChange={this.handleChange} />
+                                    </div>
+                                    <div className="form-group">
+                                        <label> Password:</label>
+                                        <input placeholder="Password" name="password" className="form-control"
+                                            onChange={this.handleChange} />
                                     </div>
 
 
 
-                                    <button className="btn btn-success" onClick={this.saveOrUpdateCompany}>Save</button>
+
+                                    <button className="btn btn-success" onClick={this.saveOrUpdateDoctor}>Save</button>
 
 
 

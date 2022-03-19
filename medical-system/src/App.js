@@ -13,6 +13,7 @@ import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
 import ListExaminationsComponent from './components/Examinations/ListExaminationsComponent';
 import DoctorDashboard from './components/Doctors/DoctorDashboard';
 import ReceptionistDashboardComponent from './components/Receptionist/ReceptionistDashboardComponent';
+import CreateDoctorComponent from './components/Doctors/CreateDoctorComponent';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
                 <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
                 <Route path='/doctors-dashboard' element= {< DoctorDashboard />}></Route>
+                <Route path='/add-doctor' element={<CreateDoctorComponent/>}></Route>
 
                 <Route path='/users' element= {< ListUsers />}></Route>
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>
