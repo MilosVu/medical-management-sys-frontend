@@ -57,7 +57,7 @@ class ListDoctorsComponent extends Component {
                                             <td> {doctor.username} </td>
                                             <td> {doctor.email} </td>
                                             <td> {doctor.fees} </td>
-                                            <td> {doctor.specialization.name} </td>
+                                            <td> Ne radi</td>
                                         </tr>
                                 )
                             }
