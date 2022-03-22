@@ -47,6 +47,7 @@ function App() {
                 {/* OVO DOLE SVE TREBA IZBRISATI */}
                 <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
                 <Route path='/add-doctor' element={<CreateDoctorComponent/>}></Route>
+                <Route path='/edit-doctor' element={<CreateDoctorComponent />}></Route>
 
                 <Route path='/users' element= {< ListUsers />}></Route>
                 <Route path='/medicines' element= {< ListMedicinesComponent />}></Route>

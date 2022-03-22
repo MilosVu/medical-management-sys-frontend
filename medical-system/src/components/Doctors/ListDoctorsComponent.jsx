@@ -44,6 +44,8 @@ class ListDoctorsComponent extends Component {
                                 <th>Email</th>
                                 <th>Fees</th>
                                 <th>Specialization</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
 
@@ -58,6 +60,10 @@ class ListDoctorsComponent extends Component {
                                             <td> {doctor.email} </td>
                                             <td> {doctor.fees} </td>
                                             <td> Ne radi</td>
+
+                                            <td> <button className="btn btn-success">Edit</button></td>
+
+                                            <td> <button className="btn btn-danger" >Delete</button></td>
                                         </tr>
                                 )
                             }
