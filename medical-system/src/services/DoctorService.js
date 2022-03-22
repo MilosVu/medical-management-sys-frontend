@@ -10,6 +10,9 @@ class DoctorService {
     createDoctor(doctors) {
         return axios.post(DOCTOR_API_BASE_URL, doctors);
     }
+    deleteDoctor(doctor) {
+        return axios.post(Do)
+    }
 
 }
 
