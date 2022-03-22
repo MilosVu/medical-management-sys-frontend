@@ -34,24 +34,6 @@ class DashboardComponent extends Component {
         this.setState(prevState => ({ isLogginActive: !prevState.isLogginActive }));
     }
 
-    // componentDidMount() {
-    //     this.rightSide.classList.add("right");
-    // }
-
-    // changeState() {
-    //     const { isLogginActive, userType } = this.state;
-    //     console.log(this.state);
-
-    //     if (isLogginActive) {
-    //         this.rightSide.classList.remove("right");
-    //         this.rightSide.classList.add("left");
-    //     } else {
-    //         this.rightSide.classList.remove("left");
-    //         this.rightSide.classList.add("right");
-    //     }
-    //     this.setState(prevState => ({ isLogginActive: !prevState.isLogginActive }));
-    // }
-
     render() {
 
         const { isLogginActive, userType } = this.state;
@@ -75,7 +57,7 @@ class DashboardComponent extends Component {
                                 currentActive={currentActive}
                                 containerRef={ref => (this.rightSide = ref)}
                                 obj={this}
-                            //onClick={this.changeState.bind(this)}
+                                //onClick={this.changeState.bind(this)}
                             />
 
                             <div className="tab-content" id="myTabContent">

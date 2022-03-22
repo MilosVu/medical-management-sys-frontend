@@ -75,3 +75,11 @@ label.radio.inline {
 a.nav-link {
   cursor: pointer;
 }
+
+a.list-group-item.list-group-item-action{
+  color: #3931af!important;
+}
+
+a.list-group-item.list-group-item-action.active{
+  color: white!important;
+}

@@ -37,7 +37,7 @@ function App() {
                 <Route path='/home' element= {< DashboardComponent />}></Route>
 
                 <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
-                <Route path='/doctors-dashboard' element= {< DoctorDashboard />}></Route>
+                <Route path='/doctor-dashboard' element= {< DoctorDashboard />}></Route>
                 <Route path='/add-doctor' element={<CreateDoctorComponent/>}></Route>
 
                 <Route path='/users' element= {< ListUsers />}></Route>

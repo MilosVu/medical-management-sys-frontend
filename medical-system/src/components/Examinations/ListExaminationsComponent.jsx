@@ -6,20 +6,30 @@ class ListExaminationsComponent extends Component {
 
     constructor(props) {
         super(props)
-
+        console.log(props.userid);
         this.state = {
-            examinations: []
+            examinations: [],
+            doctorid: 4
         }
-
     }
 
     componentDidMount() {
-        ExaminationService.getExaminations().then((res) => {
-            this.setState({ examinations: res.data });
-        });
+        console.log(this.props.userid);
+
+        if(this.state.doctorid != undefined){
+
+            ExaminationService.getExaminationsForDoctor(this.state.doctorid).then((res) => {
+                this.setState({ examinations: res.data });
+            });
+
+        }else{
+
+            ExaminationService.getExaminations().then((res) => {
+                this.setState({ examinations: res.data });
+            });
+
+        }
     }
-
-
 
     render() {
         return (
