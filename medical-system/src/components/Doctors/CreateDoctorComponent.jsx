@@ -1,31 +1,28 @@
 import React, { Component } from 'react'
-import DoctorService from '../../services/DoctorService';
-
-
-
-
-
 import SpecializationService from '../../services/SpecializationService';
+
+function registerDoctor(doctor) {
+    return fetch('http://localhost:8080/api/v1/patients', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(doctor)
+    }).then(data => data.json())
+}
 
 class CreateDoctorComponent extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-
-            FirstName: '',
-            LastName: '',
-            Username: '',
-            Email: '',
-            Password: '',
-            Fees: '',
-            SpecializationId: '',
+            userRole: "Doctor",
             specializations: []
 
         }
         this.handleChange = this.handleChange.bind(this);
 
-        this.saveOrUpdateDoctor = this.saveOrUpdateDoctor.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     componentDidMount() {
         SpecializationService.getSpecializations().then((res) => {
@@ -44,14 +41,15 @@ class CreateDoctorComponent extends Component {
         });
     }
 
-    saveOrUpdateDoctor = (e) => {
+    async handleSubmit(e) {
 
         e.preventDefault();
-        let doctor = { firstName: this.state.FirstName, lastName: this.state.LastName, userName: this.state.Username, email: this.state.Email, password: this.state.Password, fees: this.state.Fees, specialization: this.state.SpecializationId };
-        console.log('doctor => ' + JSON.stringify(doctor));
+        console.log('doctor => ' + JSON.stringify(this.state));
+
+        const response = await registerDoctor(this.state);
 
         // step 5
-        DoctorService.createDoctor(doctor);
+
 
     }
     /*  if(this.state.id === '_add'){
@@ -74,7 +72,7 @@ class CreateDoctorComponent extends Component {
                         <div className="card col-md-6 offset-md-3 offset-md-3">
 
                             <div className="card-body">
-                                <form>
+                                <form onSubmit={this.handleSubmit}>
 
                                     <div className="form-group">
                                         <label> First name:</label>
@@ -124,8 +122,8 @@ class CreateDoctorComponent extends Component {
 
 
 
-                                    <button className="btn btn-success" onClick={this.saveOrUpdateDoctor}>Save</button>
 
+                                    <input type="submit" className='btnRegister' name='patsub1' value='Register' />
 
 
                                     <button className="btn btn-danger" >Cancel</button>
