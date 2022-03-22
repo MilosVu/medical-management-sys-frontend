@@ -1,41 +1,78 @@
 import React, { Component } from 'react';
 
 class DoctorTabsComponent extends Component {
+
+    constructor(props){
+        super(props)
+
+        console.log(props);
+        this.state = {
+            user : props.user
+        }
+    }
+
     render() {
         return (
             <div className="tab-content">
-                <div className="container-fluid container-fullw bg-white">
-                    <div className="row">
+                <div className="row gutters-sm">
 
-                        <div className="col-sm-4">
-                            <div className="panel panel-white no-radius text-center">
-                                <div className="panel-body">
-                                    <span className="fa-stack fa-2x"> <i className="fa fa-square fa-stack-2x text-primary"></i> <i className="fa fa-list fa-stack-1x fa-inverse"></i> </span>
-                                    <h4 className="StepTitle"> View Appointments</h4>
-                                    <p className="links cl-effect-1">
-                                        <a href="#list-app">
-                                            Appointment List
-                                        </a>
-                                    </p>
+                    <div className="col-md-8">
+                        <div className="card mb-3">
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-sm-3">
+                                        <h6 className="mb-0">Full Name:</h6>
+                                    </div>
+                                    <div className="col-sm-9 text-secondary">
+                                        {this.state.user.firstName} {this.state.user.lastName}
+                                    </div> 
+                                </div>
+                                <hr />
+                                <div className="row">
+                                    <div className="col-sm-3">
+                                        <h6 className="mb-0">Email:</h6>
+                                    </div>
+                                    <div className="col-sm-9 text-secondary">
+                                        {this.state.user.email}
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="row">
+                                    <div className="col-sm-3">
+                                        <h6 className="mb-0">Fee:</h6>
+                                    </div>
+                                    <div className="col-sm-9 text-secondary">
+                                        {this.state.user.fees}$
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="row">
+                                    <div className="col-sm-3">
+                                        <h6 className="mb-0">Specialization:</h6>
+                                    </div>
+                                    <div className="col-sm-9 text-secondary">
+                                        {this.state.user.specialization.name}
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="row">
+                                    <div className="col-sm-3">
+                                        <h6 className="mb-0">University:</h6>
+                                    </div>
+                                    <div className="col-sm-9 text-secondary">
+                                        {this.state.user.specialization.graduated}
+                                    </div>
+                                </div>
+                                <hr />
+                                <div className="row">
+                                    <div className="col-sm-12">
+                                        <a className="btn btn-info" href="#">Edit</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div className="col-sm-4">
-                            <div className="panel panel-white no-radius text-center">
-                                <div className="panel-body">
-                                    <span className="fa-stack fa-2x"> <i className="fa fa-square fa-stack-2x text-primary"></i> <i className="fa fa-list-ul fa-stack-1x fa-inverse"></i> </span>
-                                    <h4 className="StepTitle"> Prescriptions</h4>
-                                    <p className="links cl-effect-1">
-                                        <a href="#list-pres">
-                                            Prescription List
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
+
                 </div>
             </div>
         );

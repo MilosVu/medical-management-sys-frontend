@@ -47,10 +47,12 @@ class LoginFormComponent extends Component {
         if(response.length !== 0){
             // setToken(response);
             alert("Loged in");
-            console.log(response);
-            localStorage.setItem(this.state.userRole + "-token", response[0]["username"] + response[0]["userid"]);
+            localStorage.setItem(this.state.userRole + "-token", JSON.stringify({
+                "userId" : response[0]["userid"],
+                "username" : response[0]["username"]
+            }));
 
-            //window.location.href = "http://localhost:3000/test";
+            window.location.reload();
 
         }else{
             alert("Wrong username or password");

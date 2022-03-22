@@ -10,10 +10,10 @@ class DashboardComponent extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
             isLogginActive: true,
             userType: "patient",
-            user: {"firstname":"milos", "lastname" :"vujic"}
         };
     }
 

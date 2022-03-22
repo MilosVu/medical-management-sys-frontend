@@ -25,11 +25,6 @@ const withAuth = (Component) => {
     
     const isAuth = hasToken();
 
-    if(Component.name == "DashboardComponent"){
-      //console.log(Component);
-      return Component;
-    }
-
     console.log(isAuth);
     
     switch (isAuth) {
@@ -41,7 +36,7 @@ const withAuth = (Component) => {
       case 'receptionist-dashboard':
         return (Component.name == "ReceptionistDashboard") ? <Component /> : <Navigate replace to={"/" + isAuth} />;
       default:
-        return <Navigate replace to={"/"} />
+        return (Component.name == "DashboardComponent") ? <Component /> : <Navigate replace to={"/"} />;
     }
     
   };

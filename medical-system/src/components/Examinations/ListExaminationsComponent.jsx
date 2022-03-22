@@ -9,7 +9,7 @@ class ListExaminationsComponent extends Component {
         console.log(props.userid);
         this.state = {
             examinations: [],
-            doctorid: 4
+            doctorid: props.userid
         }
     }
 
