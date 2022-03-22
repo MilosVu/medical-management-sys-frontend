@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import withAuth from '../../withAuth';
 
-class ReceptionistDashboardComponent extends Component {
+class ReceptionistDashboard extends Component {
     render() {
         return (
             <div>
@@ -57,4 +58,4 @@ class ReceptionistDashboardComponent extends Component {
     }
 }
 
-export default ReceptionistDashboardComponent;
+export default withAuth(ReceptionistDashboard);

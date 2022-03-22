@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withAuth from '../../withAuth';
 import ListExaminationsComponent from '../Examinations/ListExaminationsComponent';
 import DoctorTabsComponent from './DoctorTabsComponent';
 
@@ -54,4 +55,4 @@ class DoctorDashboard extends Component {
     }
 }
 
-export default DoctorDashboard;
+export default withAuth(DoctorDashboard);

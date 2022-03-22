@@ -11,9 +11,10 @@ import CreatePharmaceuticalCompanyComponent from './components/PharmaceutalCompa
 import ListDoctorsComponent from './components/Doctors/ListDoctorsComponent';
 import ListExaminationsComponent from './components/Examinations/ListExaminationsComponent';
 import DoctorDashboard from './components/Doctors/DoctorDashboard';
-import ReceptionistDashboardComponent from './components/Receptionist/ReceptionistDashboardComponent';
 import CreateDoctorComponent from './components/Doctors/CreateDoctorComponent';
 import NotFoundComponent from './components/NotFoundComponent';
+import PatientDashboard from './components/Patient/PatientDashboard';
+import ReceptionistDashboard from './components/Receptionist/ReceptionistDashboard';
 
 function App() {
 
@@ -36,8 +37,15 @@ function App() {
                 <Route path='/dashboard' element= {< DashboardComponent />}></Route>
                 <Route path='/home' element= {< DashboardComponent />}></Route>
 
-                <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
                 <Route path='/doctor-dashboard' element= {< DoctorDashboard />}></Route>
+
+                <Route path='/patient-dashboard' element={<PatientDashboard/>}></Route>
+
+                <Route path='/receptionist-dashboard' element= {< ReceptionistDashboard />}></Route>
+
+
+                {/* OVO DOLE SVE TREBA IZBRISATI */}
+                <Route path='/doctors' element= {< ListDoctorsComponent />}></Route>
                 <Route path='/add-doctor' element={<CreateDoctorComponent/>}></Route>
 
                 <Route path='/users' element= {< ListUsers />}></Route>
@@ -52,7 +60,6 @@ function App() {
                 <Route path='/examinations' element= {< ListExaminationsComponent />}></Route>
 
 
-                <Route path='/receptionist-dashboard' element= {< ReceptionistDashboardComponent />}></Route>
 
                 
 

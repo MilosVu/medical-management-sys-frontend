@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import withAuth from '../../withAuth';
 import DoctorLogin from './DoctorLogin';
 import PatientLogin from './PatientLogin';
 import PatientRegister from './PatientRegister';
@@ -11,7 +12,8 @@ class DashboardComponent extends Component {
         super(props);
         this.state = {
             isLogginActive: true,
-            userType: "patient"
+            userType: "patient",
+            user: {"firstname":"milos", "lastname" :"vujic"}
         };
     }
 
@@ -93,7 +95,6 @@ class DashboardComponent extends Component {
 }
 
 const UserMenu = props => {
-    console.log(props.obj.state.userType);
     return (
         <ul className="nav nav-tabs nav-justified" id="myTab" role="tablist">
             <li className="nav-item">
@@ -115,4 +116,4 @@ const UserMenu = props => {
     );
 };
 
-export default DashboardComponent;
+export default withAuth(DashboardComponent);

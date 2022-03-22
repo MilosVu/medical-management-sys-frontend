@@ -6,13 +6,13 @@ class PatientLogin extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { data: "Patient" };
+        this.state = { data: "patient" };
     }
 
     render() {
         return (
             <div>
-                <LoginFormComponent dataFromParent={this.state.data} />
+                <LoginFormComponent userRole={this.state.data} />
             </div>
         );
     }

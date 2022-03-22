@@ -5,13 +5,13 @@ class DoctorLogin extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {data: "Doctor"};
+        this.state = {data: "doctor"};
     }
 
     render() {
         return (
             <div>
-                <LoginFormComponent dataFromParent = {this.state.data}/>
+                <LoginFormComponent userRole = {this.state.data}/>
             </div>
         );
     }

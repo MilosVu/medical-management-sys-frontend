@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useNavigate } from "react-router-dom";
 
 async function loginUser(credentials) {
     return fetch('http://localhost:8080/api/v1/login', {
@@ -11,15 +12,17 @@ async function loginUser(credentials) {
         .then(data => data.json())
 }
 
+
 class LoginFormComponent extends Component {
 
     constructor(props) {
         super(props);
         // this.state = { setToken };
-        this.state = {};
+        this.state = {userRole : this.props.userRole};
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        
     }
 
     handleChange(event) {
@@ -44,6 +47,11 @@ class LoginFormComponent extends Component {
         if(response.length !== 0){
             // setToken(response);
             alert("Loged in");
+            console.log(response);
+            localStorage.setItem(this.state.userRole + "-token", response[0]["username"] + response[0]["userid"]);
+
+            //window.location.href = "http://localhost:3000/test";
+
         }else{
             alert("Wrong username or password");
         }
@@ -53,7 +61,7 @@ class LoginFormComponent extends Component {
     render() {
         return (
             <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <h3 className="register-heading">Login as {this.props.dataFromParent}</h3>
+                <h3 className="register-heading">Login as {this.props.userRole}</h3>
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="row register-form">
