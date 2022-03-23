@@ -1,7 +1,41 @@
 import React, { Component } from 'react';
 import withAuth from '../../withAuth';
+import ListDoctorsComponent from '../Doctors/ListDoctorsComponent';
+import ListExaminationsComponent from '../Examinations/ListExaminationsComponent';
+import ListPatientsComponent from '../Patient/ListPatientsComponent';
+
+
 
 class ReceptionistDashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            view: "dashboard"
+        };
+    }
+    toDashboard = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "dashboard" }));
+    }
+
+    toDoctorList = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "doctors" }));
+    }
+    toPatientList = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "patients" }));
+    }
+
+    toExaminationList = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "examinations" }));
+    }
+
+    toPrescriptionList = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "prescriptions" }));
+    }
     render() {
         return (
             <div>
@@ -26,7 +60,7 @@ class ReceptionistDashboard extends Component {
                                 className={`list-group-item list-group-item-action ${this.state.view == "examinations" ? "active" : ""}`}>
                                 Examinations
                             </a>
-                            <a href="#" role="tab" onClick={this.toDoctorList}
+                            <a href="#" role="tab" onClick={this.toPrescriptionList}
                                 className={`list-group-item list-group-item-action ${this.state.view == "prescriptions" ? "active" : ""}`}>
                                 Prescriptions
                             </a>
@@ -43,9 +77,11 @@ class ReceptionistDashboard extends Component {
                                 case 'doctors':
                                     return <ListDoctorsComponent />;
                                 case 'patients':
-                                    return <>Patientss</>;
+                                    return <ListPatientsComponent />
                                 case 'examinations':
                                     return <ListExaminationsComponent />;
+                                case 'prescriptions':
+                                    return <>Ledu</>;
                                 default:
                                     return null;
                             }
