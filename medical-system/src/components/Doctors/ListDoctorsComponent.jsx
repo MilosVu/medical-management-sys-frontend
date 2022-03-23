@@ -19,7 +19,14 @@ class ListDoctorsComponent extends Component {
         });
     }
 
+    deleteDoctor = (e, id) => {
+        e.preventDefault();
+        let doctor = { id: id };
+        console.log('doctor => ' + JSON.stringify(doctor));
 
+        // step 5
+        DoctorService.deleteDoctor(id);
+    }
 
     render() {
         return (
@@ -63,7 +70,7 @@ class ListDoctorsComponent extends Component {
 
                                             <td> <button className="btn btn-success">Edit</button></td>
 
-                                            <td> <button className="btn btn-danger" >Delete</button></td>
+                                            <td> <button className="btn btn-danger" onClick={(e) => { this.deleteDoctor(e, doctor.userid); }}>Delete</button></td>
                                         </tr>
                                 )
                             }
