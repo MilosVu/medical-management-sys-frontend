@@ -52,8 +52,12 @@ body {
   background-size: cover;
 }
 
-.container {
+.dashboard-container {
   margin-top: 15%;
+}
+
+.main-dashboard-container{
+  margin-top: 15%!important;
 }
 
 .tab-content-container {
@@ -82,4 +86,12 @@ a.list-group-item.list-group-item-action{
 
 a.list-group-item.list-group-item-action.active{
   color: white!important;
+}
+
+.btnLogin{
+  float: right;
+}
+
+a.btn.btn-info {
+  float: right;
 }

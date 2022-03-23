@@ -78,7 +78,7 @@ class LoginFormComponent extends Component {
                             <div className="form-group">
                                 <input type="password" className="form-control" placeholder="Password *" name="password" required="" onChange={this.handleChange}/>
                             </div>
-                            <input type="submit" className="btnLogin" name="docsub1" value="Login" />
+                            <input type="submit" className="btnLogin btn btn-light" name="docsub1" value="Login" />
                         </div>
 
                     </div>

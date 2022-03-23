@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserService from '../../services/UserService';
 import withAuth from '../../withAuth';
 import ListExaminationsComponent from '../Examinations/ListExaminationsComponent';
+import NavbarComponent from '../NavbarComponent';
 import DoctorTabsComponent from './DoctorTabsComponent';
 
 
@@ -41,8 +42,8 @@ class DoctorDashboard extends Component {
 
     render() {
         return (
-            <div>
-
+            <div className='dashboard-container'>
+                <NavbarComponent />
                 <h3> Welcome {this.state.user.username}</h3>
                 <div className="row">
 

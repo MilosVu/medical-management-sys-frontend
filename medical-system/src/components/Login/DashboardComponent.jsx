@@ -43,7 +43,7 @@ class DashboardComponent extends Component {
         const currentActive = isLogginActive ? "login" : "register";
 
         return (
-            <div className="row">
+            <div className="row main-dashboard-container">
 
                 <div className="col-md-3 register-left">
                     <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
@@ -82,7 +82,7 @@ class DashboardComponent extends Component {
                         </div>
                         : <div>
                             <PatientRegister />
-                            <a href="#" onClick={this.changeState}>Go to login</a>
+                            <a href="#" onClick={this.changeState}>Don't have an account? Register here.</a>
                         </div>
                     }
 
