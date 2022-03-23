@@ -41,7 +41,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
@@ -56,8 +56,8 @@ body {
   margin-top: 15%;
 }
 
-.main-dashboard-container{
-  margin-top: 15%!important;
+.main-dashboard-container {
+  margin-top: 15% !important;
 }
 
 .tab-content-container {
@@ -65,11 +65,11 @@ body {
 }
 
 a {
-  color: white!important;
+  color: white !important;
 }
 
 a.nav-link.active {
-  color: #3931af!important;
+  color: #3931af !important;
 }
 
 label.radio.inline {
@@ -80,15 +80,15 @@ a.nav-link {
   cursor: pointer;
 }
 
-a.list-group-item.list-group-item-action{
-  color: #3931af!important;
+a.list-group-item.list-group-item-action {
+  color: #3931af !important;
 }
 
-a.list-group-item.list-group-item-action.active{
-  color: white!important;
+a.list-group-item.list-group-item-action.active {
+  color: white !important;
 }
 
-.btnLogin{
+.btnLogin {
   float: right;
 }
 
