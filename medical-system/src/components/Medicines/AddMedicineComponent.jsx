@@ -59,7 +59,7 @@ const AddMedicineComponent = (props) => {
                 </Form.Group>
 
                 <Button variant="success" type="submit" block='true'>
-                    Add New Pharmaceutical Company
+                    Add New Medicine
                 </Button>
             </Form>
 
