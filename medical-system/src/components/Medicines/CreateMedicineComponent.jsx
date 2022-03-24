@@ -32,6 +32,7 @@ import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanySe
     }
 
     changeCompanyHandler= (event) => {
+
         this.setState({pharmaceuticalCompany: event.target.value});
     }
 

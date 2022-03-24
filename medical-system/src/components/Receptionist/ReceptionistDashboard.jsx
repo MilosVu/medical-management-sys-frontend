@@ -3,6 +3,8 @@ import withAuth from '../../withAuth';
 import ListDoctorsComponent from '../Doctors/ListDoctorsComponent';
 import ListExaminationsComponent from '../Examinations/ListExaminationsComponent';
 import ListPatientsComponent from '../Patient/ListPatientsComponent';
+import ListMedicinesComponent from '../Medicines/ListMedicinesComponent';
+import ListPharmaceuticalCompanyComponent from '../PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
 
 
 
@@ -36,6 +38,19 @@ class ReceptionistDashboard extends Component {
         const { view } = this.state;
         this.setState(prevState => ({ view: "prescriptions" }));
     }
+
+
+    toMedicinesList = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "medicines" }));
+    }
+
+    toPharmaceuticalCompanies = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "pharmaceuticalCompanies" }));
+    }
+
+
     render() {
         return (
             <div>
@@ -64,6 +79,14 @@ class ReceptionistDashboard extends Component {
                                 className={`list-group-item list-group-item-action ${this.state.view == "prescriptions" ? "active" : ""}`}>
                                 Prescriptions
                             </a>
+                            <a href="#" role="tab" onClick={this.toMedicinesList}
+                                className={`list-group-item list-group-item-action ${this.state.view == "medicines" ? "active" : ""}`}>
+                                Medicines
+                            </a>
+                            <a href="#" role="tab" onClick={this.toPharmaceuticalCompanies}
+                                className={`list-group-item list-group-item-action ${this.state.view == "pharmaceuticalCompanies" ? "active" : ""}`}>
+                                Pharmaceutical companies
+                            </a>
 
                         </div>
                     </div>
@@ -82,6 +105,10 @@ class ReceptionistDashboard extends Component {
                                     return <ListExaminationsComponent />;
                                 case 'prescriptions':
                                     return <>Ledu</>;
+                                case 'medicines':
+                                    return <ListMedicinesComponent />;
+                                case 'pharmaceuticalCompanies':
+                                    return <ListPharmaceuticalCompanyComponent />;
                                 default:
                                     return null;
                             }
