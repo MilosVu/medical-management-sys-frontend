@@ -11,6 +11,10 @@ class PharmaceuticalCompanyService {
         return axios.post(PHARMACEUTAL_COMPANY_API_BASE_URL, pharmaceuticalCompany);
     }
 
+    getCompanyById(company) {
+        return axios.get(PHARMACEUTAL_COMPANY_API_BASE_URL, company);
+    }
+
 }
 
 export default new PharmaceuticalCompanyService();

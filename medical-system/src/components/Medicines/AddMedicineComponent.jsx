@@ -24,6 +24,7 @@ const AddMedicineComponent = (props) => {
         let medicine = { name, pharmaceuticalCompany };
         console.log(medicine.name + " /" + medicine.pharmaceuticalCompany);
         MedicineService.createMedicine(medicine);
+
     }
 
     return (
@@ -50,8 +51,8 @@ const AddMedicineComponent = (props) => {
 
                     >
                         {
-                            props.companies.map(company =>
-                                <option key={company.companyId} value={company.name} name={company.name} >{company.name}</option>
+                            allCompanies.map(company =>
+                                <option key={company.companyId} value={company} name={company.name} >{company.name}</option>
                             )
 
                         }

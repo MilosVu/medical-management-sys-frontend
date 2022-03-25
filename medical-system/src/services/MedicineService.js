@@ -10,6 +10,7 @@ class MedicineService {
         return axios.get(MEDICINE_API_BASE_URL);
     }
     createMedicine(medicines) {
+        console.log(medicines);
         return axios.post(MEDICINE_API_BASE_URL, medicines);
     }
 

@@ -6,6 +6,7 @@ import ListPatientsComponent from '../Patient/ListPatientsComponent';
 import ListMedicinesComponent from '../Medicines/ListMedicinesComponent';
 import ListPharmaceuticalCompanyComponent from '../PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
 import NavbarComponent from '../NavbarComponent';
+import UserService from '../../services/UserService';
 
 
 
@@ -13,8 +14,23 @@ class ReceptionistDashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            view: "dashboard"
+            view: "dashboard",
+            user: []
         };
+    }
+
+    componentDidMount() {
+
+        const user = JSON.parse(localStorage.getItem("receptionist-token"));
+        console.log(user.userId);
+
+        UserService.getUser(user.userId).then((res) => {
+            console.log("stiglo");
+            console.log(res.data);
+            this.setState({
+                user: res.data,
+            });
+        });
     }
     toDashboard = () => {
         const { view } = this.state;
@@ -56,7 +72,7 @@ class ReceptionistDashboard extends Component {
         return (
             <div className='dashboard-container'>
                 <NavbarComponent />
-                <h3> Welcome dr Svabo</h3>
+                <h3> Welcome {this.state.user.username} </h3>
                 <div className="row">
 
                     <div className="col-md-3">

@@ -9,12 +9,12 @@ const AddDoctorComponent = (props) => {
 
     const allSpecializations = [] = props.specializations;
     const [newDoctor, setNewDoctor] = useState({
-        firstName: "", lastName: "", username: "", email: "", password: "", fees: "", specializationId: allSpecializations[0]
+        firstName: "", lastName: "", username: "", email: "", password: "", fees: "", specializationId: allSpecializations[0].name
     });
 
     const onInputChange = (e) => {
         setNewDoctor({
-            ...newDoctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
+            [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
         })
     }
 

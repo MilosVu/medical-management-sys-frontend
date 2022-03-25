@@ -16,7 +16,7 @@ class DoctorDashboard extends Component {
         };
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         const user = JSON.parse(localStorage.getItem("doctor-token"));
         console.log(user.userId);
