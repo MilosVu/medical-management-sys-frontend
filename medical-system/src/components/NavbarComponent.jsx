@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 function logout(){
   alert("Goodbye");
-  localStorage.removeItem("doctor-token");
+  localStorage.clear();
   window.location.reload();
 }
 

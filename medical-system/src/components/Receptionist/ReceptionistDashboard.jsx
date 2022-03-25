@@ -5,6 +5,7 @@ import ListExaminationsComponent from '../Examinations/ListExaminationsComponent
 import ListPatientsComponent from '../Patient/ListPatientsComponent';
 import ListMedicinesComponent from '../Medicines/ListMedicinesComponent';
 import ListPharmaceuticalCompanyComponent from '../PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
+import NavbarComponent from '../NavbarComponent';
 
 
 
@@ -53,7 +54,8 @@ class ReceptionistDashboard extends Component {
 
     render() {
         return (
-            <div>
+            <div className='dashboard-container'>
+                <NavbarComponent />
                 <h3> Welcome dr Svabo</h3>
                 <div className="row">
 

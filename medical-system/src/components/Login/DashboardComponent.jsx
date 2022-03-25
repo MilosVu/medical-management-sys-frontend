@@ -76,13 +76,13 @@ class DashboardComponent extends Component {
                                     )}
                                 </div>
 
-                                <a href="#" onClick={this.changeState}>Already have an account?</a>
+                                <a href="#" onClick={this.changeState}>Don't have an account? Register here.</a>
 
                             </div>
                         </div>
                         : <div>
                             <PatientRegister />
-                            <a href="#" onClick={this.changeState}>Don't have an account? Register here.</a>
+                            <a href="#" onClick={this.changeState}>Go to login.</a>
                         </div>
                     }
 
