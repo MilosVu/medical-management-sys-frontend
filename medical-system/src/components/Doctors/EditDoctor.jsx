@@ -5,21 +5,21 @@ import { useState } from 'react';
 
 import DoctorService from "../../services/DoctorService";
 
-const AddDoctorComponent = (props) => {
+const EditDoctor = (props) => {
 
-    const allSpecializations = [] = props.specializations;
-    const [newDoctor, setNewDoctor] = useState({
-        firstName: "", lastName: "", username: "", email: "", password: "", fees: "", specializationId: allSpecializations[0].name
+    const doctor = props.doctor;
+    const [Doctor, setDoctor] = useState({
+        firstName: doctor.firstName, lastName: doctor.lastName, username: doctor.username, email: doctor.email, password: doctor.password, fees: doctor.fees, specializationId: doctor.specialization
     });
 
     const onInputChange = (e) => {
-        setNewDoctor({
-            ...newDoctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
+        setDoctor({
+            ...Doctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
         })
     }
 
 
-    const { firstName, lastName, username, email, password, fees, specializationId } = newDoctor;
+    const { firstName, lastName, username, email, password, fees, specializationId } = Doctor;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,6 +33,7 @@ const AddDoctorComponent = (props) => {
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
+                    <h5>First name</h5>
                     <Form.Control
                         type="text"
                         placeholder="First name *"
@@ -43,6 +44,7 @@ const AddDoctorComponent = (props) => {
                     />
                 </Form.Group>
                 <Form.Group>
+                    <h5>Last name</h5>
                     <Form.Control
                         type="text"
                         placeholder="Last name *"
@@ -53,6 +55,7 @@ const AddDoctorComponent = (props) => {
                     />
                 </Form.Group>
                 <Form.Group>
+                    <h5>Username</h5>
                     <Form.Control
                         type="text"
                         placeholder="Username *"
@@ -62,19 +65,11 @@ const AddDoctorComponent = (props) => {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group>
+                    <h5>Fees</h5>
                     <Form.Control
-                        type="password"
-                        placeholder="Password *"
-                        name="password"
-                        value={password}
-                        onChange={(e) => onInputChange(e)}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control
-                        type="text"
+                        type="number"
                         placeholder="Fees *"
                         name="fees"
                         value={fees}
@@ -84,6 +79,7 @@ const AddDoctorComponent = (props) => {
                 </Form.Group>
 
                 <Form.Group>
+                    <h5>Specialization</h5>
                     <Form.Select
                         name="specializationId"
                         value={specializationId}
@@ -101,7 +97,7 @@ const AddDoctorComponent = (props) => {
                 </Form.Group>
 
                 <Button variant="success" type="submit" block='true'>
-                    Add New Doctor
+                    Edit Doctor
                 </Button>
             </Form>
 
@@ -109,4 +105,4 @@ const AddDoctorComponent = (props) => {
     )
 }
 
-export default AddDoctorComponent
+export default EditDoctor

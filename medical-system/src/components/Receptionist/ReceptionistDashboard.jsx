@@ -7,6 +7,7 @@ import ListMedicinesComponent from '../Medicines/ListMedicinesComponent';
 import ListPharmaceuticalCompanyComponent from '../PharmaceutalCompany/ListPharmaceuticalCompanyComponent';
 import NavbarComponent from '../NavbarComponent';
 import UserService from '../../services/UserService';
+import ReceptionistTabsComponent from './ReceptionistTabsComponent';
 
 
 
@@ -79,7 +80,7 @@ class ReceptionistDashboard extends Component {
                         <div className="list-group" id="list-tab" role="tablist">
                             <a href="#" role="tab" onClick={this.toDashboard}
                                 className={`list-group-item list-group-item-action ${this.state.view == "dashboard" ? "active" : ""}`}>
-                                Dashboard
+                                Account data
                             </a>
                             <a href="#" role="tab" onClick={this.toDoctorList}
                                 className={`list-group-item list-group-item-action ${this.state.view == "doctors" ? "active" : ""}`}>
@@ -114,7 +115,7 @@ class ReceptionistDashboard extends Component {
                         {(() => {
                             switch (this.state.view) {
                                 case 'dashboard':
-                                    return <>abvg</>;
+                                    return LoadPatientTabComponent(this.state);
                                 case 'doctors':
                                     return <ListDoctorsComponent />;
                                 case 'patients':
@@ -140,6 +141,16 @@ class ReceptionistDashboard extends Component {
             </div>
         );
     }
+}
+
+function LoadPatientTabComponent(state) {
+    console.log(state);
+    if (state.user == 0) {
+        return <h2>Loading receptionist...</h2>;
+    }
+    return (
+        <ReceptionistTabsComponent user={state.user} />
+    );
 }
 
 export default withAuth(ReceptionistDashboard);
