@@ -4,16 +4,17 @@ import { Form, Button } from "react-bootstrap"
 import { Component, useState } from 'react';
 
 import PharmaceuticalCompanyService from "../../services/PharmaceuticalCompanyService";
+import SpecializationService from "../../services/SpecializationService";
 
 
 
-class EditCompany extends Component {
+class AddSpecialization extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            name: props.company.name, companyId: props.company.companyId
+            specializationId: 9999999
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +28,7 @@ class EditCompany extends Component {
         this.setState({
             [name]: value
         });
-    } 
+    }
 
     async handleSubmit(event) {
         event.preventDefault();
@@ -35,33 +36,33 @@ class EditCompany extends Component {
 
         console.log('doctor => ' + JSON.stringify(this.state));
 
-        PharmaceuticalCompanyService.createCompany(this.state)
+
+        SpecializationService.createSpecialization(this.state);
 
         window.location.reload();
     }
 
 
     render() {
-    return (
+        return (
 
-        <Form onSubmit={this.handleSubmit}>
-            <Form.Group>
-                <Form.Control
-                    type="text"
-                    placeholder="Name *"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleChange}
-                    required
-                />
-            </Form.Group>
+            <Form onSubmit={this.handleSubmit}>
+                <Form.Group>
+                    <Form.Control
+                        type="text"
+                        placeholder="Name *"
+                        name="name"
+                        onChange={this.handleChange}
+                        required
+                    />
+                </Form.Group>
 
-            <Button variant="success" type="submit" block='true'>
-                Edit Company
-            </Button>
-        </Form>
-    )
+                <Button variant="success" type="submit" block='true'>
+                    Add Specialization
+                </Button>
+            </Form>
+        )
     }
 }
 
-export default EditCompany
+export default AddSpecialization

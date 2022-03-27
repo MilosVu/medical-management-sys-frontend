@@ -13,7 +13,10 @@ class ListMedicinesComponent extends Component {
         this.state = {
             medicines: [],
             companies: [],
-            show: false
+            show: false,
+            showDelete: false,
+            showEdit: false,
+            medicine: null,
         };
     }
 
@@ -27,6 +30,32 @@ class ListMedicinesComponent extends Component {
     handleClose = () => {
         this.setState({
             show: false
+        });
+    }
+
+    handleShowEdit = (id) => {
+        this.setState({
+            showEdit: true,
+            medicine: id
+        });
+    }
+    handleCloseEdit = (id) => {
+        this.setState({
+            showEdit: false,
+            medicine: id
+        });
+    }
+    handleShowDelete(id) {
+        this.setState({
+            showDelete: true,
+            medicine: id
+        });
+        console.log(id);
+    }
+
+    handleCloseDelete = () => {
+        this.setState({
+            showDelete: false
         });
     }
 
@@ -50,6 +79,13 @@ class ListMedicinesComponent extends Component {
         });
     }
 
+    deleteMedicine(id) {
+        console.log(id);
+        MedicineService.deleteMedicine(id);
+
+        window.location.reload();
+    }
+
     render() {
 
         return (
@@ -69,11 +105,23 @@ class ListMedicinesComponent extends Component {
                             <tr>
                                 <th>Name</th>
                                 <th>Pharmaceutical company</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {LoadMedicines(this.state)}
+                            {this.state.medicines.map(
+                                medicine =>
+                                    <tr key={medicine.medicineid}>
+                                        <td> {medicine.name} </td>
+                                        <td> {medicine.pharmaceuticalCompany.name} </td>
+                                        <td><Button onClick={() => this.handleShowEdit(medicine)} className='btn btn-success' data-toggle="modal">Edit</Button></td>
+                                        <td><Button onClick={() => this.handleShowDelete(medicine)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
+
+                                    </tr>
+                            )
+                            }
                         </tbody>
 
                     </table>
@@ -89,6 +137,41 @@ class ListMedicinesComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClose() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showEdit} onHide={() => { this.handleCloseEdit() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Edit Medicine
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {/* <EditCompany medicine={this.state.medicine} /> */}
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleCloseEdit() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showDelete} onHide={() => { this.handleCloseDelete() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Delete Medicine
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Do you want to delete this medicine?</h5>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={() => this.deleteMedicine(this.state.medicine)}>
+                            Delete
+                        </Button>
+                        <Button variant="secondary" onClick={() => { this.handleCloseDelete() }}>
                             Close Button
                         </Button>
                     </Modal.Footer>

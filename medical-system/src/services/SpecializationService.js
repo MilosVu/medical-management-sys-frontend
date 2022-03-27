@@ -14,6 +14,10 @@ class SpecializationService {
     getSpecializationById(id) {
         return axios.get(SPECIALIZATION_COMPANY_API_BASE_URL + "/" + id);
     }
+
+    deleteSpecialization(specialization) {
+        return axios.delete(SPECIALIZATION_COMPANY_API_BASE_URL + "/" + specialization.specializationId);
+    }
 }
 
 export default new SpecializationService();

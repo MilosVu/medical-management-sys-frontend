@@ -23,6 +23,8 @@ const AddCompany = () => {
         e.preventDefault();
         let company={name};
           PharmaceuticalCompanyService.createCompany(company); 
+
+          window.location.reload();
     }
 
     return (

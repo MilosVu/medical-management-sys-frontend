@@ -8,6 +8,7 @@ import ListPharmaceuticalCompanyComponent from '../PharmaceutalCompany/ListPharm
 import NavbarComponent from '../NavbarComponent';
 import UserService from '../../services/UserService';
 import ReceptionistTabsComponent from './ReceptionistTabsComponent';
+import ListSpecializationsComponent from '../Specializations/ListSpecializationsComponent';
 
 
 
@@ -64,6 +65,11 @@ class ReceptionistDashboard extends Component {
         this.setState(prevState => ({ view: "pharmaceuticalCompanies" }));
     }
 
+    toSpecializations = () => {
+        const { view } = this.state;
+        this.setState(prevState => ({ view: "specializations" }));
+    }
+
 
     render() {
         return (
@@ -102,6 +108,10 @@ class ReceptionistDashboard extends Component {
                                 className={`list-group-item list-group-item-action ${this.state.view == "pharmaceuticalCompanies" ? "active" : ""}`}>
                                 Pharmaceutical companies
                             </a>
+                            <a href="#" role="tab" onClick={this.toSpecializations}
+                                className={`list-group-item list-group-item-action ${this.state.view == "specializations" ? "active" : ""}`}>
+                                Specializations
+                            </a>
 
                         </div>
                     </div>
@@ -124,6 +134,8 @@ class ReceptionistDashboard extends Component {
                                     return <ListMedicinesComponent />;
                                 case 'pharmaceuticalCompanies':
                                     return <ListPharmaceuticalCompanyComponent />;
+                                case 'specializations':
+                                    return <ListSpecializationsComponent />;
                                 default:
                                     return null;
                             }
