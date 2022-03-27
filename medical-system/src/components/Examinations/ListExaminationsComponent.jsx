@@ -1,7 +1,26 @@
-import moment from 'moment';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Modal, Button} from 'react-bootstrap';
 import ExaminationService from '../../services/ExaminationService';
+import CreateExaminationComponent from './CreateExaminationComponent';
+
+function formatDate(res){
+
+    res.data.forEach(element => {
+
+        let date = new Date(Date.parse(element.dateOfExamination));
+        element.dateOfExamination = date.toLocaleString("en-GB", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+          });
+
+    });
+
+    return res;
+
+}
 
 class ListExaminationsComponent extends Component {
 
@@ -10,7 +29,8 @@ class ListExaminationsComponent extends Component {
         this.state = {
             examinations: [],
             doctorId: props.doctorId,
-            patientId: props.patientId
+            patientId: props.patientId,
+            showCreate: false
         }
     }
 
@@ -19,32 +39,21 @@ class ListExaminationsComponent extends Component {
         if (this.state.doctorId != undefined) {
 
             ExaminationService.getExaminationsForDoctor(this.state.doctorId).then((res) => {
-
-                res.data.forEach(element => {
-
-                    let date = new Date(Date.parse(element.dateOfExamination));
-                    element.dateOfExamination = date.toLocaleString("en-GB", {
-                        day: "numeric",
-                        month: "short",
-                        year: "numeric",
-                        hour: "numeric",
-                        minute: "2-digit"
-                      });
-
-                });
-                
+                res = formatDate(res);
                 this.setState({ examinations: res.data });
             });
 
         } else if (this.state.patientId != undefined) {
 
             ExaminationService.getExaminationsForPatient(this.state.patientId).then((res) => {
+                res = formatDate(res);
                 this.setState({ examinations: res.data });
             });
 
         } else {
 
             ExaminationService.getExaminations().then((res) => {
+                res = formatDate(res);
                 this.setState({ examinations: res.data });
             });
 
@@ -56,10 +65,26 @@ class ListExaminationsComponent extends Component {
         alert("Canceled")
     }
 
+    handleShowCreate = () => {
+        this.setState({
+            showCreate: true
+        });
+    }
+    
+    handleCloseCreate = () => {
+        this.setState({
+            showCreate: false
+        });
+    }
+
+    createExamination = () => {
+
+    }
+
     render() {
         return (
             <div>
-                {console.log(this.state.examinations.length)}
+
                 {
                     this.state.examinations.length === 0
                         ? <h2>There are no appointments available</h2>
@@ -81,7 +106,7 @@ class ListExaminationsComponent extends Component {
                                     {
                                         this.state.examinations.map(
                                             examination =>
-                                                <tr>
+                                                <tr key={examination.examinationId}>
                                                     <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
                                                     <td> {examination.patient.firstName} {examination.patient.lastName}</td>
          
@@ -106,13 +131,25 @@ class ListExaminationsComponent extends Component {
                 }
 
                 <div className='add-examination'>
-                    <button variant="success" type="submit" block='true' className='btn btn-primary'>
+                    <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShowCreate}>
                         Appoint
                     </button>
                     {/* <Link to="/add-pharmaceutical-company">
                         <button className='btn btn-primary'>Add examination</button>
                     </Link> */}
                 </div>
+
+                <Modal show={this.state.showCreate} onHide={this.handleCloseCreate}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Schedule an appointment
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <CreateExaminationComponent />
+                    </Modal.Body>
+                </Modal>
+
             </div>
         );
     }

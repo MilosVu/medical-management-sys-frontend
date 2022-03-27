@@ -24,11 +24,13 @@ class ListDoctorsComponent extends Component {
             show: true
         });
     }
+
     handleClose = () => {
         this.setState({
             show: false
         });
     }
+
     handleShowEdit = (id) => {
         this.setState({
             showEdit: true,
@@ -37,12 +39,13 @@ class ListDoctorsComponent extends Component {
         console.log("POZIV F-JE");
 
     }
+    
     handleCloseEdit = () => {
         this.setState({
             showEdit: false
         });
     }
-    
+
     handleShowDelete(id) {
         this.setState({
             showDelete: true,
@@ -67,10 +70,10 @@ class ListDoctorsComponent extends Component {
 
         SpecializationService.getSpecializations().then((res) => {
 
-             this.setState({
+            this.setState({
                 specializations: res.data
-             });
-         });
+            });
+        });
     }
 
     deleteDoctor(id) {
@@ -86,8 +89,8 @@ class ListDoctorsComponent extends Component {
 
                 <div className='row'>
                     <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add doctor</Button>
-
                 </div>
+
                 <div className="row">
                     <table className='table table-striped table-bordered'>
 
@@ -133,9 +136,8 @@ class ListDoctorsComponent extends Component {
                         </tbody>
 
                     </table>
-
-
                 </div>
+
                 <Modal show={this.state.show} onHide={() => { this.handleClose() }}>
                     <Modal.Header closeButton>
                         <Modal.Title>
@@ -187,10 +189,6 @@ class ListDoctorsComponent extends Component {
                     </Modal.Footer>
                 </Modal>
             </div>
-
-
-
-
         )
     }
 
@@ -206,12 +204,12 @@ function LoadDoctors(state) {
             state.doctors.map(
                 doctor =>
 
-                <tr key={doctor.userid}>
-                    <td> {doctor.firstName} </td>
-                    <td> {doctor.lastName} </td>
-                    <td> {doctor.username} </td>
-                    <td> {doctor.email} </td>
-                    <td> {doctor.fees} </td>
+                    <tr key={doctor.userid}>
+                        <td> {doctor.firstName} </td>
+                        <td> {doctor.lastName} </td>
+                        <td> {doctor.username} </td>
+                        <td> {doctor.email} </td>
+                        <td> {doctor.fees} </td>
                         {
                             doctor.specialization === null
                                 ? <td>No specialization</td>
@@ -222,7 +220,7 @@ function LoadDoctors(state) {
                         <td><Button onClick={state.handleShowEdit} className='btn btn-success' data-toggle="modal">Edit</Button></td>
 
                         <td><Button onClick={state.handleShowDelete} className='btn btn-success' data-toggle="modal">Delete</Button> </td>
-                </tr>
+                    </tr>
 
             )
 

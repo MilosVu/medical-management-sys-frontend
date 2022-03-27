@@ -20,10 +20,6 @@ function App() {
 
   const [token, setToken] = useState();
 
-  // if(!token) {
-  //   return <DashboardComponent setToken={setToken} />
-  // }
-
   return (
     <div>
       <Router>
@@ -60,9 +56,6 @@ function App() {
 
                 <Route path='/examinations' element= {< ListExaminationsComponent />}></Route>
 
-
-
-                
 
               </Routes>
             </div>

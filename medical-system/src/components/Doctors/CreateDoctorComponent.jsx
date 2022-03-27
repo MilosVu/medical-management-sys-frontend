@@ -24,12 +24,12 @@ class CreateDoctorComponent extends Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
     componentDidMount() {
         SpecializationService.getSpecializations().then((res) => {
             this.setState({ specializations: res.data });
         });
     }
-
 
     handleChange(event) {
         const target = event.target;
@@ -119,14 +119,10 @@ class CreateDoctorComponent extends Component {
                                             onChange={this.handleChange} />
                                     </div>
 
-
-
-
-
                                     <input type="submit" className='btnRegister' name='patsub1' value='Register' />
 
-
                                     <button className="btn btn-danger" >Cancel</button>
+                                    
                                 </form>
                             </div>
                         </div>

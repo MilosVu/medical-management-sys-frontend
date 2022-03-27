@@ -108,3 +108,11 @@ a.btn.btn-info {
   float: right;
   margin-top: 20px;
 }
+
+.container {
+  margin-bottom: 10%;
+}
+
+.row {
+  margin-bottom: 25px;
+}

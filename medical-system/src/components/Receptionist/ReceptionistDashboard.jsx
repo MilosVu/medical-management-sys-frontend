@@ -21,13 +21,9 @@ class ReceptionistDashboard extends Component {
     }
 
     componentDidMount() {
-
         const user = JSON.parse(localStorage.getItem("receptionist-token"));
-        console.log(user.userId);
 
         UserService.getUser(user.userId).then((res) => {
-            console.log("stiglo");
-            console.log(res.data);
             this.setState({
                 user: res.data,
             });
@@ -144,7 +140,6 @@ class ReceptionistDashboard extends Component {
 }
 
 function LoadPatientTabComponent(state) {
-    console.log(state);
     if (state.user == 0) {
         return <h2>Loading receptionist...</h2>;
     }
