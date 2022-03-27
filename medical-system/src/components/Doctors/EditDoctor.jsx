@@ -1,45 +1,103 @@
 
 import { Form, Button } from "react-bootstrap"
 
-import { useState } from 'react';
+import { Component, useState } from 'react';
 
 import DoctorService from "../../services/DoctorService";
+import SpecializationService from "../../services/SpecializationService";
 
-const EditDoctor = (props) => {
+async function editDoctor(doctor) {
 
-    const doctor = props.doctor;
-    const [Doctor, setDoctor] = useState({
-        firstName: doctor.firstName, lastName: doctor.lastName, username: doctor.username, email: doctor.email, password: doctor.password, fees: doctor.fees, specializationId: doctor.specialization
-    });
 
-    const onInputChange = (e) => {
-        setDoctor({
-            ...Doctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
-        })
+    return fetch('http://localhost:8080/api/v1/doctors', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(doctor)
+    })
+        .then(data => data.json())
+}
+
+class EditDoctor extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            firstName: props.doctor.firstName, lastName: props.doctor.lastName,
+            username: props.doctor.username, email: props.doctor.email, fees: props.doctor.fees,
+            password: props.doctor.password, specialization: props.doctor.specialization, userRole: "Doctor", userId: props.doctor.userId
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.changeSpecialization = this.changeSpecialization.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    specializations = [];
 
-    const { firstName, lastName, username, email, password, fees, specializationId } = Doctor;
+    componentDidMount() {
+        SpecializationService.getSpecializations().then((res) => {
+            this.specializations = res.data;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        let doctor = { firstName, lastName, username, email, password, fees, specializationId };
-        console.log(doctor.firstName + " /" + doctor.specializationId);
-        DoctorService.createDoctor(doctor);
+        });
+    }
+    handleChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(target + " / tar" + value + "val / " + name);
+        this.setState({
+            [name]: value
+        });
     }
 
+    changeSpecialization(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(value);
+        this.setState({
+            specialization: value
+        });
+    }
+    async handleSubmit(event) {
+        event.preventDefault();
+        let specialization2 = await SpecializationService.getSpecializationById(Number(this.state.specialization));
+        console.log("SPECIJALIZCIJA" + specialization2);
+        this.setState({ specialization: specialization2.data });
+
+
+        console.log('doctor => ' + JSON.stringify(this.state));
+
+        const response = await editDoctor(this.state);
+
+
+
+
+
+        // console.log(token);
+        // if (token.length !== 0) {
+        //     setToken(token);
+        // } else {
+        //     alert("Wrong username or password")
+        // }
+
+    }
+    render() {
     return (
         <>
-
-            <Form onSubmit={handleSubmit}>
+            {console.log(this.props)}
+            <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
                     <h5>First name</h5>
                     <Form.Control
                         type="text"
                         placeholder="First name *"
                         name="firstName"
-                        value={firstName}
-                        onChange={(e) => onInputChange(e)}
+                        value={this.state.firstName}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
@@ -49,8 +107,8 @@ const EditDoctor = (props) => {
                         type="text"
                         placeholder="Last name *"
                         name="lastName"
-                        value={lastName}
-                        onChange={(e) => onInputChange(e)}
+                        value={this.state.lastName}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
@@ -60,8 +118,31 @@ const EditDoctor = (props) => {
                         type="text"
                         placeholder="Username *"
                         name="username"
-                        value={username}
-                        onChange={(e) => onInputChange(e)}
+                        value={this.state.username}
+                        onChange={this.handleChange}
+                        required
+                    />
+                </Form.Group>
+
+                <Form.Group>
+                    <h5>Email</h5>
+                    <Form.Control
+                        type="email"
+                        placeholder="Email *"
+                        name="email"
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        required
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <h5>Password</h5>
+                    <Form.Control
+                        type="password"
+                        placeholder="Password *"
+                        name="password"
+                        value={this.state.password}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
@@ -72,8 +153,8 @@ const EditDoctor = (props) => {
                         type="number"
                         placeholder="Fees *"
                         name="fees"
-                        value={fees}
-                        onChange={(e) => onInputChange(e)}
+                        value={this.state.fees}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
@@ -82,14 +163,14 @@ const EditDoctor = (props) => {
                     <h5>Specialization</h5>
                     <Form.Select
                         name="specializationId"
-                        value={specializationId}
-                        onChange={(e) => onInputChange(e)}
+                        value={this.state.specialization.specializationId}
+                        onChange={this.changeSpecialization}
 
 
                     >
                         {
-                            props.specializations.map(specialization =>
-                                <option key={specialization.specializationId} value={specialization.name} name={specialization.name} >{specialization.name}</option>
+                            this.props.specializations.map(specialization =>
+                                <option key={specialization.specializationId} value={specialization.specializationId} name={specialization.name} >{specialization.name}</option>
                             )
 
                         }
@@ -103,6 +184,7 @@ const EditDoctor = (props) => {
 
         </>
     )
+    }
 }
 
 export default EditDoctor

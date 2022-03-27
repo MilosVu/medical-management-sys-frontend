@@ -1,40 +1,57 @@
 
 import { Form, Button } from "react-bootstrap"
 
-import { useState } from 'react';
+import { Component, useState } from 'react';
 
 import PharmaceuticalCompanyService from "../../services/PharmaceuticalCompanyService";
 
-const EditCompany = (props) => {
 
 
+class EditCompany extends Component {
 
-    const [Company, setCompany] = useState({
-        companyId: props.company.companyId, name: props.company.name
-    });
+    constructor(props) {
+        super(props);
 
-    const onInputChange = (e) => {
-        setCompany({ ...Company, [e.target.name]: e.target.value })
+        this.state = {
+            name: props.company.name, companyId: props.company.companyId
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    const { companyId, name } = Company;
+    handleChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value
+        });
+    } 
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        let company = { companyId, name };
-        PharmaceuticalCompanyService.createCompany(company);
+    async handleSubmit(event) {
+        event.preventDefault();
+
+
+        console.log('doctor => ' + JSON.stringify(this.state));
+
+        PharmaceuticalCompanyService.createCompany(this.state)
+
+
     }
 
+
+    render() {
     return (
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
             <Form.Group>
                 <Form.Control
                     type="text"
                     placeholder="Name *"
                     name="name"
-                    value={name}
-                    onChange={(e) => onInputChange(e)}
+                    value={this.state.name}
+                    onChange={this.handleChange}
                     required
                 />
             </Form.Group>
@@ -44,6 +61,7 @@ const EditCompany = (props) => {
             </Button>
         </Form>
     )
+    }
 }
 
 export default EditCompany

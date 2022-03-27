@@ -11,6 +11,9 @@ class SpecializationService {
         return axios.post(SPECIALIZATION_COMPANY_API_BASE_URL, specializations);
     }
 
+    getSpecializationById(id) {
+        return axios.get(SPECIALIZATION_COMPANY_API_BASE_URL + "/" + id);
+    }
 }
 
 export default new SpecializationService();

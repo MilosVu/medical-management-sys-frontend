@@ -1,98 +1,170 @@
 
 import { Form, Button } from "react-bootstrap"
 
-import { useState } from 'react';
+import { Component, useState } from 'react';
 
 import DoctorService from "../../services/DoctorService";
+import SpecializationService from "../../services/SpecializationService";
 
-const AddDoctorComponent = (props) => {
+async function registerDoctor(doctor) {
 
-    const allSpecializations = [] = props.specializations;
-    const [newDoctor, setNewDoctor] = useState({
-        firstName: "", 
-        lastName: "", 
-        username: "", 
-        email: "", 
-        password: "", 
-        fees: "", 
-    });
 
-    const onInputChange = (e) => {
-        console.log(e);
-        setNewDoctor({
-            ...newDoctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
-        })
+    return fetch('http://localhost:8080/api/v1/doctors', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(doctor)
+    })
+        .then(data => data.json())
+}
+
+class AddDoctorComponent extends Component {
+
+
+    constructor(props) {
+        super(props);
+        this.state = { userRole: "Doctor", specialization: 1, userId: 10000000000 };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.changeSpecialization = this.changeSpecialization.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    specializations = [];
+
+    componentDidMount() {
+        SpecializationService.getSpecializations().then((res) => {
+            this.specializations = res.data;
+
+        });
+    }
+    handleChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(target + " / tar" + value + "val / " + name);
+        this.setState({
+            [name]: value
+        });
+    } changeSpecialization
+
+    changeSpecialization(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+        console.log(value);
+        this.setState({
+            specialization: value
+        });
+    }
+    async handleSubmit(event) {
+        event.preventDefault();
+        let specialization2 = await SpecializationService.getSpecializationById(Number(this.state.specialization));
+        console.log("SPECIJALIZCIJA" + specialization2);
+        this.setState({ specialization: specialization2.data });
+
+
+        console.log('doctor => ' + JSON.stringify(this.state));
+
+        const response = await registerDoctor(this.state);
+
+
+
+
+
+        // console.log(token);
+        // if (token.length !== 0) {
+        //     setToken(token);
+        // } else {
+        //     alert("Wrong username or password")
+        // }
+
     }
 
 
-    // const { firstName, lastName, username, email, password, fees} = newDoctor;
-    const firstName = "test";
-    const lastName = "test";
-    const username = "test";
-    const email = "test";
-    const password = "test";
-    const fees = "test";
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        let doctor = { firstName, lastName, username, email, password, fees};
-        console.log(doctor.firstName + " /" + doctor.specializationId);
-        //DoctorService.createDoctor(doctor);
-    }
-
+    render() {
     return (
         <>
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={this.handleSubmit}>
+                <h5>First name</h5>
                 <Form.Group>
                     <Form.Control
                         type="text"
                         placeholder="First name *"
                         name="firstName"
-                        value={firstName}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
+                <h5>Last name</h5>
                 <Form.Group>
                     <Form.Control
                         type="text"
                         placeholder="Last name *"
                         name="lastName"
-                        value={lastName}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
+                <h5>Username</h5>
                 <Form.Group>
                     <Form.Control
                         type="text"
                         placeholder="Username *"
                         name="username"
-                        value={username}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
+                <h5>Email</h5>
+                <Form.Group>
+                    <Form.Control
+                        type="email"
+                        placeholder="Email *"
+                        name="email"
+                        onChange={this.handleChange}
+                        required
+                    />
+                </Form.Group>
+                <h5>Password</h5>
                 <Form.Group>
                     <Form.Control
                         type="password"
                         placeholder="Password *"
                         name="password"
-                        value={password}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={this.handleChange}
                         required
                     />
                 </Form.Group>
+                <h5>Fees</h5>
                 <Form.Group>
                     <Form.Control
                         type="text"
                         placeholder="Fees *"
                         name="fees"
-                        value={fees}
-                        onChange={(e) => onInputChange(e)}
+                        onChange={this.handleChange}
                         required
                     />
+                </Form.Group>
+
+                <Form.Group>
+                    <h5>Specialization</h5>
+                    <Form.Select
+                        name="specializationId"
+                        onChange={this.changeSpecialization}
+
+
+                    >
+                        {
+                            this.props.specializations.map(specialization =>
+                                <option key={specialization.specializationId} value={specialization.specializationId} name={specialization.name} >{specialization.name}</option>
+                            )
+
+                        }
+                    </Form.Select>
                 </Form.Group>
 
                 
@@ -105,5 +177,6 @@ const AddDoctorComponent = (props) => {
         </>
     )
 }
+}
 
-export default AddDoctorComponent
+export default AddDoctorComponent;
