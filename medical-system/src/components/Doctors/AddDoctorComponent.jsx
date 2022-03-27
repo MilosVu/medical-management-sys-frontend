@@ -9,23 +9,40 @@ const AddDoctorComponent = (props) => {
 
     const allSpecializations = [] = props.specializations;
     const [newDoctor, setNewDoctor] = useState({
-        firstName: "", lastName: "", username: "", email: "", password: "", fees: "", specializationId: allSpecializations[0].name
+        firstName: "", 
+        lastName: "", 
+        username: "", 
+        email: "", 
+        password: "", 
+        fees: "", 
     });
 
     const onInputChange = (e) => {
+        console.log(e);
         setNewDoctor({
-            [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
+            ...newDoctor, 
+            [e.target.firstName]: e.target.value, 
+            [e.target.lastName]: e.target.value, 
+            [e.target.username]: e.target.value, 
+            [e.target.email]: e.target.value, 
+            [e.target.fees]: e.target.value, 
         })
     }
 
 
-    const { firstName, lastName, username, email, password, fees, specializationId } = newDoctor;
+    // const { firstName, lastName, username, email, password, fees} = newDoctor;
+    const firstName = "test";
+    const lastName = "test";
+    const username = "test";
+    const email = "test";
+    const password = "test";
+    const fees = "test";
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let doctor = { firstName, lastName, username, email, password, fees, specializationId };
+        let doctor = { firstName, lastName, username, email, password, fees};
         console.log(doctor.firstName + " /" + doctor.specializationId);
-        DoctorService.createDoctor(doctor);
+        //DoctorService.createDoctor(doctor);
     }
 
     return (
@@ -83,22 +100,7 @@ const AddDoctorComponent = (props) => {
                     />
                 </Form.Group>
 
-                <Form.Group>
-                    <Form.Select
-                        name="specializationId"
-                        value={specializationId}
-                        onChange={(e) => onInputChange(e)}
-
-
-                    >
-                        {
-                            props.specializations.map(specialization =>
-                                <option key={specialization.specializationId} value={specialization.name} name={specialization.name} >{specialization.name}</option>
-                            )
-
-                        }
-                    </Form.Select>
-                </Form.Group>
+                
 
                 <Button variant="success" type="submit" block='true'>
                     Add New Doctor

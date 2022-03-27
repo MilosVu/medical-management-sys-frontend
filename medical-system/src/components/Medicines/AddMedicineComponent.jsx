@@ -9,11 +9,16 @@ const AddMedicineComponent = (props) => {
 
     const allCompanies = [] = props.companies;
     const [newMedicine, setNewMedicine] = useState({
-        name: "", pharmaceuticalCompany: allCompanies[0]
+        name: "", 
+        pharmaceuticalCompany: allCompanies[0]
     });
 
     const onInputChange = (e) => {
-        setNewMedicine({ ...newMedicine, [e.target.name]: e.target.value, [e.target.pharmaceuticalCompany]: e.target.value })
+        setNewMedicine({ 
+            ...newMedicine, 
+            [e.target.name]: e.target.value, 
+            [e.target.pharmaceuticalCompany]: e.target.value 
+        })
     }
 
 
