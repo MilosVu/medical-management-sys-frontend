@@ -25,7 +25,9 @@ class CreateExaminationComponent extends Component {
             excludedTimes: [new Date(2022, 3, 27, 16, 0)],
             selectedDate: setHours(setMinutes(new Date(), 0), 9),
             selectedSpecializationId: 0,
-            selectedDoctorId: 0
+            selectedDoctorId: 0,
+            displayTime: false,
+            patientId: props.patientId
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -36,26 +38,14 @@ class CreateExaminationComponent extends Component {
 
         SpecializationService.getSpecializations().then((resSpec) => {
 
-            let spec = resSpec.data[0];
-
             this.setState({
                 specializations: resSpec.data,
                 selectedSpecializationId: resSpec.data[0].specializationId
             });
 
-            console.log(spec);
-
         });
 
         DoctorService.getDoctors().then((resDoctor) => {
-
-            // resDoctor.data.array.forEach(element => {
-
-            //     if(element.specialization.specializationId === spec.specializationId){
-            //         doc = element;
-            //     }
-
-            // });
 
             this.setState({
                 doctors: resDoctor.data
@@ -72,13 +62,6 @@ class CreateExaminationComponent extends Component {
         this.setState({
             [name]: value
         });
-
-        console.log(event);
-        console.log("this.state");
-        console.log(this.state);
-        console.log("podaci");
-        console.log(name);
-        console.log(value);
     }
 
     handleSubmit(e) {
@@ -89,6 +72,21 @@ class CreateExaminationComponent extends Component {
 
         alert("klik");
 
+
+        // ExaminationService.createExamination({
+        //     "examinationId":80,
+        //     "doctor": {
+        //         "userId": this.state.selectedDoctorId
+        //     },
+        //     "patient": {
+        //         "userId": this.state.patientId
+        //     },
+        //     "status": false,
+        //     "userCanceled": false,
+        //     "doctorCanceled": false,
+        //     "dateOfExamination": this.state.selectedDate
+        // });
+
     }
 
     handleSelectedDate = (date) => {
@@ -96,6 +94,12 @@ class CreateExaminationComponent extends Component {
             selectedDate: date
         });
     };
+
+    setSelectedDoctor = (id) => {
+        this.setState({
+            selectedDoctorId: id
+        });
+    }
 
     getExcludedTimes = (date) => {
 
@@ -118,96 +122,26 @@ class CreateExaminationComponent extends Component {
         //     });
         // }
 
-        let arrExcludedTimes = ExaminationService.getExcludedTimes(date);
+        //let arrExcludedTimes = ExaminationService.getExcludedTimes(date);
 
         this.setState({
-            excludedTimes: arrExcludedTimes
+            excludedTimes: new Date()
         });
 
     };
 
+    getTimeSlots = () => {
+        this.setState({
+            displayTime: true
+        });
+    }
+
     render() {
         const { selectedDate, excludedTimes } = this.state;
+
         return (
             <div className="container">
 
-                {/* <form onSubmit={this.handleSubmit}>
-
-                    <div className="row">
-
-                        <div className="col-md-6">
-                            <label> Specialization:</label>
-                            <select placeholder="Specialization" name="selectedSpecialization" className="form-control"
-                                value={this.state.selectedSpecialization.specializationId} onChange={this.handleChange} >
-                                {
-                                    this.state.specializations.map(
-                                        specialization =>
-                                            <option name={specialization.name} id={specialization.specializationId} key={specialization.specializationId}>{specialization.name}</option>
-                                    )
-                                }
-                            </select>
-                        </div>
-
-                        <div className="col-md-6">
-                            <label>Doctors:</label>
-                            <select placeholder="Doctor" name="selectedDoctor" className="form-control"
-                                value={this.state.SpecializationId} onChange={this.handleChange} >
-                                {console.log("specialisation")}
-                                {console.log(this.state.selectedSpecialization)}
-                                {console.log("Doctor")}
-                                {console.log(this.state.doctors)}
-                                {
-                                    this.state.doctors.map(
-                                        doctor => {
-                                            if (this.state.selectedSpecialization.specializationId == doctor.specializationId) {
-                                                return <option name={doctor.username} id={doctor.userId} key={doctor.userId}>{doctor.firstName} {doctor.lastName} sme</option>
-                                            } else {
-                                                return <option name={doctor.username} id={doctor.userId} key={doctor.userId}>{doctor.firstName} {doctor.lastName} NE SME</option>
-                                            }
-                                        }
-                                    )
-                                }
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div className="row">
-
-                        <div className="col-md-6">
-                            <DatePicker
-                                selected={selectedDate}
-                                onChange={this.handleSelectedDate}
-                                onSelect={this.getExcludedTimes}
-                                dateFormat="dd/MM/yyy"
-                            />
-                        </div>
-
-                        <div className="col-md-6">
-                            <DatePicker
-                                selected={selectedDate}
-                                excludeTimes={excludedTimes}
-                                onChange={this.handleSelectedDate}
-                                onSelect={this.getExcludedTimes}
-                                showTimeSelect
-                                showTimeSelectOnly
-                                timeIntervals={30}
-                                timeFormat="HH:mm"
-                                dateFormat="hh:mm aa"
-                                minDate={new Date()}
-                                minTime={setHours(setMinutes(new Date(), 0), 9)}
-                                maxTime={setHours(setMinutes(new Date(), 0), 17)}
-                            />
-                        </div>
-
-                    </div>
-
-                    <input type="submit" className="btnLogin btn btn-light" name="docsub1" value="Login" />
-
-                </form> */}
-                {console.log("NAJBITNIJE")}
-                {console.log(this.state.doctors.length == 0)}
-                {console.log(this.state.selectedSpecializationId === 0)}
                 {
                     this.state.selectedSpecializationId === 0 || this.state.doctors.length == 0
                         ? <h2>Loading data</h2>
@@ -217,7 +151,7 @@ class CreateExaminationComponent extends Component {
 
                                 <div className="col-md-6">
                                     <label> Specialization:</label>
-                                    <select placeholder="Specialization" name="selectedSpecializationId" className="form-control" onChange={this.handleChange} >
+                                    <select placeholder="Specialization" name="selectedSpecializationId" className="form-control" onChange={this.handleChange} disabled={this.state.displayTime}>
                                         {
                                             this.state.specializations.map(
                                                 specialization =>
@@ -229,14 +163,13 @@ class CreateExaminationComponent extends Component {
 
                                 <div className="col-md-6">
                                     <label>Doctors:</label>
-                                    <select placeholder="Doctor" name="selectedDoctorId" className="form-control" onChange={this.handleChange} >
-                                        {console.log("=================== poziv =====================")}
-                                        {console.log(this.state.selectedSpecializationId)}
-                                        {console.log(this.state.doctors)}
+                                    <select placeholder="Doctor" name="selectedDoctorId" className="form-control" onChange={this.handleChange} disabled={this.state.displayTime}>
                                         {
                                             this.state.doctors.map(
                                                 doctor => {
-                                                    console.log(doctor.specialization.specializationId);
+                                                    if (this.state.selectedDoctorId == 0) {
+                                                        this.setSelectedDoctor(doctor.userId);
+                                                    }
                                                     if (this.state.selectedSpecializationId == doctor.specialization.specializationId) {
                                                         return <option name={doctor.username} value={doctor.userId} id={doctor.userId} key={doctor.userId}>{doctor.firstName} {doctor.lastName}</option>
                                                     }
@@ -248,7 +181,49 @@ class CreateExaminationComponent extends Component {
 
                             </div>
 
-                            <div><button className="btnLogin btn btn-light" value="create" onClick={this.handleSubmit} /></div>
+                            {
+                                this.state.displayTime
+                                    ? <div className="row">
+
+                                        <div className="col-md-6">
+                                            <DatePicker
+                                                selected={selectedDate}
+                                                onChange={this.handleSelectedDate}
+                                                /* onSelect={this.getExcludedTimes} */
+                                                dateFormat="dd/MM/yyy"
+                                            />
+                                        </div>
+
+                                        <div className="col-md-6">
+                                            <DatePicker
+                                                selected={selectedDate}
+                                                excludeTimes={excludedTimes}
+                                                onChange={this.handleSelectedDate}
+                                                /* onSelect={this.getExcludedTimes} */
+                                                showTimeSelect
+                                                showTimeSelectOnly
+                                                timeIntervals={30}
+                                                timeFormat="HH:mm"
+                                                dateFormat="HH:mm"
+                                                minDate={new Date()}
+                                                minTime={setHours(setMinutes(new Date(), 0), 9)}
+                                                maxTime={setHours(setMinutes(new Date(), 0), 17)}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <button className="btnLogin btn btn-light" value="create" onClick={this.handleSubmit}>
+                                                Create appointment
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+
+                                    : <div><button className="btnLogin btn btn-light" value="create" onClick={this.getTimeSlots}>Confirm doctor</button></div>
+                            }
+
+
 
 
                         </form>
