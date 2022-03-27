@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Modal, Button} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import ExaminationService from '../../services/ExaminationService';
 import CreateExaminationComponent from './CreateExaminationComponent';
 
-function formatDate(res){
+function formatDate(res) {
 
     res.data.forEach(element => {
 
@@ -14,7 +14,7 @@ function formatDate(res){
             year: "numeric",
             hour: "numeric",
             minute: "2-digit"
-          });
+        });
 
     });
 
@@ -70,7 +70,7 @@ class ListExaminationsComponent extends Component {
             showCreate: true
         });
     }
-    
+
     handleCloseCreate = () => {
         this.setState({
             showCreate: false
@@ -109,7 +109,7 @@ class ListExaminationsComponent extends Component {
                                                 <tr key={examination.examinationId}>
                                                     <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
                                                     <td> {examination.patient.firstName} {examination.patient.lastName}</td>
-         
+
                                                     <td> {examination.dateOfExamination} </td>
 
                                                     {
@@ -130,14 +130,15 @@ class ListExaminationsComponent extends Component {
                         </div>
                 }
 
-                <div className='add-examination'>
-                    <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShowCreate}>
-                        Appoint
-                    </button>
-                    {/* <Link to="/add-pharmaceutical-company">
-                        <button className='btn btn-primary'>Add examination</button>
-                    </Link> */}
-                </div>
+                {
+                    this.state.patientId != undefined
+                        ? <div className='add-examination'>
+                            <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShowCreate}>
+                                Appoint
+                            </button>
+                        </div>
+                        : <></>
+                }
 
                 <Modal show={this.state.showCreate} onHide={this.handleCloseCreate}>
                     <Modal.Header closeButton>
@@ -146,7 +147,7 @@ class ListExaminationsComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <CreateExaminationComponent />
+                        <CreateExaminationComponent patientId={this.state.patientId}/>
                     </Modal.Body>
                 </Modal>
 
