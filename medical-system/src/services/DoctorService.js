@@ -9,11 +9,13 @@ class DoctorService {
     getDoctors() {
         return axios.get(DOCTOR_API_BASE_URL);
     }
-    createDoctor(doctors) {
-        return axios.post(DOCTOR_API_BASE_URL, doctors);
+
+    createDoctor(doctor) {
+        return axios.post(DOCTOR_API_BASE_URL, doctor);
     }
-    deleteDoctor(doctors) {
-        return axios.delete(USER_API_BASE_URL + "/" + doctors.userid);
+
+    deleteDoctor(doctor) {
+        return axios.delete(USER_API_BASE_URL + "/" + doctor.userid);
     }
 
 }

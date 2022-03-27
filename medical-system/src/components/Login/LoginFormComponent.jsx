@@ -17,7 +17,6 @@ class LoginFormComponent extends Component {
 
     constructor(props) {
         super(props);
-        // this.state = { setToken };
         this.state = {userRole : this.props.userRole};
 
         this.handleChange = this.handleChange.bind(this);
@@ -48,7 +47,7 @@ class LoginFormComponent extends Component {
             // setToken(response);
             alert("Loged in");
             localStorage.setItem(this.state.userRole + "-token", JSON.stringify({
-                "userId" : response[0]["userid"],
+                "userId" : response[0]["userId"],
                 "username" : response[0]["username"]
             }));
 

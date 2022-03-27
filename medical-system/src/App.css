@@ -95,3 +95,16 @@ a.list-group-item.list-group-item-action.active {
 a.btn.btn-info {
   float: right;
 }
+
+
+.table.table-light{
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+    border-radius: 0.25rem;
+}
+
+.add-examination {
+  float: right;
+  margin-top: 20px;
+}

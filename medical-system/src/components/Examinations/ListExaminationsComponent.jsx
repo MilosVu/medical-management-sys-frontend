@@ -6,23 +6,22 @@ class ListExaminationsComponent extends Component {
 
     constructor(props) {
         super(props)
-        console.log(props.userid);
         this.state = {
             examinations: [],
-            doctorid: props.userid
+            doctorId: props.doctorId,
+            patientid: props.patientid
         }
     }
 
     componentDidMount() {
-        console.log(this.props.userid);
 
-        if(this.state.doctorid != undefined){
+        if (this.state.doctorId != undefined) {
 
-            ExaminationService.getExaminationsForDoctor(this.state.doctorid).then((res) => {
+            ExaminationService.getExaminationsForDoctor(this.state.doctorId).then((res) => {
                 this.setState({ examinations: res.data });
             });
 
-        }else{
+        } else {
 
             ExaminationService.getExaminations().then((res) => {
                 this.setState({ examinations: res.data });
@@ -34,24 +33,15 @@ class ListExaminationsComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className='test-center'>Examinations list</h2>
-                <Link to="/add-pharmaceutical-company">
-                    <button className='btn btn-primary'>Add examination</button>
 
-                </Link>
-                <div className='row'>
-
-                </div>
                 <div className="row">
-                    <table className='table table-striped table-bordered'>
+                    <table className='table table-light table-striped table-bordered'>
 
                         <thead>
                             <tr>
-
                                 <th>Doctor</th>
                                 <th>Patient</th>
                                 <th>Date</th>
-
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -76,6 +66,14 @@ class ListExaminationsComponent extends Component {
                     </table>
                 </div>
 
+                <div className='add-examination'>
+                    <button variant="success" type="submit" block='true' className='btn btn-primary'>
+                        Add New Medicine
+                    </button>
+                    {/* <Link to="/add-pharmaceutical-company">
+                        <button className='btn btn-primary'>Add examination</button>
+                    </Link> */}
+                </div>
             </div>
         );
     }

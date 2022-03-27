@@ -25,11 +25,8 @@ const withAuth = (Component) => {
     
     const isAuth = hasToken();
 
-    console.log(isAuth);
-    
     switch (isAuth) {
       case 'patient-dashboard':
-        console.log("patient");
         return (Component.name == "PatientDashboard") ? <Component /> : <Navigate replace to={"/" + isAuth} />;
       case 'doctor-dashboard':
         return (Component.name == "DoctorDashboard") ? <Component /> : <Navigate replace to={"/" + isAuth} />;

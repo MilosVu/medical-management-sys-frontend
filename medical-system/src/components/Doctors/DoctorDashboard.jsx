@@ -17,13 +17,9 @@ class DoctorDashboard extends Component {
     }
 
     componentDidMount() {
-
         const user = JSON.parse(localStorage.getItem("doctor-token"));
-        console.log(user.userId);
 
         UserService.getUser(user.userId).then((res) => {
-            console.log("stiglo");
-            console.log(res.data);
             this.setState({
                 user: res.data,
             });
@@ -59,11 +55,10 @@ class DoctorDashboard extends Component {
                             </a>
                         </div>
                     </div>
-
                     <div className="col-md-9">
                         {this.state.view === "dashboard"
                             ? LoadDoctorTabComponent(this.state)
-                            : <ListExaminationsComponent userid={this.state.user.userid} />
+                            : <ListExaminationsComponent doctorId={this.state.user.userId} />
                         }
                     </div>
 
@@ -75,7 +70,6 @@ class DoctorDashboard extends Component {
 }
 
 function LoadDoctorTabComponent(state) {
-    console.log(state);
     if (state.user == 0) {
         return <h2>Loading doctor...</h2>;
     }
