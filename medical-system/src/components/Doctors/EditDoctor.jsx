@@ -5,39 +5,27 @@ import { useState } from 'react';
 
 import DoctorService from "../../services/DoctorService";
 
-const AddDoctorComponent = (props) => {
+const EditDoctor = (props) => {
 
-    const allSpecializations = [] = props.specializations;
-    const [newDoctor, setNewDoctor] = useState({
-        firstName: "", 
-        lastName: "", 
-        username: "", 
-        email: "", 
-        password: "", 
-        fees: "", 
+    const doctor = props.doctor;
+    const [Doctor, setDoctor] = useState({
+        firstName: doctor.firstName, lastName: doctor.lastName, username: doctor.username, email: doctor.email, password: doctor.password, fees: doctor.fees, specializationId: doctor.specialization
     });
 
     const onInputChange = (e) => {
-        console.log(e);
-        setNewDoctor({
-            ...newDoctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
+        setDoctor({
+            ...Doctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
         })
     }
 
 
-    // const { firstName, lastName, username, email, password, fees} = newDoctor;
-    const firstName = "test";
-    const lastName = "test";
-    const username = "test";
-    const email = "test";
-    const password = "test";
-    const fees = "test";
+    const { firstName, lastName, username, email, password, fees, specializationId } = Doctor;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let doctor = { firstName, lastName, username, email, password, fees};
+        let doctor = { firstName, lastName, username, email, password, fees, specializationId };
         console.log(doctor.firstName + " /" + doctor.specializationId);
-        //DoctorService.createDoctor(doctor);
+        DoctorService.createDoctor(doctor);
     }
 
     return (
@@ -45,6 +33,7 @@ const AddDoctorComponent = (props) => {
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
+                    <h5>First name</h5>
                     <Form.Control
                         type="text"
                         placeholder="First name *"
@@ -55,6 +44,7 @@ const AddDoctorComponent = (props) => {
                     />
                 </Form.Group>
                 <Form.Group>
+                    <h5>Last name</h5>
                     <Form.Control
                         type="text"
                         placeholder="Last name *"
@@ -65,6 +55,7 @@ const AddDoctorComponent = (props) => {
                     />
                 </Form.Group>
                 <Form.Group>
+                    <h5>Username</h5>
                     <Form.Control
                         type="text"
                         placeholder="Username *"
@@ -74,19 +65,11 @@ const AddDoctorComponent = (props) => {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group>
+                    <h5>Fees</h5>
                     <Form.Control
-                        type="password"
-                        placeholder="Password *"
-                        name="password"
-                        value={password}
-                        onChange={(e) => onInputChange(e)}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Control
-                        type="text"
+                        type="number"
                         placeholder="Fees *"
                         name="fees"
                         value={fees}
@@ -95,10 +78,26 @@ const AddDoctorComponent = (props) => {
                     />
                 </Form.Group>
 
-                
+                <Form.Group>
+                    <h5>Specialization</h5>
+                    <Form.Select
+                        name="specializationId"
+                        value={specializationId}
+                        onChange={(e) => onInputChange(e)}
+
+
+                    >
+                        {
+                            props.specializations.map(specialization =>
+                                <option key={specialization.specializationId} value={specialization.name} name={specialization.name} >{specialization.name}</option>
+                            )
+
+                        }
+                    </Form.Select>
+                </Form.Group>
 
                 <Button variant="success" type="submit" block='true'>
-                    Add New Doctor
+                    Edit Doctor
                 </Button>
             </Form>
 
@@ -106,4 +105,4 @@ const AddDoctorComponent = (props) => {
     )
 }
 
-export default AddDoctorComponent
+export default EditDoctor

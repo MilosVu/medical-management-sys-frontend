@@ -3,6 +3,7 @@ import { Modal, Button } from 'react-bootstrap';
 import DoctorService from '../../services/DoctorService';
 import SpecializationService from '../../services/SpecializationService';
 import AddDoctorComponent from '../Doctors/AddDoctorComponent';
+import EditDoctor from '../Doctors/EditDoctor';
 
 class ListDoctorsComponent extends Component {
 
@@ -11,7 +12,10 @@ class ListDoctorsComponent extends Component {
         this.state = {
             doctors: [],
             specializations: [],
-            show: false
+            show: false,
+            showEdit: false,
+            showDelete: false,
+            doctorId: 0
         };
     }
 
@@ -25,11 +29,35 @@ class ListDoctorsComponent extends Component {
             show: false
         });
     }
+    handleShowEdit = (id) => {
+        this.setState({
+            showEdit: true,
+            doctorId: id
+        });
+        console.log("POZIV F-JE");
+
+    }
+    handleCloseEdit = () => {
+        this.setState({
+            showEdit: false
+        });
+    }
+    handleShowDelete(id) {
+        this.setState({
+            showDelete: true,
+            doctorId: id
+        });
+        console.log(id);
+    }
+    handleCloseDelete = () => {
+        this.setState({
+            showDelete: false
+        });
+    }
 
     componentDidMount() {
         DoctorService.getDoctors().then((res) => {
-            console.log("stiglo");
-            console.log(res.data);
+
             this.setState({
                 doctors: res.data
             });
@@ -37,19 +65,22 @@ class ListDoctorsComponent extends Component {
 
         SpecializationService.getSpecializations().then((res) => {
 
-            this.setState({
+             this.setState({
                 specializations: res.data
-            });
-        });
+             });
+         });
     }
+
+    deleteDoctor(id) {
+        console.log(id);
+        DoctorService.deleteDoctor(id);
+    }
+
 
     render() {
         return (
-
             <div>
                 <h2 className='test-center'>Doctors list</h2>
-
-
 
                 <div className='row'>
                     <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add doctor</Button>
@@ -74,7 +105,28 @@ class ListDoctorsComponent extends Component {
 
                         <tbody>
                             {
-                                LoadDoctors(this.state)
+                                this.state.doctors.map(
+                                    doctor =>
+
+                                        <tr key={doctor.userid}>
+                                            <td> {doctor.firstName} </td>
+                                            <td> {doctor.lastName} </td>
+                                            <td> {doctor.username} </td>
+                                            <td> {doctor.email} </td>
+                                            <td> {doctor.fees} </td>
+                                            {
+                                                doctor.specialization === null
+                                                    ? <td>No specialization</td>
+                                                    :
+                                                    <td> {doctor.specialization.name} </td>
+                                            }
+
+                                            <td><Button onClick={() => this.handleShowEdit(doctor)} className='btn btn-success' data-toggle="modal">Edit</Button></td>
+
+                                            <td><Button onClick={() => this.handleShowDelete(doctor)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
+                                        </tr>
+
+                                )
                             }
                         </tbody>
 
@@ -97,6 +149,41 @@ class ListDoctorsComponent extends Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>
+
+                <Modal show={this.state.showEdit} onHide={() => { this.handleCloseEdit() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Edit Doctor
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <EditDoctor doctor={this.state.doctorId} specializations={this.state.specializations} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleCloseEdit() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showDelete} onHide={() => { this.handleCloseDelete() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Delete Doctor
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Do you want to delete this doctor?</h5>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={() => this.deleteDoctor(this.state.doctorId)}>
+                            Delete
+                        </Button>
+                        <Button variant="secondary" onClick={() => { this.handleCloseDelete() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
 
 
@@ -106,29 +193,44 @@ class ListDoctorsComponent extends Component {
     }
 
 }
-function LoadDoctors(state) {
-    //console.log(state);
-    if (state.user == 0) {
-        return <h2>Loading doctors...</h2>;
-    }
-    return (
 
-        state.doctors.map(
-            doctor =>
+function LoadDoctors(state) {
+    console.log(state);
+    if (state.doctors == 0) {
+        return <h2>Loading doctors...</h2>;
+    } else {
+        return (
+
+            state.doctors.map(
+                doctor =>
+
                 <tr key={doctor.userid}>
                     <td> {doctor.firstName} </td>
                     <td> {doctor.lastName} </td>
                     <td> {doctor.username} </td>
                     <td> {doctor.email} </td>
                     <td> {doctor.fees} </td>
-                    <td> Spec </td>
-                    <td> EDIT </td>
-                    <td>Delete </td>
-                </tr>
-        )
+                        {
+                            doctor.specialization === null
+                                ? <td>No specialization</td>
+                                :
+                                <td> {doctor.specialization.name} </td>
+                        }
 
-    );
+                        <td><Button onClick={state.handleShowEdit} className='btn btn-success' data-toggle="modal">Edit</Button></td>
+
+                        <td><Button onClick={state.handleShowDelete} className='btn btn-success' data-toggle="modal">Delete</Button> </td>
+                </tr>
+
+            )
+
+
+
+        );
+    }
 }
+
+
 
 
 export default ListDoctorsComponent;

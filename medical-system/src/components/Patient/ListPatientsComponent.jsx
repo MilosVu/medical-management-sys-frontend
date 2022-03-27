@@ -36,13 +36,8 @@ class ListPatientsComponent extends Component {
         return (
             <div>
                 <h2 className='test-center'>Patients list</h2>
-                <Link to="/add-doctor">
-                    <button className='btn btn-primary'>Add patient</button>
 
-                </Link>
-                <div className='row'>
 
-                </div>
                 <div className="row">
                     <table className='table table-striped table-bordered'>
 

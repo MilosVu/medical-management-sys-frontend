@@ -13,7 +13,7 @@ class DoctorService {
         return axios.post(DOCTOR_API_BASE_URL, doctors);
     }
     deleteDoctor(doctors) {
-        return axios.delete(USER_API_BASE_URL + "/" + doctors);
+        return axios.delete(USER_API_BASE_URL + "/" + doctors.userid);
     }
 
 }

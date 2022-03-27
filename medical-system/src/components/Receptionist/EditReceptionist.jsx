@@ -3,41 +3,29 @@ import { Form, Button } from "react-bootstrap"
 
 import { useState } from 'react';
 
-import DoctorService from "../../services/DoctorService";
+import MedicineService from "../../services/MedicineService";
 
-const AddDoctorComponent = (props) => {
+const EditReceptionist = (props) => {
 
-    const allSpecializations = [] = props.specializations;
-    const [newDoctor, setNewDoctor] = useState({
-        firstName: "", 
-        lastName: "", 
-        username: "", 
-        email: "", 
-        password: "", 
-        fees: "", 
+    const user = props.user;
+
+    const [receptionist, setReceptionist] = useState({
+        firstName: user.firstName, lastName: user.firstName, username: user.username, password: user.password, email: user.email, userRole: user.userRole
     });
 
     const onInputChange = (e) => {
-        console.log(e);
-        setNewDoctor({
-            ...newDoctor, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value, [e.target.password]: e.target.value, [e.target.fees]: e.target.value, [e.target.specializationId]: e.target.value
-        })
+        setReceptionist({ ...receptionist, [e.target.firstName]: e.target.value, [e.target.lastName]: e.target.value, [e.target.username]: e.target.value, [e.target.email]: e.target.value })
     }
 
 
-    // const { firstName, lastName, username, email, password, fees} = newDoctor;
-    const firstName = "test";
-    const lastName = "test";
-    const username = "test";
-    const email = "test";
-    const password = "test";
-    const fees = "test";
+    const { firstName, lastName, username, password, email, userRole } = receptionist;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let doctor = { firstName, lastName, username, email, password, fees};
-        console.log(doctor.firstName + " /" + doctor.specializationId);
-        //DoctorService.createDoctor(doctor);
+        let receptionist = { firstName, lastName, username, password, email, userRole };
+        console.log(receptionist.firstName + " /" + receptionist.lastName);
+        //MedicineService.createMedicine(receptionist);
+
     }
 
     return (
@@ -45,6 +33,7 @@ const AddDoctorComponent = (props) => {
 
             <Form onSubmit={handleSubmit}>
                 <Form.Group>
+                    <h5>First name</h5>
                     <Form.Control
                         type="text"
                         placeholder="First name *"
@@ -54,7 +43,9 @@ const AddDoctorComponent = (props) => {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group>
+                    <h5>Last name</h5>
                     <Form.Control
                         type="text"
                         placeholder="Last name *"
@@ -64,7 +55,9 @@ const AddDoctorComponent = (props) => {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group>
+                    <h5>Username</h5>
                     <Form.Control
                         type="text"
                         placeholder="Username *"
@@ -74,31 +67,23 @@ const AddDoctorComponent = (props) => {
                         required
                     />
                 </Form.Group>
+
                 <Form.Group>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password *"
-                        name="password"
-                        value={password}
-                        onChange={(e) => onInputChange(e)}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group>
+                    <h5>Email</h5>
                     <Form.Control
                         type="text"
-                        placeholder="Fees *"
-                        name="fees"
-                        value={fees}
+                        placeholder="Email *"
+                        name="email"
+                        value={email}
                         onChange={(e) => onInputChange(e)}
                         required
                     />
                 </Form.Group>
 
-                
+
 
                 <Button variant="success" type="submit" block='true'>
-                    Add New Doctor
+                    Add New Medicine
                 </Button>
             </Form>
 
@@ -106,4 +91,4 @@ const AddDoctorComponent = (props) => {
     )
 }
 
-export default AddDoctorComponent
+export default EditReceptionist

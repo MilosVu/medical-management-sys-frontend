@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanyService';
 import AddCompany from '../PharmaceutalCompany/AddCompany';
 import { Modal, Button } from 'react-bootstrap';
+import EditCompany from './EditCompany';
 
 class ListPharmaceuticalCompanyComponent extends Component {
 
@@ -10,7 +11,9 @@ class ListPharmaceuticalCompanyComponent extends Component {
 
         this.state = {
             companies: [],
-            show: false
+            show: false,
+            showEdit: false,
+            company: null
         }
         
     }
@@ -23,6 +26,19 @@ class ListPharmaceuticalCompanyComponent extends Component {
     handleClose = () => {
         this.setState({
             show: false
+        });
+    }
+
+    handleShowEdit = (id) => {
+        this.setState({
+            showEdit: true,
+            company: id
+        });
+    }
+    handleCloseEdit = (id) => {
+        this.setState({
+            showEdit: false,
+            company: id
         });
     }
 
@@ -52,11 +68,25 @@ class ListPharmaceuticalCompanyComponent extends Component {
                         <tr>
                             
                             <th>Pharmaceutical company</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                            {LoadCompanies(this.state)}
+                            {this.state.companies.map(
+                                company =>
+                                    <tr key={company.companyId}>
+                                        <td> {company.name} </td>
+                                        <td><Button onClick={() => this.handleShowEdit(company)} className='btn btn-success' data-toggle="modal">Edit</Button></td>
+
+                                        <td><Button onClick={() => this.handleShowDelete(company)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
+
+                                    </tr>
+
+
+                            )
+                            }
                         </tbody>
 
                     </table>
@@ -72,6 +102,22 @@ class ListPharmaceuticalCompanyComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClose() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showEdit} onHide={() => { this.handleCloseEdit() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Edit Company
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <EditCompany company={this.state.company} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleCloseEdit() }}>
                             Close Button
                         </Button>
                     </Modal.Footer>
