@@ -42,6 +42,7 @@ class ListDoctorsComponent extends Component {
             showEdit: false
         });
     }
+    
     handleShowDelete(id) {
         this.setState({
             showDelete: true,
@@ -49,6 +50,7 @@ class ListDoctorsComponent extends Component {
         });
         console.log(id);
     }
+
     handleCloseDelete = () => {
         this.setState({
             showDelete: false

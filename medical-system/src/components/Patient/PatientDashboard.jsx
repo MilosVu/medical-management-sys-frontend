@@ -65,13 +65,13 @@ class PatientDashboard extends Component {
                     </div>
 
                     <div className="col-md-9">
-
+                        {console.log(this.state)}
                         {(() => {
                             switch (this.state.view) {
                                 case 'dashboard':
                                     return LoadPatientTabComponent(this.state)
                                 case 'examinations':
-                                    return <ListExaminationsComponent userid={this.state.user.userid} />
+                                    return <ListExaminationsComponent patientId={this.state.user.userId} />
                                 case 'prescriptions':
                                     return <h1>Prescriptions</h1>
                             }

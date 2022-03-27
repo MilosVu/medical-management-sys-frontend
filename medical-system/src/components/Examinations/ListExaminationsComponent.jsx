@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ExaminationService from '../../services/ExaminationService';
@@ -9,7 +10,7 @@ class ListExaminationsComponent extends Component {
         this.state = {
             examinations: [],
             doctorId: props.doctorId,
-            patientid: props.patientid
+            patientId: props.patientId
         }
     }
 
@@ -18,6 +19,26 @@ class ListExaminationsComponent extends Component {
         if (this.state.doctorId != undefined) {
 
             ExaminationService.getExaminationsForDoctor(this.state.doctorId).then((res) => {
+
+                res.data.forEach(element => {
+
+                    let date = new Date(Date.parse(element.dateOfExamination));
+                    element.dateOfExamination = date.toLocaleString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit"
+                      });
+
+                });
+                
+                this.setState({ examinations: res.data });
+            });
+
+        } else if (this.state.patientId != undefined) {
+
+            ExaminationService.getExaminationsForPatient(this.state.patientId).then((res) => {
                 this.setState({ examinations: res.data });
             });
 
@@ -28,47 +49,65 @@ class ListExaminationsComponent extends Component {
             });
 
         }
+
+    }
+
+    cancelExamination = () => {
+        alert("Canceled")
     }
 
     render() {
         return (
             <div>
+                {console.log(this.state.examinations.length)}
+                {
+                    this.state.examinations.length === 0
+                        ? <h2>There are no appointments available</h2>
+                        : <div className="row">
+                            <table className='table table-light table-striped table-bordered'>
 
-                <div className="row">
-                    <table className='table table-light table-striped table-bordered'>
+                                <thead>
+                                    <tr>
+                                        <th>Doctor</th>
+                                        <th>Patient</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Prescribe</th>
+                                        <th>Cancel</th>
+                                    </tr>
+                                </thead>
 
-                        <thead>
-                            <tr>
-                                <th>Doctor</th>
-                                <th>Patient</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
+                                <tbody>
+                                    {
+                                        this.state.examinations.map(
+                                            examination =>
+                                                <tr>
+                                                    <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
+                                                    <td> {examination.patient.firstName} {examination.patient.lastName}</td>
+         
+                                                    <td> {examination.dateOfExamination} </td>
 
-                        <tbody>
-                            {
-                                this.state.examinations.map(
-                                    examination =>
-                                        <tr>
-                                            <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
-                                            <td> {examination.patient.firstName} {examination.patient.lastName}</td>
-                                            <td> {examination.dateOfExamination} </td>
+                                                    {
+                                                        examination.status
+                                                            ? <td>Cancelled</td>
+                                                            : <td>Regular</td>
+                                                    }
 
-                                            {examination.status ?
-                                                <td>Regular</td> :
-                                                <td>Cancelled</td>}
-                                        </tr>
-                                )
-                            }
-                        </tbody>
+                                                    <td><button onClick={() => this.cancelExamination()} className='btn btn-success' data-toggle="modal">Prescribe</button></td>
+                                                    <td><button onClick={() => this.cancelExamination()} className='btn btn-danger' data-toggle="modal">Cancel</button> </td>
 
-                    </table>
-                </div>
+                                                </tr>
+                                        )
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                }
 
                 <div className='add-examination'>
                     <button variant="success" type="submit" block='true' className='btn btn-primary'>
-                        Add New Medicine
+                        Appoint
                     </button>
                     {/* <Link to="/add-pharmaceutical-company">
                         <button className='btn btn-primary'>Add examination</button>
