@@ -27,7 +27,7 @@ class EditDoctor extends Component {
         this.state = {
             firstName: props.doctor.firstName, lastName: props.doctor.lastName,
             username: props.doctor.username, email: props.doctor.email, fees: props.doctor.fees,
-            password: props.doctor.password, specialization: props.doctor.specialization, userRole: "Doctor", userId: props.doctor.userId
+            password: props.doctor.password, specialization: props.doctor.specialization, userRole: "doctor", userId: props.doctor.userId
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -63,6 +63,7 @@ class EditDoctor extends Component {
         });
     }
     async handleSubmit(event) {
+        console.log(this.state);
         event.preventDefault();
         let specialization2 = await SpecializationService.getSpecializationById(Number(this.state.specialization));
         console.log("SPECIJALIZCIJA" + specialization2);
@@ -72,17 +73,6 @@ class EditDoctor extends Component {
         console.log('doctor => ' + JSON.stringify(this.state));
 
         const response = await editDoctor(this.state);
-
-
-
-
-
-        // console.log(token);
-        // if (token.length !== 0) {
-        //     setToken(token);
-        // } else {
-        //     alert("Wrong username or password")
-        // }
 
     }
     render() {
@@ -131,17 +121,6 @@ class EditDoctor extends Component {
                         placeholder="Email *"
                         name="email"
                         value={this.state.email}
-                        onChange={this.handleChange}
-                        required
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <h5>Password</h5>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password *"
-                        name="password"
-                        value={this.state.password}
                         onChange={this.handleChange}
                         required
                     />

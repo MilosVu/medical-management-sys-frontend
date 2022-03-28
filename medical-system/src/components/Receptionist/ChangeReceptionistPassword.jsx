@@ -37,6 +37,7 @@ class ChangeReceptionistPassword extends Component {
         if (this.state.checkOldPassword !== this.state.oldPassword) {
             console.log("Stara sifra nije dobra");
             alert("Stara sifra nije dobra");
+
         }
         if (this.state.password !== this.state.repeatedPassword) {
             console.log("Niste uspesno potvrdili novu lozinku");

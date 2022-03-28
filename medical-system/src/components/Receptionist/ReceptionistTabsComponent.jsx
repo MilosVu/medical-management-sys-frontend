@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EditReceptionist from './EditReceptionist';
 import { Modal, Button } from 'react-bootstrap';
 import ChangeReceptionistPassword from './ChangeReceptionistPassword';
+import ChangePatientPassword from '../Patient/ChangePatientPassword';
 
 class ReceptionistTabsComponent extends Component {
 
@@ -101,11 +102,11 @@ class ReceptionistTabsComponent extends Component {
                 <Modal show={this.state.showPassword} onHide={() => { this.handleClosePassword() }}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            Edit
+                            Change Password
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ChangeReceptionistPassword user={this.state.user} />
+                        <ChangePatientPassword user={this.state.user} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClosePassword() }}>
