@@ -36,6 +36,17 @@ class CreateExaminationComponent extends Component {
     }
 
     componentDidMount() {
+        const arrDates = [
+            new Date(2021, 4, 20, 8, 15), //Thu May 20 2021 08:15:00
+            new Date(2021, 4, 20, 10, 45), //Fri May 20 2021 08:45:00
+            new Date(2021, 4, 21, 8, 30), //Sat May 21 2021 08:30:00
+            new Date(2021, 4, 21, 9, 0) //Sat May 21 2021 09:00:00
+        ];
+        console.log(arrDates[0].toDateString());
+        console.log(arrDates[1].toDateString());
+        if (arrDates[0].toDateString() == arrDates[1].toDateString()) {
+            console.log('uhvatio ga');
+        }
 
         SpecializationService.getSpecializations().then((resSpec) => {
 

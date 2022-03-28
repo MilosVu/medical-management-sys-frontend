@@ -20,6 +20,10 @@ class ExaminationService {
         return axios.get(EXAMINATION_API_BASE_URL);
     }
 
+    deleteExamination(examination) {
+        return axios.delete(EXAMINATION_API_BASE_URL + "/" + examination.examinationId);
+    }
+
     createExamination(examination) {
         return axios.post(EXAMINATION_API_BASE_URL, examination);
     }

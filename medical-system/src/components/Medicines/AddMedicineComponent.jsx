@@ -30,6 +30,8 @@ const AddMedicineComponent = (props) => {
         console.log(medicine.name + " /" + medicine.pharmaceuticalCompany);
         MedicineService.createMedicine(medicine);
 
+        window.location.reload();
+
     }
 
     return (

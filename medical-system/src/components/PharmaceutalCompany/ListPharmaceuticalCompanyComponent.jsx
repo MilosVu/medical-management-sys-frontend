@@ -13,7 +13,8 @@ class ListPharmaceuticalCompanyComponent extends Component {
             companies: [],
             show: false,
             showEdit: false,
-            company: null
+            showDelete: false,
+            company: null,
         }
         
     }
@@ -41,13 +42,31 @@ class ListPharmaceuticalCompanyComponent extends Component {
             company: id
         });
     }
+    handleShowDelete(id) {
+        this.setState({
+            showDelete: true,
+            company: id
+        });
+        console.log(id);
+    }
+
+    handleCloseDelete = () => {
+        this.setState({
+            showDelete: false
+        });
+    }
 
     componentDidMount(){
         PharmaceuticalCompanyService.getCompanies().then((res) => {
             this.setState({companies: res.data});
         });
     }
+    deleteCompany(id) {
+        console.log(id);
+        PharmaceuticalCompanyService.deleteCompany(id);
 
+        window.location.reload();
+    }
     
 
     render() {
@@ -118,6 +137,25 @@ class ListPharmaceuticalCompanyComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleCloseEdit() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showDelete} onHide={() => { this.handleCloseDelete() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Delete Company
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Do you want to delete this pharmaceutical company?</h5>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={() => this.deleteCompany(this.state.companyId)}>
+                            Delete
+                        </Button>
+                        <Button variant="secondary" onClick={() => { this.handleCloseDelete() }}>
                             Close Button
                         </Button>
                     </Modal.Footer>

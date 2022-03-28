@@ -1,14 +1,38 @@
 import React, { Component } from 'react';
+import { Modal, Button } from 'react-bootstrap';
+import ChangePatientPassword from './ChangePatientPassword';
+import EditPatient from './EditPatient';
 
 class PatientTabsComponent extends Component {
 
     constructor(props){
         super(props)
 
-        console.log(props);
         this.state = {
-            user : props.user
+            user: props.user,
+            showEdit: false,
+            showPassword: false
         }
+    }
+    handleShow = () => {
+        this.setState({
+            showEdit: true
+        });
+    }
+    handleClose = () => {
+        this.setState({
+            showEdit: false
+        });
+    }
+    handleShowPassword = () => {
+        this.setState({
+            showPassword: true
+        });
+    }
+    handleClosePassword = () => {
+        this.setState({
+            showPassword: false
+        });
     }
 
     render() {
@@ -39,7 +63,10 @@ class PatientTabsComponent extends Component {
                                 <hr />
                                 <div className="row">
                                     <div className="col-sm-12">
-                                        <a className="btn btn-info" href="#">Edit</a>
+                                        <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Edit Data</Button>
+
+                                        <Button onClick={this.handleShowPassword} className='btn btn-success' data-toggle="modal">Change Password</Button>
+
                                     </div>
                                 </div>
                             </div>
@@ -47,6 +74,37 @@ class PatientTabsComponent extends Component {
                     </div>
 
                 </div>
+
+                <Modal show={this.state.showEdit} onHide={() => { this.handleClose() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Edit Data
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <EditPatient user={this.state.user} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleClose() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+                <Modal show={this.state.showPassword} onHide={() => { this.handleClosePassword() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Change Password
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <ChangePatientPassword user={this.state.user} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleClosePassword() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }

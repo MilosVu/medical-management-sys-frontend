@@ -13,6 +13,9 @@ class MedicineService {
         console.log(medicines);
         return axios.post(MEDICINE_API_BASE_URL, medicines);
     }
+    deleteMedicine(medicine) {
+        return axios.delete(MEDICINE_API_BASE_URL + "/" + medicine.medicineid);
+    }
 
 }
 

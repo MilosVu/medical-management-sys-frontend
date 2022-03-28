@@ -37,7 +37,7 @@ class EditCompany extends Component {
 
         PharmaceuticalCompanyService.createCompany(this.state)
 
-
+        window.location.reload();
     }
 
 

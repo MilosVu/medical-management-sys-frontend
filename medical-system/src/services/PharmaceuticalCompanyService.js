@@ -14,6 +14,10 @@ class PharmaceuticalCompanyService {
     getCompanyById(company) {
         return axios.get(PHARMACEUTAL_COMPANY_API_BASE_URL, company);
     }
+    deleteCompany(company) {
+        return axios.delete(PHARMACEUTAL_COMPANY_API_BASE_URL + "/" + company.companyId);
+    }
+
 
 }
 
