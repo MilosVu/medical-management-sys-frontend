@@ -32,23 +32,27 @@ class ExaminationService {
         return axios.get(EXAMINATION_API_BASE_URL + "/patient/" + user);
     }
 
-    async getExcludedTimes(date){
-        let arrSpecificDates = [];
+    getExcludedDates(doctorId){
+        // let arrSpecificDates = [];
 
-        for (let i = 0; i < arrDates.length; i++) {
-            if (
-                moment(date, moment.ISO_8601).format("YYYY/MM/DD") ===
-                moment(arrDates[i], moment.ISO_8601).format("YYYY/MM/DD")
-            ) {
-                arrSpecificDates.push(moment(arrDates[i], moment.ISO_8601).toObject());
-            }
-        }
+        // for (let i = 0; i < arrDates.length; i++) {
+        //     if (
+        //         moment(date, moment.ISO_8601).format("YYYY/MM/DD") ===
+        //         moment(arrDates[i], moment.ISO_8601).format("YYYY/MM/DD")
+        //     ) {
+        //         arrSpecificDates.push(moment(arrDates[i], moment.ISO_8601).toObject());
+        //     }
+        // }
 
-        let arrExcludedTimes = [];
-        for (let i = 0; i < arrSpecificDates.length; i++) {
-            arrExcludedTimes.push(setHours(setMinutes(new Date(arrSpecificDates[i].minutes), arrSpecificDates[i].hours)));
-        }
-        return arrExcludedTimes;
+        // let arrExcludedTimes = [];
+        // for (let i = 0; i < arrSpecificDates.length; i++) {
+        //     arrExcludedTimes.push(setHours(setMinutes(new Date(arrSpecificDates[i].minutes), arrSpecificDates[i].hours)));
+        // }
+        // return arrExcludedTimes;
+
+        return arrDates;
+        //return axios.get(EXAMINATION_API_BASE_URL + "/doctor/" + doctorId);
+
     }
 
 }

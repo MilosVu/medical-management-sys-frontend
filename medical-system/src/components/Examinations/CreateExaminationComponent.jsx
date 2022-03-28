@@ -22,7 +22,8 @@ class CreateExaminationComponent extends Component {
         this.state = {
             specializations: [],
             doctors: [],
-            excludedTimes: [new Date(2022, 3, 27, 16, 0)],
+            excludedDates: [],
+            excludedTimes: [],
             selectedDate: setHours(setMinutes(new Date(), 0), 9),
             selectedSpecializationId: 0,
             selectedDoctorId: 0,
@@ -64,6 +65,55 @@ class CreateExaminationComponent extends Component {
         });
     }
 
+    setSelectedDoctor = (id) => {
+        this.setState({
+            selectedDoctorId: id
+        });
+    }
+
+    handleSelectedDate = (date) => {
+        this.setState({
+            selectedDate: date
+        });
+
+        let excludedTimesArr = [];
+
+        // console.log(this.state.excludedDates);
+        // console.log(this.state.selectedDate);
+
+        this.state.excludedDates.forEach(element => {
+
+            if( element.toDateString() == date.toDateString() ){
+                excludedTimesArr.push(element);
+            }
+
+        });
+
+        this.setState({
+            excludedTimes: excludedTimesArr
+        });
+
+    };
+
+    handleSelectedTime = (date) => {
+        this.setState({
+            selectedDate: date
+        });
+    };
+    
+    getTimeSlots = () => {
+        let excludedDatesArr = ExaminationService.getExcludedDates(this.state.selectedDoctorId);
+
+        console.log("Get Time Slots");
+        console.log(excludedDatesArr);
+        console.log("==============");
+
+        this.setState({
+            displayTime: true,
+            excludedDates: excludedDatesArr
+        });
+    }
+
     handleSubmit(e) {
 
         e.preventDefault();
@@ -89,52 +139,6 @@ class CreateExaminationComponent extends Component {
 
     }
 
-    handleSelectedDate = (date) => {
-        this.setState({
-            selectedDate: date
-        });
-    };
-
-    setSelectedDoctor = (id) => {
-        this.setState({
-            selectedDoctorId: id
-        });
-    }
-
-    getExcludedTimes = (date) => {
-
-        // let arrSpecificDates = [];
-
-        // for (let i = 0; i < arrDates.length; i++) {
-        //     if (
-        //         moment(date, moment.ISO_8601).format("YYYY/MM/DD") ===
-        //         moment(arrDates[i], moment.ISO_8601).format("YYYY/MM/DD")
-        //     ) {
-        //         arrSpecificDates.push(moment(arrDates[i], moment.ISO_8601).toObject());
-        //     }
-        // }
-
-        // let arrExcludedTimes = [];
-        // for (let i = 0; i < arrSpecificDates.length; i++) {
-        //     arrExcludedTimes.push(setHours(setMinutes(new Date(arrSpecificDates[i].minutes), arrSpecificDates[i].hours)));
-        //     this.setState({
-        //         excludedTimes: arrExcludedTimes
-        //     });
-        // }
-
-        //let arrExcludedTimes = ExaminationService.getExcludedTimes(date);
-
-        this.setState({
-            excludedTimes: new Date()
-        });
-
-    };
-
-    getTimeSlots = () => {
-        this.setState({
-            displayTime: true
-        });
-    }
 
     render() {
         const { selectedDate, excludedTimes } = this.state;
@@ -182,8 +186,9 @@ class CreateExaminationComponent extends Component {
                             </div>
 
                             {
-                                this.state.displayTime
-                                    ? <div className="row">
+                                !this.state.displayTime
+                                    ? <div><button className="btnLogin btn btn-light" value="create" onClick={this.getTimeSlots}>Confirm doctor</button></div>
+                                    : <div className="row">
 
                                         <div className="col-md-6">
                                             <DatePicker
@@ -197,8 +202,8 @@ class CreateExaminationComponent extends Component {
                                         <div className="col-md-6">
                                             <DatePicker
                                                 selected={selectedDate}
-                                                excludeTimes={excludedTimes}
-                                                onChange={this.handleSelectedDate}
+                                                excludeTimes={this.state.excludedTimes}
+                                                onChange={this.handleSelectedTime}
                                                 /* onSelect={this.getExcludedTimes} */
                                                 showTimeSelect
                                                 showTimeSelectOnly
@@ -218,13 +223,7 @@ class CreateExaminationComponent extends Component {
                                         </div>
 
                                     </div>
-
-
-                                    : <div><button className="btnLogin btn btn-light" value="create" onClick={this.getTimeSlots}>Confirm doctor</button></div>
                             }
-
-
-
 
                         </form>
 
