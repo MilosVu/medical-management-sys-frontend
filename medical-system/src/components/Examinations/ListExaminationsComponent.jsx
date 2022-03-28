@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import ExaminationService from '../../services/ExaminationService';
+import AddPrescribe from '../Prescribes/AddPrescribe';
 import CreateExaminationComponent from './CreateExaminationComponent';
+import MedicineService from '../../services/MedicineService';
 
 function formatDate(res) {
 
@@ -27,10 +29,14 @@ class ListExaminationsComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            examinations: [],
+            examinations: [], medicines: [],
             doctorId: props.doctorId,
             patientId: props.patientId,
-            showCreate: false
+            showCreate: false,
+            showCancel: false,
+            showPrescribe: false,
+            examination: null
+
         }
     }
 
@@ -57,13 +63,21 @@ class ListExaminationsComponent extends Component {
                 this.setState({ examinations: res.data });
             });
 
+
         }
 
+
+        MedicineService.getMedicines().then((res) => {
+            console.log("stiglo");
+            console.log(res.data);
+            this.setState({
+                medicines: res.data
+            });
+        });
+
     }
 
-    cancelExamination = () => {
-        alert("Canceled")
-    }
+
 
     handleShowCreate = () => {
         this.setState({
@@ -76,9 +90,39 @@ class ListExaminationsComponent extends Component {
             showCreate: false
         });
     }
+    handleShowCancel = (id) => {
+        this.setState({
+            showCancel: true,
+            examination: id
+        });
+    }
+
+    handleCloseCancel = () => {
+        this.setState({
+            showCancel: false
+        });
+    }
+    handleShowPrescribe = (id) => {
+        this.setState({
+            showPrescribe: true,
+            examination: id
+        });
+    }
+
+    handleClosePrescribe = () => {
+        this.setState({
+            showPrescribe: false
+        });
+    }
 
     createExamination = () => {
 
+    }
+
+    cancelExamination(id) {
+        console.log(id);
+        ExaminationService.deleteExamination(id);
+        window.location.reload();
     }
 
     render() {
@@ -118,8 +162,9 @@ class ListExaminationsComponent extends Component {
                                                             : <td>Regular</td>
                                                     }
 
-                                                    <td><button onClick={() => this.cancelExamination()} className='btn btn-success' data-toggle="modal">Prescribe</button></td>
-                                                    <td><button onClick={() => this.cancelExamination()} className='btn btn-danger' data-toggle="modal">Cancel</button> </td>
+                                                    <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
+
+                                                    <td><Button onClick={() => this.handleShowCancel(examination)} className='btn btn-danger' data-toggle="modal">Cancel</Button> </td>
 
                                                 </tr>
                                         )
@@ -149,6 +194,41 @@ class ListExaminationsComponent extends Component {
                     <Modal.Body>
                         <CreateExaminationComponent patientId={this.state.patientId}/>
                     </Modal.Body>
+                </Modal>
+
+                <Modal show={this.state.showPrescribe} onHide={() => { this.handleClosePrescribe() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Prescribe
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <AddPrescribe examination={this.state.examination} medicines={this.state.medicines} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleClosePrescribe() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showCancel} onHide={() => { this.handleCloseCancel() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Cancel
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Do you want to cancel this examination?</h5>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={() => this.cancelExamination(this.state.examination)}>
+                            Cancel
+                        </Button>
+                        <Button variant="secondary" onClick={() => { this.handleCloseCancel() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
                 </Modal>
 
             </div>
