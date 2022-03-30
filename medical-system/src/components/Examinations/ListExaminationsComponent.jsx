@@ -5,22 +5,16 @@ import AddPrescription from '../Prescription/AddPrescription';
 import CreateExaminationComponent from './CreateExaminationComponent';
 import MedicineService from '../../services/MedicineService';
 
-function formatDate(res) {
 
-    res.data.forEach(element => {
+function formatDate(date) {
 
-        let date = new Date(Date.parse(element.dateOfExamination));
-        element.dateOfExamination = date.toLocaleString("en-GB", {
-            day: "numeric",
-            month: "short",
-            year: "numeric",
-            hour: "numeric",
-            minute: "2-digit"
-        });
-
+    return ( new Date(Date.parse(date)) ).toLocaleString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
     });
-
-    return res;
 
 }
 
@@ -46,21 +40,18 @@ class ListExaminationsComponent extends Component {
         if (this.state.doctorId != undefined) {
 
             ExaminationService.getExaminationsForDoctor(this.state.doctorId).then((res) => {
-                res = formatDate(res);
                 this.setState({ examinations: res.data });
             });
 
         } else if (this.state.patientId != undefined) {
 
             ExaminationService.getExaminationsForPatient(this.state.patientId).then((res) => {
-                res = formatDate(res);
                 this.setState({ examinations: res.data });
             });
 
         } else {
 
             ExaminationService.getExaminations().then((res) => {
-                res = formatDate(res);
                 this.setState({ examinations: res.data });
             });
 
@@ -153,7 +144,7 @@ class ListExaminationsComponent extends Component {
                                                     <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
                                                     <td> {examination.patient.firstName} {examination.patient.lastName}</td>
 
-                                                    <td> {examination.dateOfExamination} </td>
+                                                    <td> {formatDate(examination.dateOfExamination)} </td>
 
                                                     {
                                                         examination.status
@@ -191,7 +182,7 @@ class ListExaminationsComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <CreateExaminationComponent patientId={this.state.patientId}/>
+                        <CreateExaminationComponent patientId={this.state.patientId} />
                     </Modal.Body>
                 </Modal>
 

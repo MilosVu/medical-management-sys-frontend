@@ -94,8 +94,6 @@ class ListSpecializationsComponent extends Component {
 
 
                                     </tr>
-
-
                             )
                             }
                         </tbody>
