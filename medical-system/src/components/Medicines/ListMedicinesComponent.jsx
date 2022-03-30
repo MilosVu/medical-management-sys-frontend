@@ -90,16 +90,15 @@ class ListMedicinesComponent extends Component {
 
         return (
             <div>
-                <h2 className='test-center'>Medicine list</h2>
+
                 <div className='row'>
 
                     <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add medicine</Button>
 
-
                 </div>
 
                 <div className="row">
-                    <table className='table table-striped table-bordered'>
+                    <table className='table table-light table-striped table-bordered'>
 
                         <thead>
                             <tr>
