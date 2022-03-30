@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import ExaminationService from '../../services/ExaminationService';
-import AddPrescribe from '../Prescribes/AddPrescribe';
+import AddPrescription from '../Prescription/AddPrescription';
 import CreateExaminationComponent from './CreateExaminationComponent';
 import MedicineService from '../../services/MedicineService';
 
@@ -29,7 +29,8 @@ class ListExaminationsComponent extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            examinations: [], medicines: [],
+            examinations: [],
+            medicines: [],
             doctorId: props.doctorId,
             patientId: props.patientId,
             showCreate: false,
@@ -203,7 +204,7 @@ class ListExaminationsComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddPrescribe examination={this.state.examination} medicines={this.state.medicines} />
+                        <AddPrescription examination={this.state.examination} medicines={this.state.medicines} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClosePrescribe() }}>

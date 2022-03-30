@@ -152,7 +152,7 @@ class ListPharmaceuticalCompanyComponent extends Component {
                         <h5>Do you want to delete this pharmaceutical company?</h5>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="danger" onClick={() => this.deleteCompany(this.state.companyId)}>
+                        <Button variant="danger" onClick={() => this.deleteCompany(this.state.company)}>
                             Delete
                         </Button>
                         <Button variant="secondary" onClick={() => { this.handleCloseDelete() }}>
