@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
 import DoctorService from '../../services/DoctorService';
 import SpecializationService from '../../services/SpecializationService';
-import moment from "moment";
 import DatePicker from "react-datepicker";
 import setHours from "date-fns/setHours";
 import setMinutes from "date-fns/setMinutes";
 import "react-datepicker/dist/react-datepicker.css";
 import ExaminationService from '../../services/ExaminationService';
-
-const arrDates = [
-    new Date(2021, 4, 20, 8, 15), //Thu May 20 2021 08:15:00
-    new Date(2021, 4, 20, 8, 45), //Fri May 20 2021 08:45:00
-    new Date(2021, 4, 21, 8, 30), //Sat May 21 2021 08:30:00
-    new Date(2021, 4, 21, 9, 0) //Sat May 21 2021 09:00:00
-];
+import { Button } from 'react-bootstrap';
 
 class CreateExaminationComponent extends Component {
 
@@ -71,9 +64,21 @@ class CreateExaminationComponent extends Component {
         const value = target.value;
         const name = target.name;
 
-        this.setState({
-            [name]: value
-        });
+        console.log(name);
+        console.log(value);
+
+        // if(false){
+        if(name == "selectedSpecializationId"){
+            this.setState({
+                [name]: value,
+                "selectedDoctorId": (this.state.doctors.find( d => d.specialization.specializationId == value)).userId
+            });
+        }else{
+            this.setState({
+                [name]: value
+            });
+        }
+
     }
 
     setSelectedDoctor = (id) => {
@@ -88,9 +93,6 @@ class CreateExaminationComponent extends Component {
         });
 
         let excludedTimesArr = [];
-
-        // console.log(this.state.excludedDates);
-        // console.log(this.state.selectedDate);
 
         this.state.excludedDates.forEach(element => {
 
@@ -113,16 +115,19 @@ class CreateExaminationComponent extends Component {
     };
     
     getTimeSlots = () => {
-        let excludedDatesArr = ExaminationService.getExcludedDates(this.state.selectedDoctorId);
+        
+        ExaminationService.getExcludedDates(this.state.selectedDoctorId).then((res) => {
+            console.log("Get Time Slots");
+            console.log(res);
+            console.log("==============");
+    
+            this.setState({
+                displayTime: true,
+                excludedDates: res
+            });
 
-        console.log("Get Time Slots");
-        console.log(excludedDatesArr);
-        console.log("==============");
-
-        this.setState({
-            displayTime: true,
-            excludedDates: excludedDatesArr
         });
+
     }
 
     handleSubmit(e) {
@@ -134,19 +139,19 @@ class CreateExaminationComponent extends Component {
         alert("klik");
 
 
-        // ExaminationService.createExamination({
-        //     "examinationId":80,
-        //     "doctor": {
-        //         "userId": this.state.selectedDoctorId
-        //     },
-        //     "patient": {
-        //         "userId": this.state.patientId
-        //     },
-        //     "status": false,
-        //     "userCanceled": false,
-        //     "doctorCanceled": false,
-        //     "dateOfExamination": this.state.selectedDate
-        // });
+        ExaminationService.createExamination({
+            "examinationId":80,
+            "doctor": {
+                "userId": this.state.selectedDoctorId
+            },
+            "patient": {
+                "userId": this.state.patientId
+            },
+            "status": false,
+            "userCanceled": false,
+            "doctorCanceled": false,
+            "dateOfExamination": this.state.selectedDate
+        });
 
     }
 
@@ -160,7 +165,7 @@ class CreateExaminationComponent extends Component {
                 {
                     this.state.selectedSpecializationId === 0 || this.state.doctors.length == 0
                         ? <h2>Loading data</h2>
-                        : <form onSubmit={this.handleSubmit}>
+                        : <form>
 
                             <div className="row">
 
@@ -198,7 +203,7 @@ class CreateExaminationComponent extends Component {
 
                             {
                                 !this.state.displayTime
-                                    ? <div><button className="btnLogin btn btn-light" value="create" onClick={this.getTimeSlots}>Confirm doctor</button></div>
+                                    ? <div><Button className="btnLogin btn btn-light" value="create" onClick={this.getTimeSlots}>Confirm doctor</Button></div>
                                     : <div className="row">
 
                                         <div className="col-md-6">

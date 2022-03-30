@@ -72,8 +72,6 @@ class ListPharmaceuticalCompanyComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className='test-center'>Pharmaceutical companies list</h2>
-
 
                 <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add Company</Button>
 
@@ -81,7 +79,7 @@ class ListPharmaceuticalCompanyComponent extends Component {
                 
             </div>
             <div className="row">
-                <table className='table table-striped table-bordered'>
+                <table className='table table-light table-striped table-bordered'>
 
                     <thead>
                         <tr>

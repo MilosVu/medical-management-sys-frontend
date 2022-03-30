@@ -25,6 +25,8 @@ class ExaminationService {
     }
 
     createExamination(examination) {
+        console.log(examination);
+        examination.dateOfExamination.setHours( examination.dateOfExamination.getHours() + 2 );
         return axios.post(EXAMINATION_API_BASE_URL, examination);
     }
 
@@ -37,25 +39,15 @@ class ExaminationService {
     }
 
     getExcludedDates(doctorId){
-        // let arrSpecificDates = [];
 
-        // for (let i = 0; i < arrDates.length; i++) {
-        //     if (
-        //         moment(date, moment.ISO_8601).format("YYYY/MM/DD") ===
-        //         moment(arrDates[i], moment.ISO_8601).format("YYYY/MM/DD")
-        //     ) {
-        //         arrSpecificDates.push(moment(arrDates[i], moment.ISO_8601).toObject());
-        //     }
-        // }
+        return axios.get(EXAMINATION_API_BASE_URL + "/doctor/" + doctorId).then((res) => {
 
-        // let arrExcludedTimes = [];
-        // for (let i = 0; i < arrSpecificDates.length; i++) {
-        //     arrExcludedTimes.push(setHours(setMinutes(new Date(arrSpecificDates[i].minutes), arrSpecificDates[i].hours)));
-        // }
-        // return arrExcludedTimes;
+            const getProp = prop => obj => new Date (obj[prop]);
+            const getDateOfExamination = getProp('dateOfExamination');
+            const dates = res.data.map(getDateOfExamination);
 
-        return arrDates;
-        //return axios.get(EXAMINATION_API_BASE_URL + "/doctor/" + doctorId);
+            return dates;
+        });
 
     }
 

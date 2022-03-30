@@ -35,15 +35,12 @@ class ListPatientsComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className='test-center'>Patients list</h2>
-
-
+                
                 <div className="row">
-                    <table className='table table-striped table-bordered'>
+                    <table className='table table-light table-striped table-bordered'>
 
                         <thead>
                             <tr>
-
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Username</th>
