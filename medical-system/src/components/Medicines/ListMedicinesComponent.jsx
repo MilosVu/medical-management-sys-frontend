@@ -22,6 +22,8 @@ class ListMedicinesComponent extends Component {
 
 
 
+
+
     handleShow = () => {
         this.setState({
             show: true
