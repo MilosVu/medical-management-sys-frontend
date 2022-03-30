@@ -77,8 +77,6 @@ class ListExaminationsComponent extends Component {
 
     }
 
-
-
     handleShowCreate = () => {
         this.setState({
             showCreate: true
