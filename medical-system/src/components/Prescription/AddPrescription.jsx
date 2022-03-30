@@ -57,6 +57,7 @@ class AddPrescription extends Component {
         PrescriptionService.createPrescription({
             "examination": this.state.examination,
             "prescriptionId": 9999,
+            "examinationId": this.state.examination.examinationId,
             "disease": this.state.disease,
             "description": this.state.description
         });
