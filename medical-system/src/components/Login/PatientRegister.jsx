@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
 async function registerPatient(patient) {
+
     return fetch('http://localhost:8080/api/v1/patients', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(patient)
-    })
-        .then(data => data.json())
+    }).then(data => data.json())
+
 }
 
 class PatientRegister extends Component {
@@ -38,16 +39,16 @@ class PatientRegister extends Component {
 
         const response = await registerPatient(
             this.state
-        );
-
-        console.log(response);
-
-        // console.log(token);
-        // if (token.length !== 0) {
-        //     setToken(token);
-        // } else {
-        //     alert("Wrong username or password")
-        // }
+        ).then( (res) => {
+            console.log("vratio ovo iz registracije");
+            console.log(res);
+            if(res.userId != undefined && res.userId != 0){
+                alert("Successfully registered");
+                window.location.reload();
+            }else{
+                alert("Failed to register");
+            }
+        });
 
     }
 
@@ -59,18 +60,23 @@ class PatientRegister extends Component {
                     <div className="row register-form">
 
                         <div className="col-md-6">
+
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="First Name *" name="firstName" required="" onChange={this.handleChange} />
+                                <input type="text" className="form-control" placeholder="First Name *" name="firstName" required onChange={this.handleChange} />
                             </div>
+
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Username *" name="username" onChange={this.handleChange} />
+                                <input type="text" className="form-control" placeholder="Username *" name="username" onChange={this.handleChange} required />
                             </div>
+
                             <div className="form-group">
-                                <input type="password" className="form-control" placeholder="Password *" name="password" required="" onChange={this.handleChange} />
+                                <input type="password" className="form-control" placeholder="Password *" name="password" required onChange={this.handleChange} />
                             </div>
+
                             <div className="form-group">
-                                <input type="text" minLength="10" maxLength="10" name="allergies" className="form-control" placeholder="Allergies *" onChange={this.handleChange} />
+                                <input type="text" minLength="10" maxLength="10" name="allergies" className="form-control" placeholder="Allergies *" required onChange={this.handleChange} />
                             </div>
+
                             <div className="form-group">
                                 <div className="maxl">
                                     <label className="radio inline">
@@ -83,22 +89,29 @@ class PatientRegister extends Component {
                                     </label>
                                 </div>
                             </div>
+
                         </div>
 
                         <div className="col-md-6">
+
                             <div className="form-group">
-                                <input type="text" className="form-control" placeholder="Last Name *" name="lastName" required="" onChange={this.handleChange} />
+                                <input type="text" className="form-control" placeholder="Last Name *" name="lastName" required onChange={this.handleChange} />
                             </div>
+
                             <div className="form-group">
-                                <input type="email" className="form-control" placeholder="Your Email *" name="email" onChange={this.handleChange} />
+                                <input type="email" className="form-control" placeholder="Your Email *" name="email" required onChange={this.handleChange} />
                             </div>
+
                             <div className="form-group">
-                                <input type="password" className="form-control" placeholder="Confirm Password *" name="cpassword" required="" /* onChange={this.handleChange} */ /><span id="message"></span>
+                                <input type="password" className="form-control" placeholder="Confirm Password *" name="cpassword" required /* onChange={this.handleChange} */ /><span id="message"></span>
                             </div>
+
                             <div className="form-group">
-                                <input type="tel" minLength="10" maxLength="10" name="contact" className="form-control" placeholder="Your Phone *" onChange={this.handleChange} />
+                                <input type="tel" minLength="10" maxLength="10" name="contact" className="form-control" placeholder="Your Phone *" required onChange={this.handleChange} />
                             </div>
+
                             <input type="submit" className="btnRegister btn btn-light" name="patsub1" value="Register" />
+                            
                         </div>
 
                     </div>
