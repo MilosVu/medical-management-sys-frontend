@@ -9,6 +9,7 @@ import NavbarComponent from '../NavbarComponent';
 import UserService from '../../services/UserService';
 import ReceptionistTabsComponent from './ReceptionistTabsComponent';
 import ListSpecializationsComponent from '../Specializations/ListSpecializationsComponent';
+import ListPrescriptionsComponent from '../Prescription/ListPrescriptionsComponent';
 
 
 
@@ -75,7 +76,7 @@ class ReceptionistDashboard extends Component {
         return (
             <div className='dashboard-container'>
                 <NavbarComponent />
-                <h3> Welcome {this.state.user.username} </h3>
+                <h3 className='welcome-heading'> Welcome {this.state.user.username} </h3>
                 <div className="row">
 
                     <div className="col-md-3">
@@ -129,7 +130,7 @@ class ReceptionistDashboard extends Component {
                                 case 'examinations':
                                     return <ListExaminationsComponent />;
                                 case 'prescriptions':
-                                    return <>Ledu</>;
+                                    return <ListPrescriptionsComponent />;
                                 case 'medicines':
                                     return <ListMedicinesComponent />;
                                 case 'pharmaceuticalCompanies':

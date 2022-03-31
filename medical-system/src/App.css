@@ -120,3 +120,11 @@ a.btn.btn-info {
 button.btn.btn-primary {
   float: right;
 }
+
+h3.welcome-heading {
+  color: white;
+}
+
+.btnRegister{
+  float: right;
+}

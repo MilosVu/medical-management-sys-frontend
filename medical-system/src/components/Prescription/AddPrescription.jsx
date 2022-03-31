@@ -45,8 +45,6 @@ class AddPrescription extends Component {
     }
 
 
-
-
     handleChange(event) {
 
         const target = event.target;
