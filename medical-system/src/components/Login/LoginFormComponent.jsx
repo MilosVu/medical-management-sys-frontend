@@ -62,7 +62,7 @@ class LoginFormComponent extends Component {
     render() {
         return (
             <div className="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <h3 className="register-heading">Login as {this.props.userRole}</h3>
+                <h3 className="register-heading welcome-heading">Login as {this.props.userRole}</h3>
                 <form onSubmit={this.handleSubmit}>
 
                     <div className="row register-form">

@@ -40,7 +40,7 @@ class DoctorDashboard extends Component {
         return (
             <div className='dashboard-container'>
                 <NavbarComponent />
-                <h3> Welcome {this.state.user.username}</h3>
+                <h3 className='welcome-heading'> Welcome {this.state.user.username}</h3>
                 <div className="row">
 
                     <div className="col-md-3">

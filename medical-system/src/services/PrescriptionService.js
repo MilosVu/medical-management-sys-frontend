@@ -9,10 +9,12 @@ class PrescriptionService {
     getPrescriptions() {
         return axios.get(PRESCRIPTION_API_BASE_URL);
     }
+
     createPrescription(prescription) {
         console.log(prescription);
         return axios.post(PRESCRIPTION_API_BASE_URL, prescription);
     }
+    
     deleteMedicine(prescription) {
         return axios.delete(PRESCRIPTION_API_BASE_URL + "/" + prescription.prescriptionId);
     }

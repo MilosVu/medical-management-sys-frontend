@@ -98,7 +98,7 @@ class PatientRegister extends Component {
                             <div className="form-group">
                                 <input type="tel" minLength="10" maxLength="10" name="contact" className="form-control" placeholder="Your Phone *" onChange={this.handleChange} />
                             </div>
-                            <input type="submit" className="btnRegister" name="patsub1" value="Register" />
+                            <input type="submit" className="btnRegister btn btn-light" name="patsub1" value="Register" />
                         </div>
 
                     </div>
