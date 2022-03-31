@@ -3,9 +3,12 @@ import { Form, Button } from "react-bootstrap"
 
 import { Component, useState } from 'react';
 
-import DoctorService from "../../services/DoctorService";
-import SpecializationService from "../../services/SpecializationService";
+
 import PrescriptionService from "../../services/PrescriptionService";
+
+import MultiSelect from 'multiselect-react-dropdown';
+
+
 
 
 
@@ -14,20 +17,30 @@ class AddPrescription extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { medicine: 1, examination: this.props.examination, prescriptionId: 9999 };
+        this.state = { medicine: this.props.medicines, examination: this.props.examination, prescriptionId: 9999, selectedMedicines: [] };
 
         this.handleChange = this.handleChange.bind(this);
         this.changeMedicines = this.changeMedicines.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onSelect = this.onSelect.bind(this);
+        this.onRemove = this.onRemove.bind(this);
     }
 
     changeMedicines(event) {
+        console.log("aaaaaaaaa");
+
+        let value2 = Array.from(
+            event.target.selectedOptions,
+            (option) => option.value
+        );
+
+        console.log(value2);
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
         console.log(value);
         this.setState({
-            medicine: value
+            medicine: value2
         });
     }
 
@@ -35,6 +48,7 @@ class AddPrescription extends Component {
 
 
     handleChange(event) {
+
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -45,7 +59,7 @@ class AddPrescription extends Component {
     }
 
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
 
 
@@ -59,26 +73,31 @@ class AddPrescription extends Component {
             "prescriptionId": 9999,
             "examinationId": this.state.examination.examinationId,
             "disease": this.state.disease,
-            "description": this.state.description
+            "description": this.state.description,
+            "medicines": this.state.selectedMedicines
         });
-
-
-
-
-
-
-
     }
 
+    onSelect(event) {
+        this.setState({
+            "selectedMedicines": event
+        });
+        console.log(event);
+        console.log(this.state.selectedMedicines);
+    }
 
+    onRemove(event) {
+        this.setState({
+            "selectedMedicines": event
+        });
+        console.log(event);
+        console.log(this.state.selectedMedicines);
+    }
 
     render() {
         return (
             <>
-                {console.log(this.props.medicines)}
-                {
-                    console.log(this.props.examination)
-                }
+                {console.log(this.state.medicine)}
                 <Form onSubmit={this.handleSubmit}>
                     <h5>Disease</h5>
                     <Form.Group>
@@ -106,19 +125,13 @@ class AddPrescription extends Component {
 
                     <Form.Group>
                         <h5>Medicines</h5>
-                        <Form.Select
-                            name="medicines"
-                            onChange={this.changeMedicines}
-                            multiple
+                        <MultiSelect
+                            options={this.state.medicine}
+                            displayValue="name"
+                            onSelect={this.onSelect}
+                            onRemove={this.onRemove}
 
-                        >
-                            {
-                                this.props.medicines.map(medicine =>
-                                    <option key={medicine.medicineId} value={medicine.medicineId} name={medicine.name} >{medicine.name}</option>
-                                )
-
-                            }
-                        </Form.Select>
+                        />
                     </Form.Group>
 
 
