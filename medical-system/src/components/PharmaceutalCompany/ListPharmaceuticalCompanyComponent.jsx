@@ -6,7 +6,7 @@ import EditCompany from './EditCompany';
 
 class ListPharmaceuticalCompanyComponent extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -16,7 +16,7 @@ class ListPharmaceuticalCompanyComponent extends Component {
             showDelete: false,
             company: null,
         }
-        
+
     }
 
     handleShow = () => {
@@ -56,9 +56,9 @@ class ListPharmaceuticalCompanyComponent extends Component {
         });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         PharmaceuticalCompanyService.getCompanies().then((res) => {
-            this.setState({companies: res.data});
+            this.setState({ companies: res.data });
         });
     }
     deleteCompany(id) {
@@ -67,30 +67,24 @@ class ListPharmaceuticalCompanyComponent extends Component {
 
         window.location.reload();
     }
-    
+
 
     render() {
         return (
             <div>
 
-                <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add Company</Button>
+                <div className="row">
+                    <table className='table table-light table-striped table-bordered'>
 
-            <div className='row'>
-                
-            </div>
-            <div className="row">
-                <table className='table table-light table-striped table-bordered'>
-
-                    <thead>
-                        <tr>
-                            
-                            <th>Pharmaceutical company</th>
+                        <thead>
+                            <tr>
+                                <th>Pharmaceutical company</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                        </tr>
-                    </thead>
+                            </tr>
+                        </thead>
 
-                    <tbody>
+                        <tbody>
                             {this.state.companies.map(
                                 company =>
                                     <tr key={company.companyId}>
@@ -108,6 +102,11 @@ class ListPharmaceuticalCompanyComponent extends Component {
 
                     </table>
                 </div>
+
+                <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShow} data-toggle="modal">
+                    Add Company
+                </button>
+
                 <Modal show={this.state.show} onHide={() => { this.handleClose() }}>
                     <Modal.Header closeButton>
                         <Modal.Title>

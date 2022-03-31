@@ -101,8 +101,9 @@ class ListSpecializationsComponent extends Component {
                     </table>
                 </div>
 
-                <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add Specialization</Button>
-
+                <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShow} data-toggle="modal">
+                    Add Specialization
+                </button>
 
                 <Modal show={this.state.show} onHide={() => { this.handleClose() }}>
                     <Modal.Header closeButton>

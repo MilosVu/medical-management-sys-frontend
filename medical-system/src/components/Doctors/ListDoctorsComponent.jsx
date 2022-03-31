@@ -85,14 +85,9 @@ class ListDoctorsComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className='test-center'>Doctors list</h2>
-
-                <div className='row'>
-                    <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add doctor</Button>
-                </div>
-
+                
                 <div className="row">
-                    <table className='table table-striped table-bordered'>
+                    <table className='table table-light table-striped table-bordered'>
 
                         <thead>
                             <tr>
@@ -137,6 +132,10 @@ class ListDoctorsComponent extends Component {
 
                     </table>
                 </div>
+
+                <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShow} data-toggle="modal">
+                    Add Doctor
+                </button>
 
                 <Modal show={this.state.show} onHide={() => { this.handleClose() }}>
                     <Modal.Header closeButton>
