@@ -107,7 +107,7 @@ class AddPrescription extends Component {
                         <Form.Select
                             name="medicines"
                             onChange={this.changeMedicines}
-
+                            multiple
 
                         >
                             {
