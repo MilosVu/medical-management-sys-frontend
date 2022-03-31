@@ -187,11 +187,12 @@ class CreateExaminationComponent extends Component {
                                         {
                                             this.state.doctors.map(
                                                 doctor => {
+                                                    console.log(doctor);
                                                     if (this.state.selectedDoctorId == 0) {
                                                         this.setSelectedDoctor(doctor.userId);
                                                     }
                                                     if (this.state.selectedSpecializationId == doctor.specialization.specializationId) {
-                                                        return <option name={doctor.username} value={doctor.userId} id={doctor.userId} key={doctor.userId}>{doctor.firstName} {doctor.lastName}</option>
+                                                        return <option name={doctor.username} value={doctor.userId} id={doctor.userId} key={doctor.userId}>{doctor.firstName} {doctor.lastName}, fee {doctor.fees}$</option>
                                                     }
                                                 }
                                             )

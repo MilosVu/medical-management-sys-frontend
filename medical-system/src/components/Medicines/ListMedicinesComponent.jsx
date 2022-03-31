@@ -93,12 +93,6 @@ class ListMedicinesComponent extends Component {
         return (
             <div>
 
-                <div className='row'>
-
-                    <Button onClick={this.handleShow} className='btn btn-success' data-toggle="modal">Add medicine</Button>
-
-                </div>
-
                 <div className="row">
                     <table className='table table-light table-striped table-bordered'>
 
@@ -127,6 +121,13 @@ class ListMedicinesComponent extends Component {
 
                     </table>
                 </div>
+
+
+                <button variant="success" type="submit" block='true' className='btn btn-primary' onClick={this.handleShow}  data-toggle="modal">
+                    Add medicine
+                </button>
+
+
                 <Modal show={this.state.show} onHide={() => { this.handleClose() }}>
                     <Modal.Header closeButton>
                         <Modal.Title>

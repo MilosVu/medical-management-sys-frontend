@@ -116,3 +116,7 @@ a.btn.btn-info {
 .row {
   margin-bottom: 25px;
 }
+
+button.btn.btn-primary {
+  float: right;
+}
