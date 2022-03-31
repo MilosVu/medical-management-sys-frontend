@@ -4,11 +4,12 @@ import ExaminationService from '../../services/ExaminationService';
 import AddPrescription from '../Prescription/AddPrescription';
 import CreateExaminationComponent from './CreateExaminationComponent';
 import MedicineService from '../../services/MedicineService';
+import DatePicker from "react-datepicker";
 
 
 function formatDate(date) {
 
-    return ( new Date(Date.parse(date)) ).toLocaleString("en-GB", {
+    return (new Date(Date.parse(date))).toLocaleString("en-GB", {
         day: "numeric",
         month: "short",
         year: "numeric",
@@ -30,8 +31,8 @@ class ListExaminationsComponent extends Component {
             showCreate: false,
             showCancel: false,
             showPrescribe: false,
-            examination: null
-
+            examination: null,
+            selectedDate: new Date(),
         }
     }
 
@@ -80,6 +81,7 @@ class ListExaminationsComponent extends Component {
             showCreate: false
         });
     }
+
     handleShowCancel = (id) => {
         this.setState({
             showCancel: true,
@@ -92,6 +94,7 @@ class ListExaminationsComponent extends Component {
             showCancel: false
         });
     }
+
     handleShowPrescribe = (id) => {
         this.setState({
             showPrescribe: true,
@@ -105,9 +108,12 @@ class ListExaminationsComponent extends Component {
         });
     }
 
-    createExamination = () => {
-
-    }
+    handleSelectedDate = (date) => {
+        this.setState({
+            selectedDate: date
+        });
+        alert(date);
+    };
 
     cancelExamination(id) {
         console.log(id);
@@ -122,52 +128,66 @@ class ListExaminationsComponent extends Component {
                 {
                     this.state.examinations.length === 0
                         ? <h2>There are no appointments available</h2>
-                        : <div className="row">
-                            <table className='table table-light table-striped table-bordered'>
+                        : <div>
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <DatePicker
+                                        selected={this.state.selectedDate}
+                                        onChange={this.handleSelectedDate}
+                                        dateFormat="dd/MM/yyy"
+                                    />
+                                </div>
+                            </div>
+                            <div className="row">
+                                <table className='table table-light table-striped table-bordered'>
 
-                                <thead>
-                                    <tr>
-                                        <th>Doctor</th>
-                                        <th>Patient</th>
-                                        <th>Date</th>
-                                        <th>Status</th>
-                                        <th>Prescribe</th>
-                                        <th>Cancel</th>
-                                    </tr>
-                                </thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Doctor</th>
+                                            <th>Patient</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Prescribe</th>
+                                            <th>Cancel</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
-                                    {
-                                        this.state.examinations.map(
-                                            examination =>
-                                                <tr key={examination.examinationId}>
-                                                    <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
-                                                    <td> {examination.patient.firstName} {examination.patient.lastName}</td>
+                                    <tbody>
+                                        {
+                                            this.state.examinations.map(
+                                                examination => {
+                                                    if (this.state.selectedDate.toDateString() == (new Date(examination.dateOfExamination).toDateString())) {
+                                                        return <>
+                                                            <tr key={examination.examinationId}>
+                                                                <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
+                                                                <td> {examination.patient.firstName} {examination.patient.lastName}</td>
 
-                                                    <td> {formatDate(examination.dateOfExamination)} </td>
+                                                                <td> {formatDate(examination.dateOfExamination)} </td>
 
-                                                    {
-                                                        examination.statusCompleted
-                                                            ? <>
-                                                                <td>Completed</td>
-                                                                <td>ZAVRSEN PREGLED FAMILIJO</td>
-                                                            </>
-                                                            : <>
-                                                                <td>Regular</td>
-                                                                <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
+                                                                {
+                                                                    examination.statusCompleted
+                                                                        ? <>
+                                                                            <td>Completed</td>
+                                                                            <td>ZAVRSEN PREGLED FAMILIJO</td>
+                                                                        </>
+                                                                        : <>
+                                                                            <td>Regular</td>
+                                                                            <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
 
-                                                            </>
+                                                                        </>
+                                                                }
+
+                                                                <td><Button onClick={() => this.handleShowCancel(examination)} className='btn btn-danger' data-toggle="modal">Cancel</Button> </td>
+                                                            </tr>
+                                                        </>
                                                     }
+                                                }
+                                            )
+                                        }
+                                    </tbody>
 
-
-                                                    <td><Button onClick={() => this.handleShowCancel(examination)} className='btn btn-danger' data-toggle="modal">Cancel</Button> </td>
-
-                                                </tr>
-                                        )
-                                    }
-                                </tbody>
-
-                            </table>
+                                </table>
+                            </div>
                         </div>
                 }
 
