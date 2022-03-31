@@ -147,12 +147,18 @@ class ListExaminationsComponent extends Component {
                                                     <td> {formatDate(examination.dateOfExamination)} </td>
 
                                                     {
-                                                        examination.status
-                                                            ? <td>Cancelled</td>
-                                                            : <td>Regular</td>
+                                                        examination.statusCompleted
+                                                            ? <>
+                                                                <td>Completed</td>
+                                                                <td>ZAVRSEN PREGLED FAMILIJO</td>
+                                                            </>
+                                                            : <>
+                                                                <td>Regular</td>
+                                                                <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
+
+                                                            </>
                                                     }
 
-                                                    <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
 
                                                     <td><Button onClick={() => this.handleShowCancel(examination)} className='btn btn-danger' data-toggle="modal">Cancel</Button> </td>
 
