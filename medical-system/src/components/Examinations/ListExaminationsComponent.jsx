@@ -133,7 +133,7 @@ class ListExaminationsComponent extends Component {
     cancelExamination(id) {
         console.log(id);
         ExaminationService.deleteExamination(id);
-        window.location.reload();
+       // window.location.reload();
     }
 
     render() {
