@@ -91,7 +91,6 @@ class ListDoctorsComponent extends Component {
 
                         <thead>
                             <tr>
-
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Username</th>

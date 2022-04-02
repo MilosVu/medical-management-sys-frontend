@@ -3,6 +3,7 @@ import UserService from '../../services/UserService';
 import withAuth from '../../withAuth';
 import ListExaminationsComponent from '../Examinations/ListExaminationsComponent';
 import NavbarComponent from '../NavbarComponent';
+import ListPrescriptionsComponent from '../Prescription/ListPrescriptionsComponent';
 import PatientTabsComponent from './PatientTabsComponent';
 
 class PatientDashboard extends Component {
@@ -73,7 +74,7 @@ class PatientDashboard extends Component {
                                 case 'examinations':
                                     return <ListExaminationsComponent patientId={this.state.user.userId} />
                                 case 'prescriptions':
-                                    return <h1>Prescriptions</h1>
+                                    return <ListPrescriptionsComponent />
                             }
                         })()}
 

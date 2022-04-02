@@ -1,16 +1,8 @@
 
 import { Form, Button } from "react-bootstrap"
-
 import { Component, useState } from 'react';
-
-
 import PrescriptionService from "../../services/PrescriptionService";
-
 import MultiSelect from 'multiselect-react-dropdown';
-
-
-
-
 
 class AddPrescription extends Component {
 
@@ -60,11 +52,7 @@ class AddPrescription extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-
-
         console.log('prescribe => ' + JSON.stringify(this.state));
-
-
 
         PrescriptionService.createPrescription({
             "examination": this.state.examination,
@@ -120,7 +108,6 @@ class AddPrescription extends Component {
                         />
                     </Form.Group>
 
-
                     <Form.Group>
                         <h5>Medicines</h5>
                         <MultiSelect
@@ -131,10 +118,6 @@ class AddPrescription extends Component {
 
                         />
                     </Form.Group>
-
-
-
-
 
                     <Button variant="success" type="submit" block='true'>
                         Add Presciption
