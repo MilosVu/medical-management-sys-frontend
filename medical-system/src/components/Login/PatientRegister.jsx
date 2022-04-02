@@ -35,13 +35,9 @@ class PatientRegister extends Component {
     async handleSubmit(event) {
         event.preventDefault();
 
-        console.log(JSON.stringify(this.state));
-
         const response = await registerPatient(
             this.state
         ).then( (res) => {
-            console.log("vratio ovo iz registracije");
-            console.log(res);
             if(res.userId != undefined && res.userId != 0){
                 alert("Successfully registered");
                 window.location.reload();

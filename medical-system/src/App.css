@@ -128,3 +128,8 @@ h3.welcome-heading {
 .btnRegister{
   float: right;
 }
+
+.examination-select-date{
+  margin-left: 80%!important;
+  right: 0;
+}

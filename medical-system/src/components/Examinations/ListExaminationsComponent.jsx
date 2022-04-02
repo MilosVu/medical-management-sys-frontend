@@ -129,7 +129,7 @@ class ListExaminationsComponent extends Component {
                     this.state.examinations.length === 0
                         ? <h2>There are no appointments available</h2>
                         : <div>
-                            <div className="row">
+                            <div className="row examination-select-date">
                                 <div className="col-md-6">
                                     <DatePicker
                                         selected={this.state.selectedDate}

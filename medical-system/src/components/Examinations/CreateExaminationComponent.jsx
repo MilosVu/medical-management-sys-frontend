@@ -59,9 +59,6 @@ class CreateExaminationComponent extends Component {
         const value = target.value;
         const name = target.name;
 
-        console.log(name);
-        console.log(value);
-
         // if(false){
         if(name == "selectedSpecializationId"){
             this.setState({
