@@ -3,6 +3,7 @@ import { Form, Button } from "react-bootstrap"
 
 import { Component, useState } from 'react';
 import PatientService from "../../services/PatientService";
+import DoctorService from "../../services/DoctorService";
 
 
 
@@ -14,7 +15,8 @@ class ChangeDoctorPassword extends Component {
         this.state = {
             firstName: props.doctor.firstName, lastName: props.doctor.lastName,
             username: props.doctor.username, email: props.doctor.email, fees: props.doctor.fees,
-            password: "", repeatedPassword: "", oldPassword: props.user.password, checkOldPassword: "", specialization: props.doctor.specialization, userRole: "doctor", userId: props.doctor.userId
+            password: "", repeatedPassword: "", oldPassword: props.doctor.password, checkOldPassword: "", specialization: props.doctor.specialization, userRole: "doctor", userId: props.doctor.userId,
+            message: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -35,21 +37,29 @@ class ChangeDoctorPassword extends Component {
 
     async handleSubmit(event) {
         if (this.state.checkOldPassword !== this.state.oldPassword) {
-            console.log("Stara sifra nije dobra");
-            alert("Stara sifra nije dobra");
+            event.preventDefault();
+            console.log("Incorrect old password");
+            this.setState({
+                "message": "Wrong old password!"
+            });
+            return;
 
         }
         if (this.state.password !== this.state.repeatedPassword) {
+            event.preventDefault();
             console.log("Niste uspesno potvrdili novu lozinku");
+            this.setState({
+                "message": "Wrong password confirmation!"
+            });
             return;
         }
         event.preventDefault();
 
         console.log('doctor => ' + JSON.stringify(this.state));
 
-        PatientService.createPatients(this.state);
+        DoctorService.createDoctor(this.state);
 
-        //window.location.reload();
+        window.location.reload();
 
 
 
@@ -96,6 +106,8 @@ class ChangeDoctorPassword extends Component {
                         Change Password
                     </Button>
                 </Form>
+
+                <h5>{this.state.message}</h5>
 
             </>
         )

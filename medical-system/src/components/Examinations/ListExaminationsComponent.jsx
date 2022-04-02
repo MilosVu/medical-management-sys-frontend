@@ -133,7 +133,7 @@ class ListExaminationsComponent extends Component {
     cancelExamination(id) {
         console.log(id);
         ExaminationService.deleteExamination(id);
-       // window.location.reload();
+        // window.location.reload();
     }
 
     render() {
@@ -153,7 +153,7 @@ class ListExaminationsComponent extends Component {
                                                 this.setState({
                                                     "showAllExaminations": !this.state.showAllExaminations
                                                 });
-                                                }
+                                            }
                                             }
                                         />
                                         Show all examination
@@ -161,10 +161,10 @@ class ListExaminationsComponent extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <DatePicker
-                                        selected = {this.state.selectedDate}
-                                        onChange = {this.handleSelectedDate}
-                                        dateFormat = "dd/MM/yyy"
-                                        disabled = {this.state.showAllExaminations}
+                                        selected={this.state.selectedDate}
+                                        onChange={this.handleSelectedDate}
+                                        dateFormat="dd/MM/yyy"
+                                        disabled={this.state.showAllExaminations}
                                     />
                                 </div>
                             </div>
@@ -177,7 +177,10 @@ class ListExaminationsComponent extends Component {
                                             <th>Patient</th>
                                             <th>Date</th>
                                             <th>Status</th>
-                                            <th>Prescribe</th>
+                                            {
+                                                this.state.doctorId != undefined ?
+                                                    <th>Prescribe</th> : <></>
+                                            }
                                             <th>Cancel</th>
                                         </tr>
                                     </thead>
@@ -186,29 +189,41 @@ class ListExaminationsComponent extends Component {
                                             this.state.examinations.map(
                                                 examination => {
                                                     if (this.state.showAllExaminations == true || this.state.selectedDate.toDateString() == (new Date(examination.dateOfExamination).toDateString())) {
-                                                        return <>
-                                                            <tr key={examination.examinationId}>
-                                                                <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
-                                                                <td> {examination.patient.firstName} {examination.patient.lastName}</td>
+                                                        if (this.state.patientId != undefined && examination.statusCompleted === true) {
+                                                            return <></>;
+                                                        }
+                                                        else {
+                                                            return <>
+                                                                <tr key={examination.examinationId}>
+                                                                    <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
+                                                                    <td> {examination.patient.firstName} {examination.patient.lastName}</td>
 
-                                                                <td> {formatDate(examination.dateOfExamination)} </td>
+                                                                    <td> {formatDate(examination.dateOfExamination)} </td>
 
-                                                                {
-                                                                    examination.statusCompleted
-                                                                        ? <>
-                                                                            <td>Completed</td>
-                                                                            <td><Button onClick={() => this.handleShowPrescriptionDetails(examination)} className='btn btn-success' data-toggle="modal">Details</Button></td>
-                                                                        </>
-                                                                        : <>
-                                                                            <td>Regular</td>
-                                                                            <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
+                                                                    {
+                                                                        examination.statusCompleted
+                                                                            ? <>
+                                                                                <td>Completed</td>
+                                                                                <td><Button onClick={() => this.handleShowPrescriptionDetails(examination)} className='btn btn-success' data-toggle="modal">Details</Button></td>
+                                                                            </>
+                                                                            : <>
+                                                                                {this.state.doctorId != undefined ?
+                                                                                    <>
+                                                                                        <td>Regular</td>
+                                                                                        <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
+                                                                                    </>
+                                                                                    :
+                                                                                    <td>Regular</td>
+                                                                                }
 
-                                                                        </>
-                                                                }
 
-                                                                <td><Button onClick={() => this.handleShowCancel(examination)} className='btn btn-danger' data-toggle="modal">Cancel</Button> </td>
-                                                            </tr>
-                                                        </>
+                                                                            </>
+                                                                    }
+
+                                                                    <td><Button onClick={() => this.handleShowCancel(examination)} className='btn btn-danger' data-toggle="modal">Cancel</Button> </td>
+                                                                </tr>
+                                                            </>;
+                                                        }
                                                     }
                                                 }
                                             )

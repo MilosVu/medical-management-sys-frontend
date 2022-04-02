@@ -127,7 +127,7 @@ class DoctorTabsComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <EditDoctor doctor={this.state.user2} specializations={this.state.specializations} />
+                        <EditDoctor doctor={this.state.user} specializations={this.state.specializations} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClose() }}>
@@ -142,7 +142,7 @@ class DoctorTabsComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ChangeDoctorPassword user={this.state.user} />
+                        <ChangeDoctorPassword doctor={this.state.user} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClosePassword() }}>

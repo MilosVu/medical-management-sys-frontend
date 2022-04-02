@@ -14,7 +14,8 @@ class ChangeReceptionistPassword extends Component {
         this.state = {
             firstName: props.user.firstName, lastName: props.user.lastName,
             username: props.user.username, email: props.user.email,
-            password: "", repeatedPassword: "", userRole: "receptionist", userId: props.user.userId, oldPassword: props.user.password, checkOldPassword: ""
+            password: "", repeatedPassword: "", userRole: "receptionist", userId: props.user.userId, oldPassword: props.user.password, checkOldPassword: "",
+            message: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -35,12 +36,20 @@ class ChangeReceptionistPassword extends Component {
 
     async handleSubmit(event) {
         if (this.state.checkOldPassword !== this.state.oldPassword) {
-            console.log("Stara sifra nije dobra");
-            alert("Stara sifra nije dobra");
+            event.preventDefault();
+            console.log("Incorrect old password");
+            this.setState({
+                "message": "Wrong old password!"
+            });
+            return;
 
         }
         if (this.state.password !== this.state.repeatedPassword) {
+            event.preventDefault();
             console.log("Niste uspesno potvrdili novu lozinku");
+            this.setState({
+                "message": "Wrong password confirmation!"
+            });
             return;
         }
         event.preventDefault();
@@ -49,7 +58,7 @@ class ChangeReceptionistPassword extends Component {
 
         UserService.createUser(this.state);
 
-        //window.location.reload();
+        window.location.reload();
 
 
 
@@ -96,6 +105,7 @@ class ChangeReceptionistPassword extends Component {
                     Change Password
                 </Button>
             </Form>
+            <h5>{this.state.message}</h5>
 
         </>
     )

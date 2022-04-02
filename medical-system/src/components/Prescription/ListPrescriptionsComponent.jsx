@@ -28,8 +28,8 @@ class ListPrescriptionsComponent extends Component {
         }
     }
 
-    componentDidMount() {
-        PrescriptionService.getPrescriptionsByPatient(this.state.patientId).then( (res) => {
+    async componentDidMount() {
+        await PrescriptionService.getPrescriptionsByPatient(this.state.patientId).then((res) => {
             console.log("vratio prescriptions");
 
             console.log(res);
@@ -69,7 +69,6 @@ class ListPrescriptionsComponent extends Component {
                                             <th>Patient</th>
                                             <th>Date</th>
                                             <th>Details</th>
-                                            <th>Delete</th>
                                         </tr>
                                     </thead>
 
@@ -84,7 +83,6 @@ class ListPrescriptionsComponent extends Component {
                                                             <td> {formatDate(prescription.examination.dateOfExamination)} </td>
 
                                                             <td><Button onClick={() => this.handleShowDetails(prescription)} className='btn btn-info' data-toggle="modal">Details</Button> </td>
-                                                            <td><Button onClick={() => this.handleShowDetails(prescription)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
                                                         </tr>
                                                     </>
                                                 }

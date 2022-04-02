@@ -27,7 +27,8 @@ class EditDoctor extends Component {
         this.state = {
             firstName: props.doctor.firstName, lastName: props.doctor.lastName,
             username: props.doctor.username, email: props.doctor.email, fees: props.doctor.fees,
-            password: props.doctor.password, specialization: props.doctor.specialization, userRole: "doctor", userId: props.doctor.userId
+            password: props.doctor.password, specialization: props.doctor.specialization.specializationId, userRole: "doctor", userId: props.doctor.userId,
+            specializations: []
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -35,13 +36,15 @@ class EditDoctor extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    specializations = [];
 
     componentDidMount() {
         SpecializationService.getSpecializations().then((res) => {
-            this.specializations = res.data;
 
+            this.setState({
+                "specializations": res.data
+            });
         });
+        console.log(this.state.specializations);
     }
     handleChange(event) {
         const target = event.target;
@@ -74,6 +77,7 @@ class EditDoctor extends Component {
 
         const response = await editDoctor(this.state);
 
+        window.location.reload();
     }
     render() {
     return (
@@ -142,7 +146,7 @@ class EditDoctor extends Component {
                     <h5>Specialization</h5>
                     <Form.Select
                         name="specializationId"
-                        value={this.state.specialization.specializationId}
+                        value={this.state.specialization}
                         onChange={this.changeSpecialization}
 
 
