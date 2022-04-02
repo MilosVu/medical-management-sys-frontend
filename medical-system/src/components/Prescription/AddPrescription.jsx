@@ -55,13 +55,26 @@ class AddPrescription extends Component {
         console.log('prescribe => ' + JSON.stringify(this.state));
 
         PrescriptionService.createPrescription({
-            "examination": this.state.examination,
-            "prescriptionId": 9999,
-            "examinationId": this.state.examination.examinationId,
-            "disease": this.state.disease,
-            "description": this.state.description,
+            "prescription": {
+                "examination": this.state.examination,
+                "prescriptionId": 9999,
+                "examinationId": this.state.examination.examinationId,
+                "disease": this.state.disease,
+                "description": this.state.description,
+
+            },
             "medicines": this.state.selectedMedicines
-        });
+        })
+
+
+        // PrescriptionService.createPrescription({
+        //     "examination": this.state.examination,
+        //     "prescriptionId": 9999,
+        //     "examinationId": this.state.examination.examinationId,
+        //     "disease": this.state.disease,
+        //     "description": this.state.description,
+        //     "medicines": this.state.selectedMedicines
+        // });
     }
 
     onSelect(event) {

@@ -14,11 +14,12 @@ class PrescriptionService {
         return axios.get(PRESCRIPTION_API_BASE_URL + '/' + id);
     }
 
-    getCompletedPrescriptions(){
+    getCompletedPrescriptions() {
         return axios.get(EXAMINATION_API_BASE_URL + '/completed');
     }
 
     createPrescription(prescription) {
+        console.log(prescription);
         axios.post(PRESCRIPTION_API_BASE_URL, prescription);
     }
 
