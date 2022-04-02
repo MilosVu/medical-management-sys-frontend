@@ -133,6 +133,8 @@ class CreateExaminationComponent extends Component {
             "userCanceled": false,
             "doctorCanceled": false,
             "dateOfExamination": this.state.selectedDate
+        }).then( (res) => {
+            window.location.reload();
         });
 
     }

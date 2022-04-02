@@ -61,13 +61,10 @@ class ListExaminationsComponent extends Component {
                 this.setState({ examinations: res.data });
             });
 
-
         }
 
 
         MedicineService.getMedicines().then((res) => {
-            console.log("stiglo");
-            console.log(res.data);
             this.setState({
                 medicines: res.data
             });
