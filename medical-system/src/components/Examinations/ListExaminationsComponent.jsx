@@ -131,7 +131,6 @@ class ListExaminationsComponent extends Component {
         this.setState({
             selectedDate: date
         });
-        alert(date);
     };
 
     cancelExamination(id) {
@@ -154,7 +153,6 @@ class ListExaminationsComponent extends Component {
                                             type="checkbox"
                                             checked={this.state.showAllExaminations}
                                             onChange={() => {
-                                                alert(this.state.showAllExaminations);
                                                 this.setState({
                                                     "showAllExaminations": !this.state.showAllExaminations
                                                 });
@@ -166,9 +164,10 @@ class ListExaminationsComponent extends Component {
                                 </div>
                                 <div className="col-md-6">
                                     <DatePicker
-                                        selected={this.state.selectedDate}
-                                        onChange={this.handleSelectedDate}
-                                        dateFormat="dd/MM/yyy"
+                                        selected = {this.state.selectedDate}
+                                        onChange = {this.handleSelectedDate}
+                                        dateFormat = "dd/MM/yyy"
+                                        disabled = {this.state.showAllExaminations}
                                     />
                                 </div>
                             </div>
