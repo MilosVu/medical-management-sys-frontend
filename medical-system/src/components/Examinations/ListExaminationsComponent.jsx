@@ -5,6 +5,8 @@ import AddPrescription from '../Prescription/AddPrescription';
 import CreateExaminationComponent from './CreateExaminationComponent';
 import MedicineService from '../../services/MedicineService';
 import DatePicker from "react-datepicker";
+import PrescriptionService from '../../services/PrescriptionService';
+import DetailsPrescription from '../Prescription/DetailsPrescription';
 
 
 function formatDate(date) {
@@ -31,8 +33,10 @@ class ListExaminationsComponent extends Component {
             showCreate: false,
             showCancel: false,
             showPrescribe: false,
+            showPrescriptionDetails: false,
             examination: null,
             selectedDate: new Date(),
+            prescription: null
         }
     }
 
@@ -108,6 +112,20 @@ class ListExaminationsComponent extends Component {
         });
     }
 
+    async handleShowPrescriptionDetails(id) {
+        let p = await PrescriptionService.getPrescriptionById(id);
+        this.setState({
+            showPrescriptionDetails: true,
+            prescription: p.data
+        });
+    }
+
+    handleClosePrescriptionDetails = () => {
+        this.setState({
+            showPrescriptionDetails: false
+        });
+    }
+
     handleSelectedDate = (date) => {
         this.setState({
             selectedDate: date
@@ -168,7 +186,7 @@ class ListExaminationsComponent extends Component {
                                                                     examination.statusCompleted
                                                                         ? <>
                                                                             <td>Completed</td>
-                                                                            <td>ZAVRSEN PREGLED FAMILIJO</td>
+                                                                            <td><Button onClick={() => this.handleShowPrescriptionDetails(examination)} className='btn btn-success' data-toggle="modal">Details</Button></td>
                                                                         </>
                                                                         : <>
                                                                             <td>Regular</td>
@@ -223,6 +241,22 @@ class ListExaminationsComponent extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleClosePrescribe() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
+
+                <Modal show={this.state.showPrescriptionDetails} onHide={() => { this.handleClosePrescriptionDetails() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Prescription Details
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <DetailsPrescription prescription={this.state.prescription} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={() => { this.handleClosePrescriptionDetails() }}>
                             Close Button
                         </Button>
                     </Modal.Footer>

@@ -21,9 +21,13 @@ class PrescriptionService {
 
 
     }
-    
+
     deleteMedicine(prescription) {
         return axios.delete(PRESCRIPTION_API_BASE_URL + "/" + prescription.prescriptionId);
+    }
+
+    getPrescriptionById(examination) {
+        return axios.get(PRESCRIPTION_API_BASE_URL + "/" + examination.examinationId);
     }
 
 }
