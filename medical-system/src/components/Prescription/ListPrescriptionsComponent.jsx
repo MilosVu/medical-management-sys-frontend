@@ -23,12 +23,13 @@ class ListPrescriptionsComponent extends Component {
         this.state = {
             prescriptions: [],
             showDetails: false,
-            prescriptionDetails: []
+            prescriptionDetails: [],
+            patientId: props.patientId,
         }
     }
 
     componentDidMount() {
-        PrescriptionService.getPrescriptionsByPatient(11).then( (res) => {
+        PrescriptionService.getPrescriptionsByPatient(this.state.patientId).then( (res) => {
             console.log("vratio prescriptions");
 
             console.log(res);

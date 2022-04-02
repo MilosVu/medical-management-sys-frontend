@@ -74,7 +74,7 @@ class PatientDashboard extends Component {
                                 case 'examinations':
                                     return <ListExaminationsComponent patientId={this.state.user.userId} />
                                 case 'prescriptions':
-                                    return <ListPrescriptionsComponent />
+                                    return <ListPrescriptionsComponent patientId={this.state.user.userId}/>
                             }
                         })()}
 
