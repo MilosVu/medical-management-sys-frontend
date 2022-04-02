@@ -12,6 +12,7 @@ class ChangeReceptionistPassword extends Component {
         super(props);
 
         this.state = {
+            userId: props.user.userId,
             firstName: props.user.firstName, lastName: props.user.lastName,
             username: props.user.username, email: props.user.email,
             password: "", repeatedPassword: "", userRole: "receptionist", userId: props.user.userId, oldPassword: props.user.password, checkOldPassword: "",

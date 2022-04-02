@@ -25,9 +25,10 @@ class EditPatient extends Component {
         super(props);
 
         this.state = {
+            userId: props.user.userId,
             firstName: props.user.firstName, lastName: props.user.lastName,
-            username: props.user.username, email: props.user.email, fees: props.user.fees,
-            password: props.user.password, specialization: props.user.specialization, userRole: "patient", userId: props.user.userId, contact: props.user.contact, allergies: props.user.allergies, gender: props.user.gender
+            username: props.user.username, email: props.user.email,
+            password: props.user.password, userRole: "patient", userId: props.user.userId, contact: props.user.contact, allergies: props.user.allergies, gender: props.user.gender
         };
 
         this.handleChange = this.handleChange.bind(this);

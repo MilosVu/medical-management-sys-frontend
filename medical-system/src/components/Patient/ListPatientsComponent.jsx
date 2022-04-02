@@ -48,7 +48,7 @@ class ListPatientsComponent extends Component {
                                 <th>Contact</th>
                                 <th>Allergies</th>
                                 <th>Gender</th>
-                                <th>Edit</th>
+
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -67,7 +67,7 @@ class ListPatientsComponent extends Component {
                                             <td> {patient.gender} </td>
 
 
-                                            <td> <button className="btn btn-success">Edit</button></td>
+
 
                                             <td> <button className="btn btn-danger" onClick={(e) => { this.deletePatient(e, patient.userid); }}>Delete</button></td>
                                         </tr>

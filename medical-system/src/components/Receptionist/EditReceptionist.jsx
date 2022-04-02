@@ -24,9 +24,13 @@ class EditReceptionist extends Component {
         super(props);
 
         this.state = {
-            firstName: props.user.firstName, lastName: props.user.lastName,
-            username: props.user.username, email: props.user.email,
-            password: props.user.password, userRole: "receptionist", userId: props.user.userId
+            userId: props.user.userId,
+            firstName: props.user.firstName,
+            lastName: props.user.lastName,
+            username: props.user.username,
+            email: props.user.email,
+            password: props.user.password,
+            userRole: "receptionist",
         };
 
         this.handleChange = this.handleChange.bind(this);
