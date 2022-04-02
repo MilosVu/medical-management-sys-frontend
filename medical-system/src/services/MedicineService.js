@@ -17,6 +17,10 @@ class MedicineService {
         return axios.delete(MEDICINE_API_BASE_URL + "/" + medicine.medicineid);
     }
 
+    getMedicinesByPrescriptionId(id) {
+        return axios.get(MEDICINE_API_BASE_URL, id);
+    }
+
 }
 
 export default new MedicineService();
