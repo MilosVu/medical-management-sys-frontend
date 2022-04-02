@@ -29,12 +29,6 @@ class CreateExaminationComponent extends Component {
     }
 
     componentDidMount() {
-        const arrDates = [
-            new Date(2021, 4, 20, 8, 15), //Thu May 20 2021 08:15:00
-            new Date(2021, 4, 20, 10, 45), //Fri May 20 2021 08:45:00
-            new Date(2021, 4, 21, 8, 30), //Sat May 21 2021 08:30:00
-            new Date(2021, 4, 21, 9, 0) //Sat May 21 2021 09:00:00
-        ];
 
         SpecializationService.getSpecializations().then((resSpec) => {
 
@@ -59,7 +53,6 @@ class CreateExaminationComponent extends Component {
         const value = target.value;
         const name = target.name;
 
-        // if(false){
         if(name == "selectedSpecializationId"){
             this.setState({
                 [name]: value,
@@ -109,10 +102,7 @@ class CreateExaminationComponent extends Component {
     getTimeSlots = () => {
         
         ExaminationService.getExcludedDates(this.state.selectedDoctorId).then((res) => {
-            console.log("Get Time Slots");
-            console.log(res);
-            console.log("==============");
-    
+
             this.setState({
                 displayTime: true,
                 excludedDates: res

@@ -36,7 +36,8 @@ class ListExaminationsComponent extends Component {
             showPrescriptionDetails: false,
             examination: null,
             selectedDate: new Date(),
-            prescription: null
+            prescription: null,
+            showAllExaminations: false
         }
     }
 
@@ -142,12 +143,27 @@ class ListExaminationsComponent extends Component {
     render() {
         return (
             <div>
-
                 {
                     this.state.examinations.length === 0
                         ? <h2>There are no appointments available</h2>
                         : <div>
                             <div className="row examination-select-date">
+                                <div className="col-md-6">
+                                    <label className='show-all-examinations-checkbox'>
+                                        <input
+                                            type="checkbox"
+                                            checked={this.state.showAllExaminations}
+                                            onChange={() => {
+                                                alert(this.state.showAllExaminations);
+                                                this.setState({
+                                                    "showAllExaminations": !this.state.showAllExaminations
+                                                });
+                                                }
+                                            }
+                                        />
+                                        Show all examination
+                                    </label>
+                                </div>
                                 <div className="col-md-6">
                                     <DatePicker
                                         selected={this.state.selectedDate}
@@ -169,12 +185,11 @@ class ListExaminationsComponent extends Component {
                                             <th>Cancel</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         {
                                             this.state.examinations.map(
                                                 examination => {
-                                                    if (this.state.selectedDate.toDateString() == (new Date(examination.dateOfExamination).toDateString())) {
+                                                    if (this.state.showAllExaminations == true || this.state.selectedDate.toDateString() == (new Date(examination.dateOfExamination).toDateString())) {
                                                         return <>
                                                             <tr key={examination.examinationId}>
                                                                 <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>

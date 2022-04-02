@@ -130,10 +130,14 @@ h3.welcome-heading {
 }
 
 .examination-select-date{
-  margin-left: 80%!important;
+  margin-left: 60%!important;
   right: 0;
 }
 
 button.btn.btn-success.btn.btn-primary {
   margin-right: 20px;
+}
+
+.show-all-examinations-checkbox{
+  color: white;
 }
