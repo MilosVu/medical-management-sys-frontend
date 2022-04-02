@@ -1,19 +1,9 @@
 
-import { Form, Button } from "react-bootstrap"
-
 import { Component, useState } from 'react';
-
-
-import PrescriptionService from "../../services/PrescriptionService";
 import PrescriptionMedicineService from "../../services/PrescriptionMedicineService";
 
 
-
-
-
-
 class DetailsPrescription extends Component {
-
 
     constructor(props) {
         super(props);
@@ -21,8 +11,6 @@ class DetailsPrescription extends Component {
             prescription: this.props.prescription,
             medicines: []
         };
-
-
     }
 
     componentDidMount() {
@@ -64,11 +52,6 @@ class DetailsPrescription extends Component {
 
 
                     )}
-
-
-
-
-
 
 
             </>

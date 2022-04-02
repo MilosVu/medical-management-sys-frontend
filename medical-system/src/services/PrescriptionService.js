@@ -14,8 +14,8 @@ class PrescriptionService {
         return axios.get(PRESCRIPTION_API_BASE_URL + '/' + id);
     }
 
-    getCompletedPrescriptions(){
-        return axios.get(EXAMINATION_API_BASE_URL + '/completed');
+    getPrescriptionsByPatient(id){
+        return axios.get(PRESCRIPTION_API_BASE_URL + '/patient/' + id);
     }
 
     createPrescription(prescription) {
