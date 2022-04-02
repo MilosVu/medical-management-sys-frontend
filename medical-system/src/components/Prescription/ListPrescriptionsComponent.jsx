@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PrescriptionService from '../../services/PrescriptionService';
+import DetailsPrescription from '../Prescription/DetailsPrescription';
 
 function formatDate(date) {
 
@@ -20,29 +21,32 @@ class ListPrescriptionsComponent extends Component {
         super(props)
 
         this.state = {
-            examinations: [],
-            showDetails: false
+            prescriptions: [],
+            showDetails: false,
+            prescriptionDetails: []
         }
     }
 
     componentDidMount() {
-        PrescriptionService.getCompletedPrescriptions().then( (res) => {
+        PrescriptionService.getPrescriptionsByPatient(11).then( (res) => {
             console.log("vratio prescriptions");
 
             console.log(res);
-            this.setState({ examinations: res.data });
+            this.setState({ prescriptions: res.data });
         });
     }
 
-    handleShowDetails = () => {
+    handleShowDetails = (prescription) => {
         this.setState({
-            showDetails: true
+            showDetails: true,
+            prescriptionDetails: prescription
         });
     }
 
     handleCloseDetails = () => {
         this.setState({
-            showDetails: false
+            showDetails: false,
+            prescriptionDetails: []
         });
     }
 
@@ -51,10 +55,9 @@ class ListPrescriptionsComponent extends Component {
             <div>
 
                 {
-                    this.state.examinations.length === 0
+                    this.state.prescriptions.length === 0
                         ? <h2>There are no prescriptions</h2>
                         : <div>
-
                             <div className="row">
 
                                 <table className='table table-light table-striped table-bordered'>
@@ -71,16 +74,16 @@ class ListPrescriptionsComponent extends Component {
 
                                     <tbody>
                                         {
-                                            this.state.examinations.map(
-                                                examination => {
+                                            this.state.prescriptions.map(
+                                                prescription => {
                                                     return <>
-                                                        <tr key={examination.examinationId}>
-                                                            <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
-                                                            <td> {examination.patient.firstName} {examination.patient.lastName}</td>
-                                                            <td> {formatDate(examination.dateOfExamination)} </td>
+                                                        <tr key={prescription.examination.examinationId}>
+                                                            <td> {prescription.examination.doctor.firstName} {prescription.examination.doctor.lastName}</td>
+                                                            <td> {prescription.examination.patient.firstName} {prescription.examination.patient.lastName}</td>
+                                                            <td> {formatDate(prescription.examination.dateOfExamination)} </td>
 
-                                                            <td><Button onClick={() => this.handleShowDetails(examination)} className='btn btn-info' data-toggle="modal">Details</Button> </td>
-                                                            <td><Button onClick={() => this.handleShowDetails(examination)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
+                                                            <td><Button onClick={() => this.handleShowDetails(prescription)} className='btn btn-info' data-toggle="modal">Details</Button> </td>
+                                                            <td><Button onClick={() => this.handleShowDetails(prescription)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
                                                         </tr>
                                                     </>
                                                 }
@@ -111,8 +114,7 @@ class ListPrescriptionsComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <h1>USAO</h1>
-                        {/* <CreateExaminationComponent patientId={this.state.patientId} /> */}
+                        <DetailsPrescription prescription={this.state.prescriptionDetails} />
                     </Modal.Body>
                 </Modal>
 

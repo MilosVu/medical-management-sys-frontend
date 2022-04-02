@@ -38,6 +38,7 @@ class ListPatientsComponent extends Component {
                 
                 <div className="row">
                     <table className='table table-light table-striped table-bordered'>
+
                         <thead>
                             <tr>
                                 <th>First name</th>
