@@ -36,7 +36,8 @@ class ListExaminationsComponent extends Component {
             showPrescriptionDetails: false,
             examination: null,
             selectedDate: new Date(),
-            prescription: null
+            prescription: null,
+            showAllExaminations: false
         }
     }
 
@@ -60,13 +61,10 @@ class ListExaminationsComponent extends Component {
                 this.setState({ examinations: res.data });
             });
 
-
         }
 
 
         MedicineService.getMedicines().then((res) => {
-            console.log("stiglo");
-            console.log(res.data);
             this.setState({
                 medicines: res.data
             });
@@ -130,7 +128,6 @@ class ListExaminationsComponent extends Component {
         this.setState({
             selectedDate: date
         });
-        alert(date);
     };
 
     cancelExamination(id) {
@@ -142,17 +139,32 @@ class ListExaminationsComponent extends Component {
     render() {
         return (
             <div>
-
                 {
                     this.state.examinations.length === 0
                         ? <h2>There are no appointments available</h2>
                         : <div>
                             <div className="row examination-select-date">
                                 <div className="col-md-6">
+                                    <label className='show-all-examinations-checkbox'>
+                                        <input
+                                            type="checkbox"
+                                            checked={this.state.showAllExaminations}
+                                            onChange={() => {
+                                                this.setState({
+                                                    "showAllExaminations": !this.state.showAllExaminations
+                                                });
+                                                }
+                                            }
+                                        />
+                                        Show all examination
+                                    </label>
+                                </div>
+                                <div className="col-md-6">
                                     <DatePicker
-                                        selected={this.state.selectedDate}
-                                        onChange={this.handleSelectedDate}
-                                        dateFormat="dd/MM/yyy"
+                                        selected = {this.state.selectedDate}
+                                        onChange = {this.handleSelectedDate}
+                                        dateFormat = "dd/MM/yyy"
+                                        disabled = {this.state.showAllExaminations}
                                     />
                                 </div>
                             </div>
@@ -169,12 +181,11 @@ class ListExaminationsComponent extends Component {
                                             <th>Cancel</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
                                         {
                                             this.state.examinations.map(
                                                 examination => {
-                                                    if (this.state.selectedDate.toDateString() == (new Date(examination.dateOfExamination).toDateString())) {
+                                                    if (this.state.showAllExaminations == true || this.state.selectedDate.toDateString() == (new Date(examination.dateOfExamination).toDateString())) {
                                                         return <>
                                                             <tr key={examination.examinationId}>
                                                                 <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
