@@ -133,3 +133,7 @@ h3.welcome-heading {
   margin-left: 80%!important;
   right: 0;
 }
+
+button.btn.btn-success.btn.btn-primary {
+  margin-right: 20px;
+}
