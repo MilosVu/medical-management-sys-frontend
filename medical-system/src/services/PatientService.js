@@ -13,8 +13,8 @@ class PatientService {
         return axios.post(PATIENT_API_BASE_URL, patients);
     }
 
-    deletePatient(patients) {
-        return axios.delete(USER_API_BASE_URL + "/" + patients);
+    deletePatient(patient) {
+        return axios.delete(USER_API_BASE_URL + "/" + patient.userId);
     }
 
 }

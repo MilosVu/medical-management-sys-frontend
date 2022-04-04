@@ -50,10 +50,7 @@ class ReceptionistDashboard extends Component {
         this.setState(prevState => ({ view: "examinations" }));
     }
 
-    toPrescriptionList = () => {
-        const { view } = this.state;
-        this.setState(prevState => ({ view: "prescriptions" }));
-    }
+
 
 
     toMedicinesList = () => {
@@ -97,10 +94,7 @@ class ReceptionistDashboard extends Component {
                                 className={`list-group-item list-group-item-action ${this.state.view == "examinations" ? "active" : ""}`}>
                                 Examinations
                             </a>
-                            <a href="#" role="tab" onClick={this.toPrescriptionList}
-                                className={`list-group-item list-group-item-action ${this.state.view == "prescriptions" ? "active" : ""}`}>
-                                Prescriptions
-                            </a>
+
                             <a href="#" role="tab" onClick={this.toMedicinesList}
                                 className={`list-group-item list-group-item-action ${this.state.view == "medicines" ? "active" : ""}`}>
                                 Medicines
@@ -129,8 +123,7 @@ class ReceptionistDashboard extends Component {
                                     return <ListPatientsComponent />
                                 case 'examinations':
                                     return <ListExaminationsComponent />;
-                                case 'prescriptions':
-                                    return <ListPrescriptionsComponent />;
+
                                 case 'medicines':
                                     return <ListMedicinesComponent />;
                                 case 'pharmaceuticalCompanies':

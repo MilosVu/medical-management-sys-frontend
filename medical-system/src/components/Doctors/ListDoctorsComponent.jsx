@@ -48,8 +48,8 @@ class ListDoctorsComponent extends Component {
 
     handleShowDelete(id) {
         this.setState({
-            showDelete: true,
-            doctorId: id
+            "showDelete": true,
+            "doctorId": id
         });
         console.log(id);
     }

@@ -15,7 +15,7 @@ class DoctorService {
     }
 
     deleteDoctor(doctor) {
-        return axios.delete(USER_API_BASE_URL + "/" + doctor.userid);
+        return axios.delete(USER_API_BASE_URL + "/" + doctor.userId);
     }
 
 }

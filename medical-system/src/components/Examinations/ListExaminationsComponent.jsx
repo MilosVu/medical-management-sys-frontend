@@ -179,7 +179,9 @@ class ListExaminationsComponent extends Component {
                                             <th>Status</th>
                                             {
                                                 this.state.doctorId != undefined ?
-                                                    <th>Prescribe</th> : <></>
+                                                    <th>Prescribe</th> : (this.state.patientId != undefined ?
+                                                        <></> :
+                                                        <th>Details</th>)
                                             }
                                             <th>Cancel</th>
                                         </tr>
@@ -212,8 +214,12 @@ class ListExaminationsComponent extends Component {
                                                                                         <td>Regular</td>
                                                                                         <td><Button onClick={() => this.handleShowPrescribe(examination)} className='btn btn-success' data-toggle="modal">Prescribe</Button></td>
                                                                                     </>
-                                                                                    :
+                                                                                    : (this.state.patientId != undefined) ?
+                                                                                        <td>Regular</td> :
+                                                                                        <>
                                                                                     <td>Regular</td>
+                                                                                            <td>No details available</td>
+                                                                                        </>
                                                                                 }
 
 

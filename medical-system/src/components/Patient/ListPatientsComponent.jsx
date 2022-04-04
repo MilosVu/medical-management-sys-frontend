@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import DoctorService from '../../services/DoctorService';
 import PatientService from '../../services/PatientService';
+import { Modal, Button } from 'react-bootstrap';
 
 class ListPatientsComponent extends Component {
 
@@ -9,7 +8,9 @@ class ListPatientsComponent extends Component {
         super(props)
 
         this.state = {
-            patients: []
+            patients: [],
+            showDelete: false,
+            patientId: null
         }
 
     }
@@ -20,12 +21,24 @@ class ListPatientsComponent extends Component {
         });
     }
 
-    deletePatient = (e, id) => {
-        e.preventDefault();
-        let patient = { id: id };
-        console.log('patient => ' + JSON.stringify(patient));
 
-        // step 5
+
+    handleShowDelete(id) {
+        this.setState({
+            "showDelete": true,
+            "patientId": id
+        });
+        console.log(id);
+    }
+
+    handleCloseDelete = () => {
+        this.setState({
+            showDelete: false
+        });
+    }
+
+    deletePatient(id) {
+        console.log(id);
         PatientService.deletePatient(id);
     }
 
@@ -68,8 +81,7 @@ class ListPatientsComponent extends Component {
 
 
 
-
-                                            <td> <button className="btn btn-danger" onClick={(e) => { this.deletePatient(e, patient.userid); }}>Delete</button></td>
+                                            <td><Button onClick={() => this.handleShowDelete(patient)} className='btn btn-danger' data-toggle="modal">Delete</Button> </td>
                                         </tr>
                                 )
                             }
@@ -77,6 +89,25 @@ class ListPatientsComponent extends Component {
 
                     </table>
                 </div>
+
+                <Modal show={this.state.showDelete} onHide={() => { this.handleCloseDelete() }}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Delete Patient
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <h5>Do you want to delete this patient?</h5>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={() => this.deletePatient(this.state.patientId)}>
+                            Delete
+                        </Button>
+                        <Button variant="secondary" onClick={() => { this.handleCloseDelete() }}>
+                            Close Button
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
 
             </div>
         );
