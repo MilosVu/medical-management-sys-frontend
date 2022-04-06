@@ -3,6 +3,7 @@ import MedicineService from '../../services/MedicineService';
 import { Modal, Button } from 'react-bootstrap';
 import AddMedicineComponent from './AddMedicineComponent';
 import PharmaceuticalCompanyService from '../../services/PharmaceuticalCompanyService';
+import EditMedicines from './EditMedicines';
 
 
 
@@ -151,7 +152,7 @@ class ListMedicinesComponent extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {/* <EditCompany medicine={this.state.medicine} /> */}
+                        <EditMedicines medicine={this.state.medicine} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={() => { this.handleCloseEdit() }}>

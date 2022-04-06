@@ -197,6 +197,7 @@ class CreateExaminationComponent extends Component {
                                                 onChange={this.handleSelectedDate}
                                                 /* onSelect={this.getExcludedTimes} */
                                                 dateFormat="dd/MM/yyy"
+                                                minDate={new Date()}
                                             />
                                         </div>
 

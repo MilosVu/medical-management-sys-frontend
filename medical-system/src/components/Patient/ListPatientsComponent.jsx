@@ -40,6 +40,7 @@ class ListPatientsComponent extends Component {
     deletePatient(id) {
         console.log(id);
         PatientService.deletePatient(id);
+        window.location.reload();
     }
 
 

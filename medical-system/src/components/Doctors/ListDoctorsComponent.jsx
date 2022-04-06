@@ -79,6 +79,7 @@ class ListDoctorsComponent extends Component {
     deleteDoctor(id) {
         console.log(id);
         DoctorService.deleteDoctor(id);
+        window.location.reload();
     }
 
 

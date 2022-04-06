@@ -133,7 +133,7 @@ class ListExaminationsComponent extends Component {
     cancelExamination(id) {
         console.log(id);
         ExaminationService.deleteExamination(id);
-        // window.location.reload();
+        window.location.reload();
     }
 
     render() {
@@ -218,7 +218,7 @@ class ListExaminationsComponent extends Component {
                                                                                         <td>Regular</td> :
                                                                                         <>
                                                                                     <td>Regular</td>
-                                                                                            <td>No details available</td>
+                                                                                            <td>Not available</td>
                                                                                         </>
                                                                                 }
 

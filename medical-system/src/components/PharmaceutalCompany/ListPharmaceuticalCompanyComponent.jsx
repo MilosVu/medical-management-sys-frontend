@@ -65,7 +65,7 @@ class ListPharmaceuticalCompanyComponent extends Component {
         console.log(id);
         PharmaceuticalCompanyService.deleteCompany(id);
 
-        //window.location.reload();
+        window.location.reload();
     }
 
 
