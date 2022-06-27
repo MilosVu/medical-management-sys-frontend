@@ -40,64 +40,67 @@
 */
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: left;
-  background-color: #fff;
-  background: -webkit-linear-gradient(left, #3931af, #00c6ff);
-  background-size: cover;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #fff;
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    background-size: cover;
+}
+
+span.currencyChanger {
+    cursor: pointer;
 }
 
 .dashboard-container {
-  margin-top: 15%;
+    margin-top: 15%;
 }
 
 .main-dashboard-container {
-  margin-top: 15% !important;
+    margin-top: 15% !important;
 }
 
 .tab-content-container {
-  margin-top: 30px;
+    margin-top: 30px;
 }
 
 a {
-  color: white !important;
+    color: white !important;
 }
 
 a.nav-link.active {
-  color: #3931af !important;
+    color: #3931af !important;
 }
 
 label.radio.inline {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 a.nav-link {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 a.list-group-item.list-group-item-action {
-  color: #3931af !important;
+    color: #3931af !important;
 }
 
 a.list-group-item.list-group-item-action.active {
-  color: white !important;
+    color: white !important;
 }
 
 .btnLogin {
-  float: right;
+    float: right;
 }
 
 a.btn.btn-info {
-  float: right;
+    float: right;
 }
 
-
-.table.table-light{
+.table.table-light {
     flex-direction: column;
     padding-left: 0;
     margin-bottom: 0;
@@ -105,39 +108,39 @@ a.btn.btn-info {
 }
 
 .add-examination {
-  float: right;
-  margin-top: 20px;
+    float: right;
+    margin-top: 20px;
 }
 
 .container {
-  margin-bottom: 10%;
+    margin-bottom: 10%;
 }
 
 .row {
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 button.btn.btn-primary {
-  float: right;
+    float: right;
 }
 
 h3.welcome-heading {
-  color: white;
+    color: white;
 }
 
-.btnRegister{
-  float: right;
+.btnRegister {
+    float: right;
 }
 
-.examination-select-date{
-  margin-left: 60%!important;
-  right: 0;
+.examination-select-date {
+    margin-left: 60% !important;
+    right: 0;
 }
 
 button.btn.btn-success.btn.btn-primary {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
-.show-all-examinations-checkbox{
-  color: white;
+.show-all-examinations-checkbox {
+    color: white;
 }

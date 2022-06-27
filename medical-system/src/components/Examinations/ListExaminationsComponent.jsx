@@ -136,6 +136,23 @@ class ListExaminationsComponent extends Component {
         window.location.reload();
     }
 
+    changeCurrency(fee) {
+        var myHeaders = new Headers();
+        myHeaders.append("apikey", "QwuTVOLMOqUkQuWczO2WPutBXseQ1fPY");
+
+        var requestOptions = {
+            method: 'GET',
+            redirect: 'follow',
+            headers: myHeaders
+        };
+
+        fetch("https://api.apilayer.com/exchangerates_data/convert?to=RSD&from=USD&amount=" + fee, requestOptions)
+            .then(response => response.text())
+            .then(result => alert("Examination price: \n" + fee + " USD = " + JSON.parse(result).result + " RSD"))
+            .catch(error => console.log('error', error));
+
+    }
+
     render() {
         return (
             <div>
@@ -174,6 +191,7 @@ class ListExaminationsComponent extends Component {
                                     <thead>
                                         <tr>
                                             <th>Doctor</th>
+                                            <th>Price</th>
                                             <th>Patient</th>
                                             <th>Date</th>
                                             <th>Status</th>
@@ -198,6 +216,7 @@ class ListExaminationsComponent extends Component {
                                                             return <>
                                                                 <tr key={examination.examinationId}>
                                                                     <td> {examination.doctor.firstName} {examination.doctor.lastName}</td>
+                                                                    <td onClick={() => this.changeCurrency(examination.doctor.fees)}> <span className="currencyChanger">{examination.doctor.fees} $</span></td>
                                                                     <td> {examination.patient.firstName} {examination.patient.lastName}</td>
 
                                                                     <td> {formatDate(examination.dateOfExamination)} </td>
